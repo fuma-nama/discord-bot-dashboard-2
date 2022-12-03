@@ -31,7 +31,8 @@ export function NavbarLinksBox(props: FlexProps) {
 
   return (
     <Flex
-      alignItems="center"
+      justify="end"
+      align="center"
       direction="row"
       bg={menuBg}
       p="10px"

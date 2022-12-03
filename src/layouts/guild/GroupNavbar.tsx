@@ -3,7 +3,7 @@ import { Avatar, SkeletonCircle } from '@chakra-ui/react';
 import { iconToUrl } from 'api/discord';
 import { NavbarBox } from 'components/navbar/Navbar';
 import { NavbarDefaultItems, NavbarLinksBox } from 'components/navbar/NavbarItems';
-import { useGuild, useGuilds, useSelectedGuild } from 'stores';
+import { useGuilds, useSelectedGuild } from 'stores';
 
 export function GroupNavbar() {
   const { selected } = useSelectedGuild();
@@ -11,7 +11,7 @@ export function GroupNavbar() {
 
   const guild = query.data?.find((guild) => guild.id === selected);
   return (
-    <NavbarBox>
+    <NavbarBox bar={{ direction: 'row' }}>
       <HStack>
         {guild == null ? (
           <SkeletonCircle />
