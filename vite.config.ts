@@ -4,16 +4,7 @@ import viteTsconfigPaths from 'vite-tsconfig-paths';
 import svgrPlugin from 'vite-plugin-svgr';
 
 export default defineConfig({
-  plugins: [
-    react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin'],
-      },
-    }),
-    viteTsconfigPaths(),
-    svgrPlugin(),
-  ],
+  plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
   server: {
     host: 'localhost',
     port: 3000,

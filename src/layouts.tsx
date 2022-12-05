@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { RootLayout } from './utils/routeUtils';
 import { GroupNavbar } from 'layouts/guild/GroupNavbar';
 import { LoginView } from 'views/auth/LoginView';
+import { GuildView } from 'views/guild/GuildView';
 
 export const layouts: RootLayout[] = [
   {
@@ -36,7 +37,7 @@ export const layouts: RootLayout[] = [
         subLayouts: [
           {
             index: true,
-            component: <></>,
+            component: <GuildView />,
           },
           {
             path: 'settings',
@@ -56,6 +57,9 @@ export const layouts: RootLayout[] = [
       },
       {
         path: 'home',
+      },
+      {
+        path: 'profile',
       },
     ],
     loggedIn: true,

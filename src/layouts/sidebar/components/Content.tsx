@@ -4,7 +4,6 @@ import { Box, Flex, Heading, Stack, VStack } from '@chakra-ui/react';
 import Links from './Items';
 import SidebarCard from './SidebarCard';
 import { SidebarItem } from 'utils/routeUtils';
-import ActionBar from './ActionBar';
 import { GuildItem } from 'components/item/GuildItem';
 import { useGuilds } from 'stores';
 import { SearchBar } from 'components/fields/SearchBar';

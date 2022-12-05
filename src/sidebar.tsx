@@ -1,6 +1,5 @@
 import { Icon } from '@chakra-ui/react';
 import { MdPerson, MdHome } from 'react-icons/md';
-import { BsSearch } from 'react-icons/bs';
 
 const items: SidebarItem[] = [
   {
