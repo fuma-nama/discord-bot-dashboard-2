@@ -1,6 +1,6 @@
 import { HStack, Text } from '@chakra-ui/layout';
 import { Avatar, SkeletonCircle } from '@chakra-ui/react';
-import { iconToUrl } from 'api/discord';
+import { iconUrl } from 'api/discord';
 import { NavbarBox } from 'components/navbar/Navbar';
 import { NavbarDefaultItems, NavbarLinksBox } from 'components/navbar/NavbarItems';
 import { useGuilds, useSelectedGuild } from 'stores';
@@ -13,11 +13,7 @@ export function GroupNavbar() {
   return (
     <NavbarBox bar={{ direction: 'row' }}>
       <HStack>
-        {guild == null ? (
-          <SkeletonCircle />
-        ) : (
-          <Avatar name={guild?.name} src={iconToUrl(guild.id, guild.name)} />
-        )}
+        {guild == null ? <SkeletonCircle /> : <Avatar name={guild?.name} src={iconUrl(guild)} />}
         <Text fontWeight="600">{guild?.name}</Text>
       </HStack>
       <NavbarLinksBox>

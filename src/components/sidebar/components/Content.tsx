@@ -7,6 +7,8 @@ import { SidebarItem } from 'utils/routeUtils';
 import ActionBar from './ActionBar';
 import { GuildItem } from 'components/item/GuildItem';
 import { useGuilds } from 'stores';
+import { SearchBar } from 'components/fields/SearchBar';
+import { useMemo, useState } from 'react';
 
 function SidebarContent({
   items,
@@ -17,7 +19,13 @@ function SidebarContent({
   selected: string;
   onSelect: (id: string) => void;
 }) {
+  const [filter, setFilter] = useState('');
   const guilds = useGuilds();
+
+  const filteredGuilds = useMemo(
+    () => guilds.data?.filter((guild) => guild.name.toLowerCase().includes(filter.toLowerCase())),
+    [guilds.data, filter]
+  );
 
   // SIDEBAR
   return (
@@ -32,24 +40,25 @@ function SidebarContent({
           <Links items={items} />
         </Box>
         <Box px="10px">
-          <ActionBar />
+          <SearchBar
+            w="full"
+            input={{
+              value: filter,
+              onChange: (e) => setFilter(e.target.value),
+            }}
+          />
         </Box>
         <Flex direction="column" px="10px" gap={3}>
-          {guilds != null ? (
-            guilds.data?.map((guild) => (
-              <GuildItem
-                key={guild.id}
-                guild={guild}
-                active={selectedGroup === guild.id}
-                onSelect={() => onSelect(guild.id)}
-              />
-            ))
-          ) : (
-            <></>
-          )}
+          {filteredGuilds?.map((guild) => (
+            <GuildItem
+              key={guild.id}
+              guild={guild}
+              active={selectedGroup === guild.id}
+              onSelect={() => onSelect(guild.id)}
+            />
+          ))}
         </Flex>
       </Stack>
-
       <Box
         pos="sticky"
         bottom={0}
