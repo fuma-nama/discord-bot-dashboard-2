@@ -37,7 +37,7 @@ export function FeatureItem({
           <Text color={textColorSecondary}>{feature.description}</Text>
         </Flex>
         <Switch
-          ml="auto"
+          h="fit-content"
           isChecked={enabled}
           onChange={(e) =>
             mutation.mutate({ guild, feature: feature.id, enabled: e.target.checked })
