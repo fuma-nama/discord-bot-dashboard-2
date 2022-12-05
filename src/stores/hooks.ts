@@ -1,6 +1,6 @@
-import { UserInfo, discord } from './../api/discord';
+import { UserInfo } from './../api/discord';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelfUserQuery } from './queries';
+import { useGuilds, useSelfUserQuery } from './queries';
 
 export function useSelectedGuild() {
   const { guild } = useParams();
@@ -19,4 +19,13 @@ export function useSelectedGuild() {
  */
 export function useSelfUser(): UserInfo {
   return useSelfUserQuery().data;
+}
+
+export function useGuildPreview(guild: string) {
+  const query = useGuilds();
+
+  return {
+    guild: query.data?.find((g) => g.id === guild),
+    query,
+  };
 }

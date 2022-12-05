@@ -33,7 +33,6 @@ export const layouts: RootLayout[] = [
       },
       {
         path: ':guild',
-        component: <></>,
         subLayouts: [
           {
             index: true,
@@ -57,9 +56,11 @@ export const layouts: RootLayout[] = [
       },
       {
         path: 'home',
+        component: <></>,
       },
       {
         path: 'profile',
+        component: <></>,
       },
     ],
     loggedIn: true,

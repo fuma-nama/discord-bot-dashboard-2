@@ -22,6 +22,8 @@ const OmagizeIcon = createIcon({
 export const config: AppConfig = {
   name: 'Omagize',
   icon: OmagizeIcon,
+  inviteUrl:
+    'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',
   guild: {
     filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
   },

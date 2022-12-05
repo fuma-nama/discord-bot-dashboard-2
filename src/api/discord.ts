@@ -86,7 +86,7 @@ export async function getGuilds(accessToken: string) {
 }
 
 export async function getGuild(accessToken: string, id: string) {
-  return await callReturn<Guild>(`/guild/${id}`, withDiscord(accessToken, { method: 'GET' }));
+  return await callReturn<Guild>(`/guilds/${id}`, withDiscord(accessToken, { method: 'GET' }));
 }
 
 export function bannerToUrl(id: string, hash: IconHash) {

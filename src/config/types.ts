@@ -11,6 +11,12 @@ export type AppConfig = {
    */
   icon?: (props: any) => ReactElement;
   guild: GuildConfig;
+  /**
+   * Url to invite the bot
+   *
+   * example: `https://discord.com/api/oauth2/authorize?client_id=907955781972918281&permissions=8&scope=bot`
+   */
+  inviteUrl: string;
 };
 
 export type GuildConfig = {
@@ -25,3 +31,7 @@ export type GuildConfig = {
    */
   filter: (guild: Guild) => boolean;
 };
+
+export interface GuildInfo {
+  enabledFeatures: string[];
+}
