@@ -52,13 +52,13 @@ export function HomeView() {
     <Flex w="full" direction="column" gap={3} bg={globalBg}>
       <Flex direction="column">
         <Heading
-          fontSize={{ base: '3xl', '2xl': '6xl' }}
+          fontSize={{ base: '3xl', '2xl': '5xl' }}
           bgGradient={`linear(to-l, blue.200, ${brand})`}
           bgClip="text"
         >
           Next-gen Discord Bot
         </Heading>
-        <Heading fontSize={{ base: '6xl', xl: '8xl' }}>{config.name}</Heading>
+        <Heading fontSize={{ base: '5xl', xl: '7xl' }}>{config.name}</Heading>
       </Flex>
 
       <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="3rem" gap={2}>
@@ -78,7 +78,7 @@ export function HomeView() {
       <Image src={WorldSvg} h="65px" objectFit="cover" />
       <HStack>
         <Icon as={IoEarth} w={50} h={50} color={brand} />
-        <Heading fontSize={{ base: '2xl', xl: '3xl', '2xl': '5xl' }}>
+        <Heading fontSize={{ base: '2xl', xl: '3xl', '2xl': '4xl' }}>
           Trusted by{' '}
           <Text color="pink.400" as="span">
             15000+

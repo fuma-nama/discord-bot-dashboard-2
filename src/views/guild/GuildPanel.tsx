@@ -1,13 +1,10 @@
 import { Flex, Heading, SimpleGrid } from '@chakra-ui/layout';
 import { config } from 'config/common';
 import { CustomGuildInfo } from 'config/custom-types';
-import { useGuildPreview } from 'stores';
 import { Banner } from './components/Banner';
 import { FeatureItem } from './components/FeatureItem';
 
 export function GuildPanel({ guild: id, info }: { guild: string; info: CustomGuildInfo }) {
-  const { guild } = useGuildPreview(id);
-
   return (
     <Flex direction="column" gap={5}>
       <Banner />
