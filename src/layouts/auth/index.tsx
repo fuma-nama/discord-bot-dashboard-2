@@ -1,16 +1,26 @@
 import { Outlet } from 'react-router-dom';
 // Chakra imports
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box, HStack, Icon, Spacer, Text } from '@chakra-ui/react';
+import { useColors } from 'theme';
+import { config } from 'config/common';
+import { ThemeSwitch } from 'components/ThemeSwitch';
 
 // Custom Chakra theme
 export default function AuthLayout() {
   // states and functions
-  const authBg = useColorModeValue('white', 'navy.900');
   document.documentElement.dir = 'ltr';
+  const { cardBg, textColorPrimary } = useColors();
   return (
     <Box h="full">
+      <HStack w="full" bg={cardBg} px={{ base: 5, lg: 10 }} py={2}>
+        <Icon color={textColorPrimary} as={config.icon} w={10} h={10} />
+        <Text fontWeight="600" fontSize="lg">
+          {config.name}
+        </Text>
+        <Spacer />
+        <ThemeSwitch />
+      </HStack>
       <Box
-        bg={authBg}
         float="right"
         minHeight="100vh"
         height="100%"
@@ -20,6 +30,7 @@ export default function AuthLayout() {
         transitionDuration=".2s, .2s, .35s"
         transitionProperty="top, bottom, width"
         transitionTimingFunction="linear, linear, ease"
+        overflow="auto"
       >
         <Outlet />
       </Box>

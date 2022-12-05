@@ -1,0 +1,58 @@
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import { Button, Input } from '@chakra-ui/react';
+import { BsDiscord } from 'react-icons/bs';
+import { Box, Center, Flex, Grid, Heading } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import { useColors } from 'theme';
+import { HomeView } from 'views/home/HomeView';
+import CloudSvg from 'assets/Cloud.svg';
+
+export function LoginView() {
+  return (
+    <AuthLayout>
+      <FormControl>
+        <FormLabel>Login to your Discord Account</FormLabel>
+        <Button leftIcon={<BsDiscord />}>Login</Button>
+      </FormControl>
+    </AuthLayout>
+  );
+}
+
+function AuthLayout({ children }: { children: ReactNode }) {
+  const { globalBg, brand } = useColors();
+
+  return (
+    <Grid
+      position="relative"
+      minH="full"
+      templateColumns={{ base: '1fr', lg: '1fr 1fr', xl: '1fr 1.2fr' }}
+    >
+      <Center
+        pos="relative"
+        p={{ base: '30px', xl: '50px' }}
+        bg={brand}
+        bgImg={CloudSvg}
+        bgRepeat="no-repeat"
+        bgPosition="bottom"
+        flexDirection="column"
+        gap={4}
+      >
+        <Heading color="white" fontSize="9xl">
+          Login
+        </Heading>
+        <Box pos="relative" p={10} bg={globalBg} rounded="lg">
+          {children}
+        </Box>
+      </Center>
+      <Flex
+        display={{ base: 'none', lg: 'flex' }}
+        flexDirection="column"
+        h="full"
+        bg={globalBg}
+        p={30}
+      >
+        <HomeView />
+      </Flex>
+    </Grid>
+  );
+}

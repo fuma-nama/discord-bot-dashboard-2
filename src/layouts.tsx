@@ -3,6 +3,7 @@ import AppLayout from './layouts/app';
 import { Navigate } from 'react-router-dom';
 import { RootLayout } from './utils/routeUtils';
 import { GroupNavbar } from 'layouts/guild/GroupNavbar';
+import { LoginView } from 'views/auth/LoginView';
 
 export const layouts: RootLayout[] = [
   {
@@ -15,6 +16,7 @@ export const layouts: RootLayout[] = [
       },
       {
         path: 'signin',
+        component: <LoginView />,
       },
     ],
     loggedIn: false,
