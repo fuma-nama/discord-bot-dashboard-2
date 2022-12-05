@@ -16,6 +16,10 @@ export const client = new QueryClient({
   },
 });
 
+export const Keys = {
+  login: ['login'],
+};
+
 export function useGuild(id: string) {
   const accessToken = useAPIStore((s) => s.accessToken);
 
@@ -35,7 +39,7 @@ export function useGuilds() {
 export function useLogoutMutation() {
   return useMutation(['logout'], () => logout(), {
     onSuccess() {
-      client.setQueryData(['login'], null);
+      client.setQueryData<string>(Keys.login, () => null);
     },
   });
 }
@@ -46,7 +50,7 @@ export function useLogoutMutation() {
  * Then Store the token into api store
  */
 export function useLoginQuery() {
-  return useQuery(['login'], () => auth(), {
+  return useQuery(Keys.login, () => auth(), {
     onSuccess(token) {
       useAPIStore.setState({
         accessToken: token,
