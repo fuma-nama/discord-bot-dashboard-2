@@ -1,6 +1,8 @@
 import { createIcon } from '@chakra-ui/react';
+import { PermissionFlags } from 'api/discord';
+import { AppConfig } from './types';
 
-export const OmagizeIcon = createIcon({
+const OmagizeIcon = createIcon({
   displayName: 'OmagizeLogo',
   viewBox: '0 0 512 512',
   path: (
@@ -17,7 +19,10 @@ export const OmagizeIcon = createIcon({
   ),
 });
 
-export const config = {
+export const config: AppConfig = {
   name: 'Omagize',
   icon: OmagizeIcon,
+  guild: {
+    filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+  },
 };

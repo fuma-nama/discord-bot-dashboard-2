@@ -8,6 +8,7 @@ import { GuildItem } from 'components/item/GuildItem';
 import { useGuilds } from 'stores';
 import { SearchBar } from 'components/fields/SearchBar';
 import { useMemo, useState } from 'react';
+import { config } from 'config/common';
 
 function SidebarContent({
   items,
@@ -22,7 +23,12 @@ function SidebarContent({
   const guilds = useGuilds();
 
   const filteredGuilds = useMemo(
-    () => guilds.data?.filter((guild) => guild.name.toLowerCase().includes(filter.toLowerCase())),
+    () =>
+      guilds.data?.filter((guild) => {
+        const contains = guild.name.toLowerCase().includes(filter.toLowerCase());
+
+        return config.guild.filter(guild) && contains;
+      }),
     [guilds.data, filter]
   );
 
@@ -31,7 +37,7 @@ function SidebarContent({
     <Flex direction="column" height="100%" pt="25px" borderRadius="30px" overflow="auto">
       <Flex alignItems="center" flexDirection="column" bg="brand.400" rounded="lg">
         <VStack align="center" my="32px" color="white">
-          <Heading m={0}>Omagize</Heading>
+          <Heading m={0}>{config.name}</Heading>
         </VStack>
       </Flex>
       <Stack direction="column" mt="18px" mb="auto">
