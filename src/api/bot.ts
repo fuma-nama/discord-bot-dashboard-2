@@ -19,7 +19,7 @@ export async function auth() {
 
 export async function logout() {
   return await callDefault(
-    `/auth/logout`,
+    `/auth/signout`,
     withBot({
       method: 'POST',
     })
