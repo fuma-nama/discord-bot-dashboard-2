@@ -36,19 +36,22 @@ export const switchStyles = {
           _focus: {
             boxShadow: 'none',
           },
-        },
-      }),
-
-      variants: {
-        main: definePartsStyle((props) => ({
-          track: {
-            bg: mode('gray.300', 'navy.700')(props),
-            _checked: {
-              bg: mode(light.brand, dark.brand)(props),
+          _light: {
+            bg: 'gray.300',
+          },
+          _dark: {
+            bg: 'navy.700',
+          },
+          _checked: {
+            _light: {
+              bg: light.brand,
+            },
+            _dark: {
+              bg: dark.brand,
             },
           },
-        })),
-      },
+        },
+      }),
     }),
   },
 };

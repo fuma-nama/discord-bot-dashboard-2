@@ -1,5 +1,8 @@
-import { createIcon } from '@chakra-ui/react';
+import { createIcon, Icon } from '@chakra-ui/react';
 import { PermissionFlags } from 'api/discord';
+import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { IoHappy } from 'react-icons/io5';
+import { MdAddReaction } from 'react-icons/md';
 import { AppConfig } from './types';
 
 const OmagizeIcon = createIcon({
@@ -26,5 +29,31 @@ export const config: AppConfig = {
     'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',
   guild: {
     filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
+    features: [
+      {
+        id: 'music',
+        name: 'Music Player',
+        description: 'Play music in Your Discord Server',
+        icon: <Icon as={BsMusicNoteBeamed} />,
+      },
+      {
+        id: 'gaming',
+        name: 'Gaming',
+        description: 'Enjoy playing games with your friends',
+        icon: <Icon as={BsMusicNoteBeamed} />,
+      },
+      {
+        id: 'reaction-role',
+        name: 'Reaction Role',
+        description: 'Give user a role when clicking on a button',
+        icon: <Icon as={MdAddReaction} />,
+      },
+      {
+        id: 'meme',
+        name: 'Memes Time',
+        description: 'Send memes everyday',
+        icon: <Icon as={IoHappy} />,
+      },
+    ],
   },
 };

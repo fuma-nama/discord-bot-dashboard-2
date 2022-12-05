@@ -1,11 +1,11 @@
 import { Icon } from '@chakra-ui/react';
-import { MdPerson, MdHome } from 'react-icons/md';
+import { MdPerson, MdDashboard } from 'react-icons/md';
 
 const items: SidebarItem[] = [
   {
-    name: 'Main Dashboard',
+    name: 'Dashboard',
     path: '/user/home',
-    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    icon: <Icon as={MdDashboard} width="20px" height="20px" color="inherit" />,
   },
   {
     name: 'Profile',

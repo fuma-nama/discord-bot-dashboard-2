@@ -68,7 +68,7 @@ export function useAuthColors() {
 
 export function useItemHoverBg() {
   return useColorModeValue(
-    { bg: 'white', boxShadow: '0px 40px 58px -20px rgba(112, 144, 176, 0.12)' },
-    { bg: 'navy.700', boxShadow: 'unset' }
+    { cursor: 'pointer', bg: 'white', boxShadow: '0px 40px 58px -20px rgba(112, 144, 176, 0.12)' },
+    { cursor: 'pointer', bg: 'navy.700', boxShadow: 'unset' }
   );
 }

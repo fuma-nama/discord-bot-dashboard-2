@@ -30,8 +30,16 @@ export type GuildConfig = {
    * ```
    */
   filter: (guild: Guild) => boolean;
+  features: Feature[];
 };
 
 export interface GuildInfo {
   enabledFeatures: string[];
+}
+
+export interface Feature {
+  id: string;
+  name: string;
+  description?: string;
+  icon?: ReactElement;
 }

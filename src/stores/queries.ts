@@ -3,6 +3,7 @@ import { useAPIStore } from './apiStore';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { UserInfo, getGuild, getGuilds, fetchUserInfo } from 'api/discord';
 import { auth, fetchGuildInfo, logout } from 'api/bot';
+import { GuildInfo } from 'config/types';
 
 export const client = new QueryClient({
   defaultOptions: {
@@ -75,5 +76,29 @@ export function useGuildInfoQuery(guild: string) {
     refetchOnWindowFocus: true,
     retry: false,
     staleTime: 0,
+  });
+}
+
+export function useUpdateFeatureMutation() {
+  return useMutation(async (props: { guild: string; feature: string; enabled: boolean }) => {}, {
+    onSuccess: (data, { guild, feature, enabled }) => {
+      client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
+        if (prev == null) return null;
+
+        if (enabled) {
+          return {
+            ...prev,
+            enabledFeatures: prev.enabledFeatures.includes(feature)
+              ? prev.enabledFeatures
+              : [...prev.enabledFeatures, feature],
+          };
+        } else {
+          return {
+            ...prev,
+            enabledFeatures: prev.enabledFeatures.filter((f) => f !== feature),
+          };
+        }
+      });
+    },
   });
 }

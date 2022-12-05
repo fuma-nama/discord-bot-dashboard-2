@@ -1,4 +1,4 @@
-import { Center, Flex, Heading, Link, Text } from '@chakra-ui/layout';
+import { Center, Link, Text } from '@chakra-ui/layout';
 import { Button, Icon } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
@@ -6,8 +6,9 @@ import { config } from 'config/common';
 import { BsMailbox } from 'react-icons/bs';
 import { FaRobot } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
-import { useGuildInfoQuery, useGuildPreview } from 'stores';
+import { useGuildInfoQuery } from 'stores';
 import { useColors } from 'theme';
+import { GuildPanel } from './GuildPanel';
 
 export function GuildView() {
   const { guild } = useParams();
@@ -15,7 +16,7 @@ export function GuildView() {
 
   return (
     <QueryStatus query={query} loading={<LoadingPanel size="sm" />} error="Failed to load Guild">
-      {query.data != null ? <GuildPanel guild={guild} /> : <NotJoined />}
+      {query.data != null ? <GuildPanel guild={guild} info={query.data} /> : <NotJoined />}
     </QueryStatus>
   );
 }
@@ -38,15 +39,5 @@ function NotJoined() {
         </Button>
       </Link>
     </Center>
-  );
-}
-
-function GuildPanel({ guild: id }: { guild: string }) {
-  const { guild } = useGuildPreview(id);
-
-  return (
-    <Flex direction="column">
-      <Heading>{guild?.name}</Heading>
-    </Flex>
   );
 }
