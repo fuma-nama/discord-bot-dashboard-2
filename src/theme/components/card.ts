@@ -11,10 +11,12 @@ export const cardStyles = defineMultiStyleConfig({
   baseStyle: definePartsStyle({
     container: {
       _light: {
-        '--custom-card-bg': light.cardBg,
+        '--custom-card-bg': `colors.${light.cardBg}`,
+        bg: 'var(--custom-card-bg)',
       },
       _dark: {
-        '--custom-card-bg': dark.cardBg,
+        '--custom-card-bg': `colors.${dark.cardBg}`,
+        bg: 'var(--custom-card-bg)',
       },
       bg: 'var(--custom-card-bg)',
     },

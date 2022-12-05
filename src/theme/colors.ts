@@ -4,7 +4,7 @@ export const light = {
   globalBg: 'secondaryGray.300',
   brand: 'brand.500',
   textColorPrimary: 'secondaryGray.900',
-  textColorSecondary: 'gray.400',
+  textColorSecondary: 'gray.500',
   textColorDetails: 'navy.700',
   borderColor: 'white !important',
   cardBg: 'white',

@@ -97,7 +97,7 @@ export const globalStyles = {
       body: {
         color: mode(light.textColorPrimary, dark.textColorPrimary)(props),
         overflow: 'hidden',
-        bg: mode('secondaryGray.300', 'navy.900')(props),
+        bg: mode(light.globalBg, dark.globalBg)(props),
         fontFamily: 'DM Sans',
         letterSpacing: '-0.5px',
       },
