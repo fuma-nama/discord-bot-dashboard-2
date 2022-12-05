@@ -6,13 +6,16 @@ import { ReactNode } from 'react';
 import { useColors } from 'theme';
 import { HomeView } from 'views/home/HomeView';
 import CloudSvg from 'assets/Cloud.svg';
+import { bot } from 'api/bot';
 
 export function LoginView() {
   return (
     <AuthLayout>
       <FormControl>
         <FormLabel>Login to your Discord Account</FormLabel>
-        <Button leftIcon={<BsDiscord />}>Login</Button>
+        <a href={`${bot}/login`} target="_self">
+          <Button leftIcon={<BsDiscord />}>Login</Button>
+        </a>
       </FormControl>
     </AuthLayout>
   );
