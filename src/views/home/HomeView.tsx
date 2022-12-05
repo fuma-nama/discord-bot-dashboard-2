@@ -51,15 +51,17 @@ export function HomeView() {
   return (
     <Flex w="full" direction="column" gap={3} bg={globalBg}>
       <Flex direction="column">
-        <Heading fontSize="6xl">
-          <Text as="span" bgGradient={`linear(to-l, blue.200, ${brand})`} bgClip="text">
-            Next-gen Discord bot
-          </Text>
+        <Heading
+          fontSize={{ base: '3xl', '2xl': '6xl' }}
+          bgGradient={`linear(to-l, blue.200, ${brand})`}
+          bgClip="text"
+        >
+          Next-gen Discord Bot
         </Heading>
-        <Heading fontSize="8xl">{config.name}</Heading>
+        <Heading fontSize={{ base: '6xl', xl: '8xl' }}>{config.name}</Heading>
       </Flex>
 
-      <SimpleGrid columns={{ base: 2, xl: 3 }} mt="3rem" gap={2}>
+      <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="3rem" gap={2}>
         {features.map((feature, i) => (
           <Card key={i}>
             <CardHeader fontSize="2xl" fontWeight="600" pb={1}>
@@ -76,7 +78,7 @@ export function HomeView() {
       <Image src={WorldSvg} h="65px" objectFit="cover" />
       <HStack>
         <Icon as={IoEarth} w={50} h={50} color={brand} />
-        <Heading fontSize="5xl">
+        <Heading fontSize={{ base: '2xl', xl: '3xl', '2xl': '5xl' }}>
           Trusted by{' '}
           <Text color="pink.400" as="span">
             15000+
@@ -84,7 +86,7 @@ export function HomeView() {
           servers
         </Heading>
       </HStack>
-      <SimpleGrid columns={2} gap={5} mt={5}>
+      <SimpleGrid columns={{ base: 1, '3sm': 2 }} gap={5} mt={5}>
         {servers.map((server, i) => (
           <Card key={i} rounded="xl">
             <CardBody as={Flex} direction="row" gap={3}>

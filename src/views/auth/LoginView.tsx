@@ -24,18 +24,18 @@ function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <Grid
       position="relative"
-      minH="full"
       templateColumns={{ base: '1fr', lg: '1fr 1fr', xl: '1fr 1.2fr' }}
+      h="full"
     >
       <Center
         pos="relative"
-        p={{ base: '30px', xl: '50px' }}
         bg={brand}
         bgImg={CloudSvg}
         bgRepeat="no-repeat"
         bgPosition="bottom"
         flexDirection="column"
         gap={4}
+        py={10}
       >
         <Heading color="white" fontSize="9xl">
           Login
@@ -44,13 +44,7 @@ function AuthLayout({ children }: { children: ReactNode }) {
           {children}
         </Box>
       </Center>
-      <Flex
-        display={{ base: 'none', lg: 'flex' }}
-        flexDirection="column"
-        h="full"
-        bg={globalBg}
-        p={30}
-      >
+      <Flex direction="column" bg={globalBg} p={30}>
         <HomeView />
       </Flex>
     </Grid>
