@@ -22,42 +22,52 @@ export const layouts: RootLayout[] = [
     loggedIn: false,
   },
   {
-    path: '*',
+    path: '/guilds',
     component: <AppLayout />,
+    navbar: <GroupNavbar />,
     subLayouts: [
       {
         index: true,
-        component: <Navigate to="/user/home" />,
+        component: <></>,
       },
       {
-        path: 'guilds',
-        navbar: <GroupNavbar />,
+        path: ':guild',
+        component: <></>,
         subLayouts: [
           {
             index: true,
+            component: <></>,
           },
           {
-            path: ':guild',
-            subLayouts: [
-              {
-                index: true,
-              },
-              {
-                path: 'settings',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        path: 'user',
-        subLayouts: [
-          {
-            index: true,
+            path: 'settings',
           },
         ],
       },
     ],
     loggedIn: true,
+  },
+  {
+    path: '/user',
+    component: <AppLayout />,
+    subLayouts: [
+      {
+        index: true,
+        component: <></>,
+      },
+      {
+        path: 'home',
+      },
+    ],
+    loggedIn: true,
+  },
+  {
+    path: '*',
+    component: <Navigate to="/user/home" />,
+    loggedIn: true,
+  },
+  {
+    path: '*',
+    component: <Navigate to="/auth/signin" />,
+    loggedIn: false,
   },
 ];

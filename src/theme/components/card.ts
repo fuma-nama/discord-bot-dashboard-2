@@ -12,11 +12,9 @@ export const cardStyles = defineMultiStyleConfig({
     container: {
       _light: {
         '--custom-card-bg': `colors.${light.cardBg}`,
-        bg: 'var(--custom-card-bg)',
       },
       _dark: {
         '--custom-card-bg': `colors.${dark.cardBg}`,
-        bg: 'var(--custom-card-bg)',
       },
       bg: 'var(--custom-card-bg)',
     },
