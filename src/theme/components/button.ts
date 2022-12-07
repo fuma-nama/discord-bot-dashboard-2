@@ -81,16 +81,13 @@ export const buttonStyles = {
           },
         }),
         action: (props: any) => ({
-          fontWeight: '500',
+          fontWeight: '600',
           borderRadius: '50px',
-          bg: mode('secondaryGray.300', 'brand.400')(props),
-          color: mode('brand.500', 'white')(props),
-          _focus: {
-            bg: mode('secondaryGray.300', 'brand.400')(props),
-          },
-          _active: { bg: mode('secondaryGray.300', 'brand.400')(props) },
+          bg: mode('secondaryGray.300', 'blackAlpha.300')(props),
+          color: mode('brand.500', 'cyan.200')(props),
+          _active: { bg: mode('secondaryGray.300', 'blackAlpha.200')(props) },
           _hover: {
-            bg: mode('secondaryGray.200', 'brand.400')(props),
+            bg: mode('secondaryGray.200', 'blackAlpha.200')(props),
           },
         }),
         setup: (props: any) => ({
