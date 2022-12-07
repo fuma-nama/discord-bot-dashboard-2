@@ -72,9 +72,7 @@ function SidebarContent({
         mt="60px"
         mb="40px"
         borderRadius="30px"
-      >
-        <SidebarCard />
-      </Box>
+      ></Box>
     </Flex>
   );
 }

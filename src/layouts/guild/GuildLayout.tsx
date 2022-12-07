@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 export function GuildLayout() {
   return (
-    <Center w="full">
-      <Box w="full" maxW={{ base: 'none', xl: '1200px' }}>
+    <Center w="full" h="full">
+      <Box w="full" maxW={{ base: 'none', xl: '1200px' }} h="full">
         <Outlet />
       </Box>
     </Center>
