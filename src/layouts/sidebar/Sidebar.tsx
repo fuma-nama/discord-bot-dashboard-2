@@ -8,7 +8,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from '@chakra-ui/react';
-import Content from './components/Content';
+import { SidebarContent } from './components/SidebarContent';
 
 import { SidebarItem } from 'utils/routeUtils';
 import { usePageStore, useSelectedGuild } from 'stores';
@@ -35,7 +35,7 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
         overflowX="hidden"
         boxShadow={shadow}
       >
-        <Content items={items} selected={selected} onSelect={setSelected} />
+        <SidebarContent items={items} selected={selected} onSelect={setSelected} />
       </Box>
     </Box>
   );
@@ -62,7 +62,7 @@ export function SidebarResponsive({ items }: { items: SidebarItem[] }) {
           _hover={{ boxShadow: 'none' }}
         />
         <DrawerBody maxW="285px" px="0rem" pb="0">
-          <Content items={items} selected={selected} onSelect={setSelected} />
+          <SidebarContent items={items} selected={selected} onSelect={setSelected} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>

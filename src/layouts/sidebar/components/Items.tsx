@@ -11,9 +11,11 @@ export function SidebarItems({ items }: { items: SidebarItem[] }) {
 
   return (
     <>
-      {items.map((route: SidebarItem, index: number) => (
-        <Link key={index} item={route} active={active === route} />
-      ))}
+      {items
+        .filter((item) => !item.hidden)
+        .map((route: SidebarItem, index: number) => (
+          <Link key={index} item={route} active={active === route} />
+        ))}
     </>
   );
 }

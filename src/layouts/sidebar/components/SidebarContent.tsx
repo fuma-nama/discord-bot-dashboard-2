@@ -1,16 +1,33 @@
 // chakra imports
-import { Box, Flex, Heading, Stack, VStack } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  ButtonGroup,
+  Card,
+  CardBody,
+  Flex,
+  Heading,
+  HStack,
+  IconButton,
+  Spacer,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 //   Custom components
 import Links from './Items';
 import SidebarCard from './SidebarCard';
 import { SidebarItem } from 'utils/routeUtils';
 import { GuildItem } from 'components/item/GuildItem';
-import { useGuilds } from 'stores';
+import { useGuilds, useSelfUser, useSelfUserQuery } from 'stores';
 import { SearchBar } from 'components/fields/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
+import { SettingsIcon } from '@chakra-ui/icons';
+import { avatarUrl } from 'api/discord';
+import { useNavigate } from 'react-router-dom';
 
-function SidebarContent({
+export function SidebarContent({
   items,
   selected: selectedGroup,
   onSelect,
@@ -34,16 +51,16 @@ function SidebarContent({
 
   // SIDEBAR
   return (
-    <Flex direction="column" height="100%" pt="25px" borderRadius="30px" overflow="auto">
+    <Flex direction="column" height="100%" borderRadius="30px" overflow="auto">
       <Flex alignItems="center" flexDirection="column" bg="brand.400" rounded="lg">
         <VStack align="center" my="32px" color="white">
           <Heading m={0}>{config.name}</Heading>
         </VStack>
       </Flex>
       <Stack direction="column" mt="18px" mb="auto">
-        <Box ps="10px">
-          <Links items={items} />
-        </Box>
+        <Flex direction="column" ps="10px">
+          <Links items={items.filter((item) => item.name !== '/user/settings')} />
+        </Flex>
         <Box px="10px">
           <SearchBar
             w="full"
@@ -64,17 +81,28 @@ function SidebarContent({
           ))}
         </Flex>
       </Stack>
-      <Box
-        pos="sticky"
-        bottom={0}
-        ps="20px"
-        pe={{ lg: '16px', '2xl': '20px' }}
-        mt="60px"
-        mb="40px"
-        borderRadius="30px"
-      ></Box>
+      <BottomCard />
     </Flex>
   );
 }
 
-export default SidebarContent;
+function BottomCard() {
+  const navigate = useNavigate();
+  const user = useSelfUserQuery().data;
+  if (user == null) return <></>;
+
+  return (
+    <Card pos="sticky" left={0} bottom={0} w="full" py={2}>
+      <CardBody as={HStack}>
+        <Avatar src={avatarUrl(user)} name={user.username} size="sm" />
+        <Text fontWeight="600">{user.username}</Text>
+        <Spacer />
+        <IconButton
+          icon={<SettingsIcon />}
+          aria-label="settings"
+          onClick={() => navigate('/user/settings')}
+        />
+      </CardBody>
+    </Card>
+  );
+}
