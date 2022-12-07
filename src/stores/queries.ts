@@ -2,7 +2,7 @@ import { CustomGuildInfo } from './../config/custom-types';
 import { useAPIStore } from './apiStore';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { UserInfo, getGuild, getGuilds, fetchUserInfo } from 'api/discord';
-import { auth, fetchGuildInfo, logout } from 'api/bot';
+import { auth, disableFeature, enableFeature, fetchGuildInfo, logout } from 'api/bot';
 import { GuildInfo } from 'config/types';
 
 export const client = new QueryClient({
@@ -21,6 +21,9 @@ export const client = new QueryClient({
 export const Keys = {
   login: ['login'],
   guild_info: (guild: string) => ['guild_info', guild],
+};
+export const Mutations = {
+  updateFeature: (guild: string, id: string) => ['feature', guild, id],
 };
 
 export function useGuild(id: string) {
@@ -79,26 +82,32 @@ export function useGuildInfoQuery(guild: string) {
   });
 }
 
-export function useUpdateFeatureMutation() {
-  return useMutation(async (props: { guild: string; feature: string; enabled: boolean }) => {}, {
-    onSuccess: (data, { guild, feature, enabled }) => {
-      client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
-        if (prev == null) return null;
+export type UpdateFeatureOptions = { enabled: boolean };
+export function useUpdateFeatureMutation(guild: string, feature: string) {
+  return useMutation(
+    Mutations.updateFeature(guild, feature),
+    ({ enabled }: UpdateFeatureOptions) =>
+      enabled ? enableFeature(guild, feature) : disableFeature(guild, feature),
+    {
+      onSuccess: (_, { enabled }) => {
+        client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
+          if (prev == null) return null;
 
-        if (enabled) {
-          return {
-            ...prev,
-            enabledFeatures: prev.enabledFeatures.includes(feature)
-              ? prev.enabledFeatures
-              : [...prev.enabledFeatures, feature],
-          };
-        } else {
-          return {
-            ...prev,
-            enabledFeatures: prev.enabledFeatures.filter((f) => f !== feature),
-          };
-        }
-      });
-    },
-  });
+          if (enabled) {
+            return {
+              ...prev,
+              enabledFeatures: prev.enabledFeatures.includes(feature)
+                ? prev.enabledFeatures
+                : [...prev.enabledFeatures, feature],
+            };
+          } else {
+            return {
+              ...prev,
+              enabledFeatures: prev.enabledFeatures.filter((f) => f !== feature),
+            };
+          }
+        });
+      },
+    }
+  );
 }

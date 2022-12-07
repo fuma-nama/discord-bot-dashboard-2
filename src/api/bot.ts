@@ -42,3 +42,21 @@ export async function fetchGuildInfo(guild: string): Promise<CustomGuildInfo | n
     })
   );
 }
+
+export async function enableFeature(guild: string, feature: string) {
+  return await callDefault(
+    `/guilds/${guild}/features/${feature}`,
+    withBot({
+      method: 'POST',
+    })
+  );
+}
+
+export async function disableFeature(guild: string, feature: string) {
+  return await callDefault(
+    `/guilds/${guild}/features/${feature}`,
+    withBot({
+      method: 'DELETE',
+    })
+  );
+}

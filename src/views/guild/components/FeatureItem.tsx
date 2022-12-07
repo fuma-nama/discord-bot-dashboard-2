@@ -15,7 +15,7 @@ export function FeatureItem({
 }) {
   const { textColorSecondary, brand, globalBg } = useColors();
   const hovered = useItemHoverBg();
-  const mutation = useUpdateFeatureMutation();
+  const mutation = useUpdateFeatureMutation(guild, feature.id);
 
   return (
     <Card _hover={enabled && hovered}>
@@ -39,9 +39,7 @@ export function FeatureItem({
         <Switch
           h="fit-content"
           isChecked={enabled}
-          onChange={(e) =>
-            mutation.mutate({ guild, feature: feature.id, enabled: e.target.checked })
-          }
+          onChange={(e) => mutation.mutate({ enabled: e.target.checked })}
         />
       </CardBody>
     </Card>
