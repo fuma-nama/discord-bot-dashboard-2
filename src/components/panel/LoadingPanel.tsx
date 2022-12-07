@@ -42,13 +42,13 @@ export function LoadingPanel({ size, ...props }: Props & CenterProps) {
   return (
     <Center w="full" h="full">
       <VStack>
-        <Box pos="relative" p={5}>
+        <Box pos="relative" p="25px">
           <Spinner
             pos="absolute"
             top={0}
             left={0}
-            w="full"
-            h="full"
+            w="150px"
+            h="150px"
             thickness="4px"
             color={brand}
           />
