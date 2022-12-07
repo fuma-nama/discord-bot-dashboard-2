@@ -1,8 +1,8 @@
-import { CustomGuildInfo } from './../config/custom-types';
+import { CustomFeatures, CustomGuildInfo } from './../config/custom-types';
 import { useAPIStore } from './apiStore';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { UserInfo, getGuild, getGuilds, fetchUserInfo } from 'api/discord';
-import { auth, disableFeature, enableFeature, fetchGuildInfo, logout } from 'api/bot';
+import { auth, disableFeature, enableFeature, fetchGuildInfo, getFeature, logout } from 'api/bot';
 import { GuildInfo } from 'config/types';
 
 export const client = new QueryClient({
@@ -21,6 +21,7 @@ export const client = new QueryClient({
 export const Keys = {
   login: ['login'],
   guild_info: (guild: string) => ['guild_info', guild],
+  features: (guild: string, feature: string) => ['feature', guild, feature],
 };
 export const Mutations = {
   updateFeature: (guild: string, id: string) => ['feature', guild, id],
@@ -80,6 +81,10 @@ export function useGuildInfoQuery(guild: string) {
     retry: false,
     staleTime: 0,
   });
+}
+
+export function useFeatureQuery<K extends keyof CustomFeatures>(guild: string, feature: K) {
+  return useQuery(Keys.features(guild, feature), () => getFeature(guild, feature));
 }
 
 export type UpdateFeatureOptions = { enabled: boolean };

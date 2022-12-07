@@ -1,6 +1,7 @@
 import { Center, Flex, Text } from '@chakra-ui/layout';
-import { Card, CardBody, Spinner, Switch } from '@chakra-ui/react';
-import { Feature } from 'config/types';
+import { Card, CardBody, Switch } from '@chakra-ui/react';
+import { IdFeature } from 'config/utils';
+import { useNavigate } from 'react-router-dom';
 import { useUpdateFeatureMutation } from 'stores';
 import { useColors, useItemHoverBg } from 'theme';
 
@@ -10,15 +11,21 @@ export function FeatureItem({
   enabled,
 }: {
   guild: string;
-  feature: Feature;
+  feature: IdFeature;
   enabled: boolean;
 }) {
+  const navigate = useNavigate();
   const { textColorSecondary, brand, globalBg } = useColors();
   const hovered = useItemHoverBg();
   const mutation = useUpdateFeatureMutation(guild, feature.id);
 
   return (
-    <Card _hover={enabled && hovered}>
+    <Card
+      _hover={enabled && hovered}
+      onClick={() => {
+        if (enabled) navigate(`/guilds/${guild}/features/${feature.id}`);
+      }}
+    >
       <CardBody as={Flex} direction="row" gap={3}>
         <Center
           p={5}
@@ -41,6 +48,7 @@ export function FeatureItem({
           h="fit-content"
           isChecked={enabled}
           onChange={(e) => mutation.mutate({ enabled: e.target.checked })}
+          onMouseDown={(e) => e.preventDefault()}
         />
       </CardBody>
     </Card>

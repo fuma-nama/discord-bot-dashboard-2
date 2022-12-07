@@ -6,6 +6,7 @@ import { GroupNavbar } from 'layouts/guild/GroupNavbar';
 import { LoginView } from 'views/auth/LoginView';
 import { GuildView } from 'views/guild/GuildView';
 import { GuildLayout } from 'layouts/guild/GuildLayout';
+import { FeatureView } from 'views/feature/FeatureView';
 
 export const layouts: RootLayout[] = [
   {
@@ -35,6 +36,10 @@ export const layouts: RootLayout[] = [
           {
             index: true,
             component: <GuildView />,
+          },
+          {
+            path: 'features/:feature',
+            component: <FeatureView />,
           },
           {
             path: 'settings',
