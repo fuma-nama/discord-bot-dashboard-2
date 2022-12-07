@@ -86,11 +86,11 @@ export type UpdateFeatureOptions = { enabled: boolean };
 export function useUpdateFeatureMutation(guild: string, feature: string) {
   return useMutation(
     Mutations.updateFeature(guild, feature),
-    ({ enabled }: UpdateFeatureOptions) =>
+    async ({ enabled }: UpdateFeatureOptions) =>
       enabled ? enableFeature(guild, feature) : disableFeature(guild, feature),
     {
-      onSuccess: (_, { enabled }) => {
-        client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
+      async onSuccess(_, { enabled }) {
+        await client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
           if (prev == null) return null;
 
           if (enabled) {

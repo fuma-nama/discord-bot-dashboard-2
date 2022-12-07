@@ -5,6 +5,7 @@ import { RootLayout } from './utils/routeUtils';
 import { GroupNavbar } from 'layouts/guild/GroupNavbar';
 import { LoginView } from 'views/auth/LoginView';
 import { GuildView } from 'views/guild/GuildView';
+import { GuildLayout } from 'layouts/guild/GuildLayout';
 
 export const layouts: RootLayout[] = [
   {
@@ -22,17 +23,14 @@ export const layouts: RootLayout[] = [
     ],
     loggedIn: false,
   },
+
   {
-    path: '/guilds',
     component: <AppLayout />,
-    navbar: <GroupNavbar />,
     subLayouts: [
       {
-        index: true,
-        component: <></>,
-      },
-      {
-        path: ':guild',
+        path: '/guilds/:guild',
+        navbar: <GroupNavbar />,
+        component: <GuildLayout />,
         subLayouts: [
           {
             index: true,
@@ -43,24 +41,22 @@ export const layouts: RootLayout[] = [
           },
         ],
       },
-    ],
-    loggedIn: true,
-  },
-  {
-    path: '/user',
-    component: <AppLayout />,
-    subLayouts: [
       {
-        index: true,
-        component: <></>,
-      },
-      {
-        path: 'home',
-        component: <></>,
-      },
-      {
-        path: 'profile',
-        component: <></>,
+        path: '/user',
+        subLayouts: [
+          {
+            index: true,
+            component: <></>,
+          },
+          {
+            path: 'home',
+            component: <></>,
+          },
+          {
+            path: 'profile',
+            component: <></>,
+          },
+        ],
       },
     ],
     loggedIn: true,

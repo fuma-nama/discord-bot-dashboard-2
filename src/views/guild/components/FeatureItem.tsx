@@ -1,5 +1,5 @@
 import { Center, Flex, Text } from '@chakra-ui/layout';
-import { Card, CardBody, Switch } from '@chakra-ui/react';
+import { Card, CardBody, Spinner, Switch } from '@chakra-ui/react';
 import { Feature } from 'config/types';
 import { useUpdateFeatureMutation } from 'stores';
 import { useColors, useItemHoverBg } from 'theme';
@@ -37,6 +37,7 @@ export function FeatureItem({
           <Text color={textColorSecondary}>{feature.description}</Text>
         </Flex>
         <Switch
+          disabled={mutation.isLoading}
           h="fit-content"
           isChecked={enabled}
           onChange={(e) => mutation.mutate({ enabled: e.target.checked })}

@@ -28,8 +28,6 @@ function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
       {layouts.map((layout, key) =>
         layout.loggedIn === loggedIn ? mapNestedLayout(layout, key) : null
       )}
-
-      <Route path="*" element={<Navigate to={loggedIn ? '/user' : '/auth'} />} />
     </Routes>
   );
 }
@@ -37,6 +35,7 @@ function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
 function Pages() {
   const query = useLoginQuery();
 
+  return <LoadingPanel size="lg" />;
   return (
     <QueryStatus query={query} error="Failed to login" loading={<LoadingPanel size="lg" />}>
       <RootRoutes loggedIn={query.data != null} />

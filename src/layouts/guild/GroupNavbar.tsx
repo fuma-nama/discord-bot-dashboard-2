@@ -11,7 +11,7 @@ export function GroupNavbar() {
 
   const guild = query.data?.find((guild) => guild.id === selected);
   return (
-    <NavbarBox bar={{ direction: 'row' }}>
+    <NavbarBox bar={{ direction: 'row', maxW: { base: 'none', xl: '1200px' } }}>
       <HStack>
         {guild == null ? <SkeletonCircle /> : <Avatar name={guild?.name} src={iconUrl(guild)} />}
         <Text fontWeight="600">{guild?.name}</Text>
