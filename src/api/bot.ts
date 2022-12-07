@@ -1,4 +1,4 @@
-import { CustomGuildInfo } from 'config/custom-types';
+import { CustomFeatures, CustomGuildInfo } from 'config/custom-types';
 import { withBot, callDefault, callReturn } from './core';
 
 export const bot = 'http://localhost:8080';
@@ -57,6 +57,30 @@ export async function disableFeature(guild: string, feature: string) {
     `/guilds/${guild}/features/${feature}`,
     withBot({
       method: 'DELETE',
+    })
+  );
+}
+
+export async function getFeature<K extends keyof CustomFeatures>(
+  guild: string,
+  feature: K
+): Promise<CustomFeatures[K]> {
+  return await callReturn<CustomFeatures[K]>(
+    `/guilds/${guild}/features/${feature}`,
+    withBot({
+      method: 'GET',
+    })
+  );
+}
+
+export async function updateFeature<K extends keyof CustomFeatures>(
+  guild: string,
+  feature: K
+): Promise<CustomFeatures[K]> {
+  return await callReturn<CustomFeatures[K]>(
+    `/guilds/${guild}/features/${feature}`,
+    withBot({
+      method: 'PATCH',
     })
   );
 }
