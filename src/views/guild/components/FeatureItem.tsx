@@ -1,6 +1,7 @@
 import { Center, Flex, Text } from '@chakra-ui/layout';
-import { Card, CardBody, Switch } from '@chakra-ui/react';
+import { Button, ButtonGroup, Card, CardBody, CardFooter, Switch } from '@chakra-ui/react';
 import { IdFeature } from 'config/utils';
+import { IoOpen, IoOptions } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateFeatureMutation } from 'stores';
 import { useColors, useItemHoverBg } from 'theme';
@@ -16,16 +17,10 @@ export function FeatureItem({
 }) {
   const navigate = useNavigate();
   const { textColorSecondary, brand, globalBg } = useColors();
-  const hovered = useItemHoverBg();
   const mutation = useUpdateFeatureMutation(guild, feature.id);
 
   return (
-    <Card
-      _hover={enabled && hovered}
-      onClick={() => {
-        if (enabled) navigate(`/guilds/${guild}/features/${feature.id}`);
-      }}
-    >
+    <Card>
       <CardBody as={Flex} direction="row" gap={3}>
         <Center
           p={5}
@@ -43,14 +38,33 @@ export function FeatureItem({
           </Text>
           <Text color={textColorSecondary}>{feature.description}</Text>
         </Flex>
-        <Switch
-          disabled={mutation.isLoading}
-          h="fit-content"
-          isChecked={enabled}
-          onChange={(e) => mutation.mutate({ enabled: e.target.checked })}
-          onMouseDown={(e) => e.preventDefault()}
-        />
+        <>
+          <Switch
+            disabled={mutation.isLoading}
+            h="fit-content"
+            isChecked={enabled}
+            onChange={(e) => mutation.mutate({ enabled: e.target.checked })}
+          />
+        </>
       </CardBody>
+      <CardFooter as={ButtonGroup}>
+        <Button
+          disabled={mutation.isLoading}
+          {...(enabled
+            ? {
+                variant: 'action',
+                rounded: '2xl',
+                leftIcon: <IoOptions />,
+                onClick: () => navigate(`/guilds/${guild}/features/${feature.id}`),
+                children: 'Config',
+              }
+            : {
+                leftIcon: <IoOpen />,
+                onClick: () => mutation.mutate({ enabled: true }),
+                children: 'Enable',
+              })}
+        />
+      </CardFooter>
     </Card>
   );
 }
