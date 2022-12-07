@@ -16,10 +16,9 @@ import {
 } from '@chakra-ui/react';
 //   Custom components
 import Links from './Items';
-import SidebarCard from './SidebarCard';
 import { SidebarItem } from 'utils/routeUtils';
 import { GuildItem } from 'components/item/GuildItem';
-import { useGuilds, useSelfUser, useSelfUserQuery } from 'stores';
+import { useGuilds, useSelfUserQuery } from 'stores';
 import { SearchBar } from 'components/fields/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
@@ -58,7 +57,7 @@ export function SidebarContent({
         </VStack>
       </Flex>
       <Stack direction="column" mt="18px" mb="auto">
-        <Flex direction="column" ps="10px">
+        <Flex direction="column" px="10px" gap={1}>
           <Links items={items.filter((item) => item.name !== '/user/settings')} />
         </Flex>
         <Box px="10px">
