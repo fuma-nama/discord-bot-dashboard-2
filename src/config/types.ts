@@ -1,3 +1,4 @@
+import { CustomFeatures } from './custom-types';
 import { Guild } from 'api/discord';
 import { ReactElement } from 'react';
 
@@ -30,16 +31,21 @@ export type GuildConfig = {
    * ```
    */
   filter: (guild: Guild) => boolean;
-  features: Feature[];
+  features: {
+    [K in keyof CustomFeatures]: Feature<K>;
+  };
 };
 
 export interface GuildInfo {
   enabledFeatures: string[];
 }
 
-export interface Feature {
-  id: string;
+/**
+ * Internal Feature info
+ */
+export interface Feature<K extends keyof CustomFeatures> {
   name: string;
   description?: string;
   icon?: ReactElement;
+  useRender?: (data: CustomFeatures[K]) => ReactElement;
 }

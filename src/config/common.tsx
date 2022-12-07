@@ -29,31 +29,30 @@ export const config: AppConfig = {
     'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',
   guild: {
     filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
-    features: [
-      {
-        id: 'music',
+    features: {
+      music: {
         name: 'Music Player',
         description: 'Play music in Your Discord Server',
         icon: <Icon as={BsMusicNoteBeamed} />,
+        useRender(data) {
+          return <>{data.message}</>;
+        },
       },
-      {
-        id: 'gaming',
+      gaming: {
         name: 'Gaming',
         description: 'Enjoy playing games with your friends',
         icon: <Icon as={BsMusicNoteBeamed} />,
       },
-      {
-        id: 'reaction-role',
+      'reaction-role': {
         name: 'Reaction Role',
         description: 'Give user a role when clicking on a button',
         icon: <Icon as={MdAddReaction} />,
       },
-      {
-        id: 'meme',
+      meme: {
         name: 'Memes Time',
         description: 'Send memes everyday',
         icon: <Icon as={IoHappy} />,
       },
-    ],
+    },
   },
 };
