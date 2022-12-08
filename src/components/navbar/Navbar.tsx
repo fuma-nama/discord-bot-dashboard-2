@@ -11,7 +11,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 import { getActiveLayouts, getActiveSidebarItem, NormalLayout, RootLayout } from 'utils/routeUtils';
 import AdminNavbarLinks from './NavbarItems';

@@ -7,6 +7,7 @@ import { LoginView } from 'views/auth/LoginView';
 import { GuildView } from 'views/guild/GuildView';
 import { GuildLayout } from 'layouts/guild/GuildLayout';
 import { FeatureView } from 'views/feature/FeatureView';
+import { DashboardView } from 'views/dashboard/DashboardView';
 
 export const layouts: RootLayout[] = [
   {
@@ -51,11 +52,11 @@ export const layouts: RootLayout[] = [
         subLayouts: [
           {
             index: true,
-            component: <></>,
+            component: <Navigate to="/user/home" />,
           },
           {
             path: 'home',
-            component: <></>,
+            component: <DashboardView />,
           },
           {
             path: 'profile',
