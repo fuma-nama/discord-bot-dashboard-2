@@ -7,6 +7,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Hide,
   Icon,
   IconButton,
   Image,
@@ -20,7 +21,7 @@ export function DashboardView() {
   const { globalBg } = useColors();
 
   return (
-    <Flex direction="column" gap={5}>
+    <Flex direction="column" gap={5} maxW={{ lg: '1400px' }} mx="auto">
       <Card rounded="2xl" bg="brand.300">
         <CardHeader color="white" fontSize="2xl" fontWeight="bold">
           Invite our Bot
@@ -63,12 +64,15 @@ function MusicPlayer() {
 
   return (
     <Flex direction="row" gap={3}>
-      <Image
-        rounded="xl"
-        src="https://cdns-images.dzcdn.net/images/artist/61bcbf8296b1669499064406c534d39d/500x500.jpg"
-        maxW="200px"
-        maxH="200px"
-      />
+      <Hide below="md">
+        <Image
+          rounded="xl"
+          src="https://cdns-images.dzcdn.net/images/artist/61bcbf8296b1669499064406c534d39d/500x500.jpg"
+          maxW="200px"
+          maxH="200px"
+        />
+      </Hide>
+
       <Flex w="full" direction="column" bg={cardBg} rounded="xl" gap={3} p={3}>
         <HStack color={textColorSecondary}>
           <BsPlayBtn />
