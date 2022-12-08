@@ -47,7 +47,7 @@ function Content() {
       transitionProperty="top, bottom, width"
       transitionTimingFunction="linear, linear, ease"
     >
-      <DefaultNavbar brandText={activeItem?.name} layoutes={layouts} />
+      <DefaultNavbar />
       <Box mx="auto" w="full" pe="20px" padding={0} flex="1 1" mt="50px">
         <Outlet />
       </Box>

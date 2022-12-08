@@ -50,8 +50,8 @@ export function SidebarContent({
 
   // SIDEBAR
   return (
-    <Flex direction="column" height="100%" borderRadius="30px" overflow="auto">
-      <Flex alignItems="center" flexDirection="column" bg="brand.400" rounded="lg">
+    <Flex direction="column" height="100%" overflow="auto">
+      <Flex alignItems="center" flexDirection="column" bg="brand.400">
         <VStack align="center" my="32px" color="white">
           <Heading m={0}>{config.name}</Heading>
         </VStack>

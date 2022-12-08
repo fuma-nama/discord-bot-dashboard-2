@@ -4,20 +4,22 @@ import {
   BoxProps,
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
-  ChakraProps,
   Flex,
   FlexProps,
-  Link,
-  Skeleton,
   SkeletonText,
+  Tag,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Location, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { ReactNode } from 'react';
-import { getActiveLayouts, NormalLayout, RootLayout } from 'utils/routeUtils';
+import { getActiveLayouts, getActiveSidebarItem, NormalLayout, RootLayout } from 'utils/routeUtils';
 import AdminNavbarLinks from './NavbarItems';
 import { findLast } from 'utils/common';
+import { IoHome } from 'react-icons/io5';
+import items from 'sidebar';
+import { layouts } from 'layouts';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 
 export function useLayoutOverride(layouts: RootLayout[], filter: (item: NormalLayout) => boolean) {
   const location = useLocation();
@@ -26,16 +28,12 @@ export function useLayoutOverride(layouts: RootLayout[], filter: (item: NormalLa
   return override;
 }
 
-export function DefaultNavbar(
-  props: {
-    brandText: string;
-    layoutes: RootLayout[];
-  } & ChakraProps
-) {
-  const { brandText, layoutes } = props;
+export function DefaultNavbar() {
+  const activeItem = getActiveSidebarItem(items, useLocation());
+
   const mainText = useColorModeValue('navy.700', 'white');
-  const secondaryText = useColorModeValue('gray.700', 'white');
-  const override = useLayoutOverride(layoutes, (layout) => layout.navbar != null);
+  const linkColor = useColorModeValue('brand.400', 'cyan.200');
+  const override = useLayoutOverride(layouts, (layout) => layout.navbar != null);
 
   if (override?.navbar != null) {
     return override.navbar;
@@ -43,40 +41,26 @@ export function DefaultNavbar(
 
   return (
     <NavbarBox>
-      <Box mb={{ sm: '8px', md: '0px' }}>
-        <Breadcrumb>
-          <BreadcrumbItem color={secondaryText} fontSize="sm" mb="5px">
-            <BreadcrumbLink href="#" color={secondaryText}>
-              Pages
-            </BreadcrumbLink>
+      <Flex mb={{ sm: '8px', md: '0px' }} direction="column" gap={3}>
+        <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
+          <BreadcrumbItem>
+            <Tag as={Link} to="/" gap={1} rounded="full" colorScheme="brand" color={linkColor}>
+              <IoHome />
+              <Text>Pages</Text>
+            </Tag>
           </BreadcrumbItem>
 
-          <BreadcrumbItem color={secondaryText} fontSize="sm">
-            <BreadcrumbLink href="#" color={secondaryText}>
-              {brandText || <Skeleton w="200px" height="20px" rounded="lg" />}
-            </BreadcrumbLink>
+          <BreadcrumbItem>
+            <Tag as={Link} to="/" gap={1} rounded="full" colorScheme="brand" color={linkColor}>
+              {activeItem.icon}
+              {activeItem.name}
+            </Tag>
           </BreadcrumbItem>
         </Breadcrumb>
-        <Link
-          color={mainText}
-          href="#"
-          bg="inherit"
-          borderRadius="inherit"
-          fontWeight="bold"
-          fontSize="34px"
-          _hover={{ color: { mainText } }}
-          _active={{
-            bg: 'inherit',
-            transform: 'none',
-            borderColor: 'transparent',
-          }}
-          _focus={{
-            boxShadow: 'none',
-          }}
-        >
-          {brandText || <SkeletonText w="full" noOfLines={2} />}
-        </Link>
-      </Box>
+        <Text color={mainText} fontWeight="bold" fontSize="34px">
+          {activeItem.name || <SkeletonText w="full" noOfLines={2} />}
+        </Text>
+      </Flex>
       {override?.navbarLinks || <AdminNavbarLinks />}
     </NavbarBox>
   );
