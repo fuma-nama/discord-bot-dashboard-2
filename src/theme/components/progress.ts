@@ -1,43 +1,21 @@
 import { mode } from '@chakra-ui/theme-tools';
-export const progressStyles = {
-  components: {
-    Progress: {
-      baseStyle: {
-        field: {
-          fontWeight: 400,
-          w: '16px',
-          h: '16px',
-          borderRadius: '20px',
-          _checked: { transform: 'translate(20px, 0px)' },
-        },
-        track: {
-          w: '40px',
-          h: '20px',
-          borderRadius: '20px',
-          _focus: {
-            boxShadow: 'none',
-          },
-        },
-      },
+import { progressAnatomy as parts } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system';
+import { dark, light } from 'theme/colors';
 
-      variants: {
-        table: (props: any) => ({
-          field: {
-            bg: 'brand.500',
-            borderRadius: '16px',
-            fontSize: 'sm',
-          },
-          track: {
-            borderRadius: '20px',
-            bg: mode('blue.50', 'whiteAlpha.50')(props),
-            h: '8px',
-            w: '54px',
-          },
-          thumb: {
-            w: '250px',
-          },
-        }),
-      },
+const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(parts.keys);
+
+export const progressStyles = defineMultiStyleConfig({
+  baseStyle: definePartsStyle((props) => ({
+    track: {
+      w: '40px',
+      h: '20px',
+      bg: mode('blue.50', 'whiteAlpha.50')(props),
+      borderRadius: '20px',
     },
-  },
-};
+    filledTrack: {
+      bg: mode(light.brand, dark.brand)(props),
+      _checked: { transform: 'translate(20px, 0px)' },
+    },
+  })),
+});

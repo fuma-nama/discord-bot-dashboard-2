@@ -22,7 +22,6 @@ export const theme = extendTheme(
   badgeStyles, // badge styles
   buttonStyles, // button styles
   linkStyles, // link styles
-  progressStyles, // progress styles
   sliderStyles, // slider styles
   inputStyles, // input styles
   switchStyles, // switch styles
@@ -38,6 +37,7 @@ export const theme = extendTheme(
       Skeleton: skeletonStyles,
       Tabs: tabsStyles,
       Card: cardStyles,
+      Progress: progressStyles,
     },
   }
 );
