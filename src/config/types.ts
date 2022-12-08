@@ -1,6 +1,6 @@
 import { CustomFeatures } from './custom-types';
 import { Guild } from 'api/discord';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 export type AppConfig = {
   /**
@@ -47,5 +47,12 @@ export interface Feature<K extends keyof CustomFeatures> {
   name: string;
   description?: string;
   icon?: ReactElement;
-  useRender?: (data: CustomFeatures[K]) => ReactElement;
+  /**
+   * Render content in Feature view
+   */
+  useRender: (data: CustomFeatures[K]) => ReactElement;
+  /**
+   * Render skeleton before featrue is loaded
+   */
+  useSkeleton?: () => ReactNode;
 }

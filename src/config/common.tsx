@@ -1,5 +1,6 @@
 import { createIcon, Icon } from '@chakra-ui/react';
 import { PermissionFlags } from 'api/discord';
+import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
@@ -37,21 +38,31 @@ export const config: AppConfig = {
         useRender(data) {
           return <>{data.message}</>;
         },
+        useSkeleton: () => <LoadingPanel size="sm" flex={1} />,
       },
       gaming: {
         name: 'Gaming',
         description: 'Enjoy playing games with your friends',
         icon: <Icon as={BsMusicNoteBeamed} />,
+        useRender(data) {
+          return <>Hello</>;
+        },
       },
       'reaction-role': {
         name: 'Reaction Role',
         description: 'Give user a role when clicking on a button',
         icon: <Icon as={MdAddReaction} />,
+        useRender(data) {
+          return <>Hello</>;
+        },
       },
       meme: {
         name: 'Memes Time',
         description: 'Send memes everyday',
         icon: <Icon as={IoHappy} />,
+        useRender(data) {
+          return <>Hello</>;
+        },
       },
     },
   },

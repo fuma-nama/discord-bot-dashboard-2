@@ -83,11 +83,11 @@ export const buttonStyles = {
         action: (props: any) => ({
           fontWeight: '600',
           borderRadius: '50px',
-          bg: mode('secondaryGray.300', 'blackAlpha.300')(props),
+          bg: mode('secondaryGray.300', 'whiteAlpha.100')(props),
           color: mode('brand.500', 'cyan.200')(props),
-          _active: { bg: mode('secondaryGray.300', 'blackAlpha.200')(props) },
+          _active: { bg: mode('secondaryGray.300', 'whiteAlpha.300')(props) },
           _hover: {
-            bg: mode('secondaryGray.200', 'blackAlpha.200')(props),
+            bg: mode('secondaryGray.200', 'whiteAlpha.300')(props),
           },
         }),
         setup: (props: any) => ({
