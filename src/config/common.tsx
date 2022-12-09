@@ -1,12 +1,12 @@
-import { createIcon, Icon } from '@chakra-ui/react';
+import { createIcon, Icon, Input } from '@chakra-ui/react';
 import { PermissionFlags } from 'api/discord';
-import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { useDashboard } from './example/dashboard';
 import { AppConfig } from './types';
+import { useFeatureValue } from './utils';
 
 const OmagizeIcon = createIcon({
   displayName: 'OmagizeLogo',
@@ -40,17 +40,29 @@ export const config: AppConfig = {
         name: 'Music Player',
         description: 'Play music in Your Discord Server',
         icon: <Icon as={BsMusicNoteBeamed} />,
-        useRender(data) {
-          return <>{data.message}</>;
+        useRender: (data) => {
+          const { value, setValue, render } = useFeatureValue<'music'>();
+
+          return render(
+            <>
+              <Input
+                variant="main"
+                value={value.message ?? data.message}
+                onChange={(e) => setValue((prev) => ({ ...prev, message: e.target.value }))}
+              />
+            </>
+          );
         },
-        useSkeleton: () => <LoadingPanel size="sm" flex={1} />,
       },
       gaming: {
         name: 'Gaming',
         description: 'Enjoy playing games with your friends',
         icon: <Icon as={FaGamepad} />,
         useRender(data) {
-          return <>Hello</>;
+          return {
+            value: {},
+            component: <></>,
+          };
         },
       },
       'reaction-role': {
@@ -58,7 +70,10 @@ export const config: AppConfig = {
         description: 'Give user a role when clicking on a button',
         icon: <Icon as={MdAddReaction} />,
         useRender(data) {
-          return <>Hello</>;
+          return {
+            value: {},
+            component: <></>,
+          };
         },
       },
       meme: {
@@ -66,7 +81,10 @@ export const config: AppConfig = {
         description: 'Send memes everyday',
         icon: <Icon as={IoHappy} />,
         useRender(data) {
-          return <>Hello</>;
+          return {
+            value: {},
+            component: <></>,
+          };
         },
       },
     },

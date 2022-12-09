@@ -47,7 +47,7 @@ export type GuildConfig = {
    */
   filter: (guild: Guild) => boolean;
   features: {
-    [K in keyof CustomFeatures]: Feature<K>;
+    [K in keyof CustomFeatures]: FeatureConfig<K>;
   };
 };
 
@@ -58,16 +58,22 @@ export interface GuildInfo {
 /**
  * Internal Feature info
  */
-export interface Feature<K extends keyof CustomFeatures> {
+export interface FeatureConfig<K extends keyof CustomFeatures> {
   name: string;
   description?: string;
   icon?: ReactElement;
   /**
    * Render content in Feature view
    */
-  useRender: (data: CustomFeatures[K]) => ReactElement;
+  useRender: (data: CustomFeatures[K]) => FeatureRender;
   /**
    * Render skeleton before featrue is loaded
    */
   useSkeleton?: () => ReactNode;
 }
+
+export type FeatureRender = {
+  value: { [key: string]: any };
+  reset?: () => void;
+  component: ReactElement;
+};

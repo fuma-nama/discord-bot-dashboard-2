@@ -1,10 +1,12 @@
 import Icon from '@chakra-ui/icon';
-import { Box, Center, Flex, Heading, Text } from '@chakra-ui/layout';
+import { WarningIcon } from '@chakra-ui/icons';
+import { Center, Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
+import { Button, SlideFade } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { config } from 'config/common';
 import { CustomFeatures } from 'config/custom-types';
-import { Feature } from 'config/types';
+import { FeatureConfig } from 'config/types';
 import { BsSearch } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import { useFeatureQuery } from 'stores';
@@ -15,10 +17,12 @@ type Params = {
   feature: keyof CustomFeatures;
 };
 
+export type UpdateFeatureValue<K extends keyof CustomFeatures> = Partial<CustomFeatures[K]>;
+
 export function FeatureView() {
   const { guild, feature } = useParams<Params>();
   const query = useFeatureQuery(guild, feature);
-  const featureConfig = config.guild.features[feature] as Feature<typeof feature>;
+  const featureConfig = config.guild.features[feature] as FeatureConfig<typeof feature>;
   const skeleton = featureConfig?.useSkeleton?.();
 
   if (featureConfig == null) return <NotFound />;
@@ -29,10 +33,7 @@ export function FeatureView() {
       loading={skeleton ?? <LoadingPanel size="sm" />}
       error="Failed to load feature"
     >
-      <Flex direction="column" minH="full">
-        <Heading>{featureConfig.name}</Heading>
-        <Content id={feature} feature={query.data} config={featureConfig} />
-      </Flex>
+      <Content id={feature} feature={query.data} config={featureConfig} />
     </QueryStatus>
   );
 }
@@ -54,9 +55,41 @@ function Content<K extends keyof CustomFeatures>({
 }: {
   id: K;
   feature: CustomFeatures[K];
-  config: Feature<K>;
+  config: FeatureConfig<K>;
 }) {
-  const render = config.useRender(feature);
+  const { value, reset, component } = config.useRender(feature);
 
-  return <>{render}</>;
+  return (
+    <Flex direction="column" w="full" h="full">
+      <Flex direction="column" flex={1}>
+        <Heading>{config.name}</Heading>
+        {component}
+      </Flex>
+      <Savebar value={value} onReset={() => reset?.()} />
+    </Flex>
+  );
+}
+
+function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
+  const open = Object.entries(value).length !== 0;
+  const { cardBg } = useColors();
+
+  return (
+    <SlideFade in={open}>
+      <HStack bg={cardBg} rounded="3xl" pos="sticky" left={0} bottom={0} w="full" px={5} py={3}>
+        <WarningIcon
+          _light={{ color: 'orange.400' }}
+          _dark={{ color: 'orange.300' }}
+          w="30px"
+          h="30px"
+        />
+        <Text fontSize="lg" fontWeight="500">
+          Save changes
+        </Text>
+        <Spacer />
+        <Button variant="brand">Save</Button>
+        <Button onClick={onReset}>Discard</Button>
+      </HStack>
+    </SlideFade>
+  );
 }
