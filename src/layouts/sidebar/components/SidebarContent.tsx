@@ -19,7 +19,7 @@ import Links from './Items';
 import { SidebarItem } from 'utils/routeUtils';
 import { GuildItem } from 'components/item/GuildItem';
 import { useGuilds, useSelfUserQuery } from 'stores';
-import { SearchBar } from 'components/fields/SearchBar';
+import { SearchBar } from 'components/forms/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
 import { SettingsIcon } from '@chakra-ui/icons';

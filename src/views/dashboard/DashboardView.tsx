@@ -7,7 +7,7 @@ import { useSelfUser } from 'stores';
 import { useColors } from 'theme';
 
 export function DashboardView() {
-  const hook = config.pages?.useDashboard();
+  const hook = config.pages?.useDashboard?.();
 
   if (hook == null) return <DefaultView />;
   return <>{hook}</>;
