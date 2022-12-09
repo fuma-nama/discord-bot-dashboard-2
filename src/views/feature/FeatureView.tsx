@@ -1,5 +1,5 @@
 import Icon from '@chakra-ui/icon';
-import { Center, Flex, Heading, Text } from '@chakra-ui/layout';
+import { Box, Center, Flex, Heading, Text } from '@chakra-ui/layout';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { config } from 'config/common';
@@ -19,21 +19,21 @@ export function FeatureView() {
   const { guild, feature } = useParams<Params>();
   const query = useFeatureQuery(guild, feature);
   const featureConfig = config.guild.features[feature] as Feature<typeof feature>;
-  const skeleton = featureConfig?.useSkeleton();
+  const skeleton = featureConfig?.useSkeleton?.();
 
   if (featureConfig == null) return <NotFound />;
 
   return (
-    <Flex direction="column" minH="full">
-      <QueryStatus
-        query={query}
-        loading={skeleton ?? <LoadingPanel size="sm" flex={1} />}
-        error="Failed to load feature"
-      >
+    <QueryStatus
+      query={query}
+      loading={skeleton ?? <LoadingPanel size="sm" />}
+      error="Failed to load feature"
+    >
+      <Flex direction="column" minH="full">
         <Heading>{featureConfig.name}</Heading>
         <Content id={feature} feature={query.data} config={featureConfig} />
-      </QueryStatus>
-    </Flex>
+      </Flex>
+    </QueryStatus>
   );
 }
 
