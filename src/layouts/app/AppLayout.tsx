@@ -43,7 +43,7 @@ function Content() {
       transitionTimingFunction="linear, linear, ease"
     >
       <DefaultNavbar />
-      <Box mx="auto" w="full" pe="20px" padding={0} flex="1 1" mt="50px">
+      <Box mx="auto" w="full" maxW="1200px" pe="20px" padding={0} flex="1 1" mt="30px">
         <Outlet />
       </Box>
     </Flex>

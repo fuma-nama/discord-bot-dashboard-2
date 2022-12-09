@@ -40,7 +40,7 @@ export function DefaultNavbar() {
   }
 
   return (
-    <NavbarBox>
+    <NavbarBox box={{ maxW: '1230px' }}>
       <Flex mb={{ sm: '8px', md: '0px' }} direction="column" gap={3}>
         <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
           <BreadcrumbItem>
@@ -96,7 +96,7 @@ export function NavbarBox({
       justifyContent={{ xl: 'center' }}
       lineHeight="25.6px"
       mx="auto"
-      pb="8px"
+      pb="16px"
       px={{
         sm: '15px',
         md: '10px',
