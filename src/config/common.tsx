@@ -2,8 +2,10 @@ import { createIcon, Icon } from '@chakra-ui/react';
 import { PermissionFlags } from 'api/discord';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
+import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
+import { useDashboard } from './example/dashboard';
 import { AppConfig } from './types';
 
 const OmagizeIcon = createIcon({
@@ -28,6 +30,9 @@ export const config: AppConfig = {
   icon: OmagizeIcon,
   inviteUrl:
     'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',
+  pages: {
+    useDashboard: useDashboard,
+  },
   guild: {
     filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
     features: {
@@ -43,7 +48,7 @@ export const config: AppConfig = {
       gaming: {
         name: 'Gaming',
         description: 'Enjoy playing games with your friends',
-        icon: <Icon as={BsMusicNoteBeamed} />,
+        icon: <Icon as={FaGamepad} />,
         useRender(data) {
           return <>Hello</>;
         },

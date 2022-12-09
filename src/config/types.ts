@@ -11,6 +11,9 @@ export type AppConfig = {
    * icon (react component)
    */
   icon?: (props: any) => ReactElement;
+  /**
+   * Guild settings
+   */
   guild: GuildConfig;
   /**
    * Url to invite the bot
@@ -18,6 +21,18 @@ export type AppConfig = {
    * example: `https://discord.com/api/oauth2/authorize?client_id=907955781972918281&permissions=8&scope=bot`
    */
   inviteUrl: string;
+
+  pages?: {
+    /**
+     * The Dashboard page
+     */
+    useDashboard?: () => ReactElement;
+
+    /**
+     * The Profile page
+     */
+    useProfile?: () => ReactElement;
+  };
 };
 
 export type GuildConfig = {
