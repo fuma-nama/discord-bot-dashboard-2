@@ -98,7 +98,7 @@ function BottomCard() {
         <IconButton
           icon={<SettingsIcon />}
           aria-label="settings"
-          onClick={() => navigate('/user/settings')}
+          onClick={() => navigate('/user/profile')}
         />
       </CardBody>
     </Card>

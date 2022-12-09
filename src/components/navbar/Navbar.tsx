@@ -39,26 +39,43 @@ export function DefaultNavbar() {
     return override.navbar;
   }
 
+  const breadcrumb = [
+    {
+      icon: <IoHome />,
+      text: 'Pages',
+      to: '/user/home',
+    },
+  ];
+
+  if (activeItem != null)
+    breadcrumb.push({
+      icon: activeItem.icon,
+      text: activeItem.name,
+      to: activeItem.path,
+    });
+
   return (
     <NavbarBox box={{ maxW: '1230px' }}>
       <Flex mb={{ sm: '8px', md: '0px' }} direction="column" gap={3}>
         <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
-          <BreadcrumbItem>
-            <Tag as={Link} to="/" gap={1} rounded="full" colorScheme="brand" color={linkColor}>
-              <IoHome />
-              <Text>Pages</Text>
-            </Tag>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <Tag as={Link} to="/" gap={1} rounded="full" colorScheme="brand" color={linkColor}>
-              {activeItem.icon}
-              {activeItem.name}
-            </Tag>
-          </BreadcrumbItem>
+          {breadcrumb.map((item, i) => (
+            <BreadcrumbItem key={i}>
+              <Tag
+                as={Link}
+                to={item.to}
+                gap={1}
+                rounded="full"
+                colorScheme="brand"
+                color={linkColor}
+              >
+                {item.icon}
+                <Text>{item.text}</Text>
+              </Tag>
+            </BreadcrumbItem>
+          ))}
         </Breadcrumb>
         <Text color={mainText} fontWeight="bold" fontSize="34px">
-          {activeItem.name || <SkeletonText w="full" noOfLines={2} />}
+          {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>
       {override?.navbarLinks || <AdminNavbarLinks />}
