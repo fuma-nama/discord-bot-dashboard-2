@@ -1,14 +1,5 @@
 import { Flex, Grid, Spacer, Text, VStack } from '@chakra-ui/layout';
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-  Switch,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Avatar, Button, Card, CardBody, CardHeader, Image, useColorMode } from '@chakra-ui/react';
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SwitchField } from 'components/forms/SwitchField';
 import { config } from 'config/common';
@@ -26,8 +17,8 @@ export function ProfileView() {
   const [devMode, setDevMode] = usePageStore((s) => [s.devMode, s.setDevMode]);
 
   return (
-    <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} p={{ '3sm': 5 }} gap={3}>
-      <Flex direction="column" maxW="800px" p={2}>
+    <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={3}>
+      <Flex direction="column" maxW="800px" p={2} pl={0}>
         <Image src={bannerUrl(user)} rounded="2xl" />
         <VStack mt="-50px" ml="40px" align="start">
           <Avatar

@@ -24,7 +24,7 @@ export function useDashboard() {
   const { globalBg } = useColors();
 
   return (
-    <Flex direction="column" gap={5} maxW={{ lg: '1200px' }} mx="auto">
+    <Flex direction="column" gap={5}>
       <HStack rounded="2xl" bg="brand.300" gap={2} p={5}>
         <Show above="md">
           <Circle color="white" bg="blackAlpha.300" p={4}>
@@ -42,7 +42,7 @@ export function useDashboard() {
           </Button>
         </Flex>
       </HStack>
-      <Flex direction="column" gap={2}>
+      <Flex direction="column" gap={2} mt={3}>
         <Text fontSize="xl" fontWeight="600">
           Music Time
         </Text>

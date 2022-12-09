@@ -12,7 +12,7 @@ export function SwitchField(
 
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
   return (
-    <Flex justify="space-between" align="center" borderRadius="16px">
+    <Flex justify="space-between" align="center" borderRadius="16px" gap={3}>
       <FormLabel htmlFor={id} _hover={{ cursor: 'pointer' }} flexDirection="column">
         <Text color={textColorPrimary} fontSize="md" fontWeight="600">
           {label}
