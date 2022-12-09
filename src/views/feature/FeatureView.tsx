@@ -19,7 +19,7 @@ export function FeatureView() {
   const { guild, feature } = useParams<Params>();
   const query = useFeatureQuery(guild, feature);
   const featureConfig = config.guild.features[feature] as Feature<typeof feature>;
-  const skeleton = featureConfig?.useSkeleton();
+  const skeleton = featureConfig?.useSkeleton?.();
 
   if (featureConfig == null) return <NotFound />;
 
