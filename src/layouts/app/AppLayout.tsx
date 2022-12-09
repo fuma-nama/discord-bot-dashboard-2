@@ -28,6 +28,7 @@ export default function AppLayout() {
 function Content() {
   return (
     <Flex
+      pos="relative"
       direction="column"
       float="right"
       height="100%"

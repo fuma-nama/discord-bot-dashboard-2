@@ -87,7 +87,7 @@ function MusicPlayer() {
           />
         </Hide>
 
-        <Flex w="full" direction="column" bg={cardBg} rounded="xl" gap={3} p={3}>
+        <Flex direction="column" bg={cardBg} rounded="xl" gap={3} p={3} flex={1}>
           <HStack color={textColorSecondary}>
             <BsPlayBtn />
             <Text>Now Playing</Text>
