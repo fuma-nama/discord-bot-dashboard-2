@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { Center, Circle, Flex, Grid, Heading, HStack, Text } from '@chakra-ui/layout';
+import { Center, Circle, Flex, Grid, Heading, HStack, Link, Text } from '@chakra-ui/layout';
 import {
   Avatar,
   Button,
@@ -13,6 +13,7 @@ import {
   Image,
   Progress,
 } from '@chakra-ui/react';
+import { config } from 'config/common';
 import { BsMusicNoteBeamed, BsPlay, BsPlayBtn } from 'react-icons/bs';
 import { MdVoiceChat } from 'react-icons/md';
 import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
@@ -30,7 +31,9 @@ export function useDashboard() {
           <Text color="whiteAlpha.800">Try our discord bot with one-click</Text>
         </CardBody>
         <CardFooter>
-          <Button>Invite now</Button>
+          <Button as={Link} href={config.inviteUrl}>
+            Invite now
+          </Button>
         </CardFooter>
       </Card>
       <MusicPlayer />
