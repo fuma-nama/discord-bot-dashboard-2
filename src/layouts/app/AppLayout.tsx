@@ -4,9 +4,7 @@ import { QueryStatus } from 'components/panel/QueryPanel';
 import { useSelfUserQuery } from 'stores';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { DefaultNavbar } from 'components/navbar/Navbar';
-import { layouts } from 'layouts';
-import { useLocation, Outlet } from 'react-router-dom';
-import { getActiveSidebarItem } from 'utils/routeUtils';
+import { Outlet } from 'react-router-dom';
 import { Sidebar, SidebarResponsive } from 'layouts/sidebar/Sidebar';
 
 export default function AppLayout() {
@@ -28,9 +26,6 @@ export default function AppLayout() {
 }
 
 function Content() {
-  const location = useLocation();
-  const activeItem = getActiveSidebarItem(items, location);
-
   return (
     <Flex
       direction="column"
@@ -38,7 +33,7 @@ function Content() {
       height="100%"
       overflow="auto"
       position="relative"
-      p={{ base: '10px', md: '30px' }}
+      p={{ base: '10px', '3sm': '30px' }}
       w={{ base: '100%', xl: 'calc( 100% - 290px )' }}
       maxWidth={{ base: '100%', xl: 'calc( 100% - 290px )' }}
       maxHeight="100%"

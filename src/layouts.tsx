@@ -1,5 +1,5 @@
-import AuthLayout from './layouts/auth';
-import AppLayout from './layouts/app';
+import AuthLayout from './layouts/auth/AuthLayout';
+import AppLayout from './layouts/app/AppLayout';
 import { Navigate } from 'react-router-dom';
 import { RootLayout } from './utils/routeUtils';
 import { GroupNavbar } from 'layouts/guild/GroupNavbar';
@@ -8,6 +8,7 @@ import { GuildView } from 'views/guild/GuildView';
 import { GuildLayout } from 'layouts/guild/GuildLayout';
 import { FeatureView } from 'views/feature/FeatureView';
 import { DashboardView } from 'views/dashboard/DashboardView';
+import { ProfileView } from 'views/profile/ProfileView';
 
 export const layouts: RootLayout[] = [
   {
@@ -60,7 +61,7 @@ export const layouts: RootLayout[] = [
           },
           {
             path: 'profile',
-            component: <></>,
+            component: <ProfileView />,
           },
         ],
       },
