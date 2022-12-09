@@ -89,25 +89,15 @@ export async function getGuild(accessToken: string, id: string) {
   return await callReturn<Guild>(`/guilds/${id}`, withDiscord(accessToken, { method: 'GET' }));
 }
 
-export function bannerToUrl(id: string, hash: IconHash) {
-  return `https://cdn.discordapp.com/banners/${id}/${hash}?size=1024`;
-}
-export function avatarToUrl(id: string, hash: IconHash) {
-  return `https://cdn.discordapp.com/avatars/${id}/${hash}?size=512`;
-}
-
-export function iconToUrl(id: string, hash: IconHash) {
-  return `https://cdn.discordapp.com/icons/${id}/${hash}`;
-}
-
 export function iconUrl(guild: Guild) {
-  return iconToUrl(guild.id, guild.icon);
+  return `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
 }
 
 export function avatarUrl(user: UserInfo) {
-  return avatarToUrl(user.id, user.avatar);
+  return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=512`;
 }
 
 export function bannerUrl(user: UserInfo) {
-  return bannerToUrl(user.id, user.banner);
+  if (user.banner == null) return null;
+  return `https://cdn.discordapp.com/banners/${user.id}/${user.banner}?size=1024`;
 }

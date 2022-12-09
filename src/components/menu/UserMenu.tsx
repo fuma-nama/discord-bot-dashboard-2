@@ -8,7 +8,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { UserInfo, avatarToUrl } from 'api/discord';
+import { UserInfo, avatarUrl } from 'api/discord';
 import { useLogoutMutation } from 'stores';
 import { useSelfUser } from 'stores';
 
@@ -22,7 +22,7 @@ export function UserMenu(props: { color: string; shadow: string; bg: string }) {
           _hover={{ cursor: 'pointer' }}
           color="white"
           name={user.username}
-          src={avatarToUrl(user.id, user.avatar)}
+          src={avatarUrl(user)}
           bg="#11047A"
           w="40px"
           h="40px"
