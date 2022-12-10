@@ -1,5 +1,6 @@
 import { CustomFeatures, CustomGuildInfo } from 'config/custom-types';
 import { withBot, callDefault, callReturn } from './core';
+import { ChannelTypes } from './discord';
 
 export const bot = 'http://localhost:8080';
 
@@ -12,6 +13,16 @@ export type Role = {
     iconUrl?: string;
     emoji?: string;
   };
+};
+
+export type GuildChannel = {
+  id: string;
+  name: string;
+  type: ChannelTypes;
+  /**
+   * parent category of the channel
+   */
+  category?: string;
 };
 
 /**
@@ -107,6 +118,15 @@ export async function updateFeature<K extends keyof CustomFeatures>(
 export async function fetchGuildRoles(guild: string) {
   return await callReturn<Role[]>(
     `/guilds/${guild}/roles`,
+    withBot({
+      method: 'GET',
+    })
+  );
+}
+
+export async function fetchGuildChannels(guild: string) {
+  return await callReturn<GuildChannel[]>(
+    `/guilds/${guild}/channels`,
     withBot({
       method: 'GET',
     })
