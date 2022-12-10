@@ -11,7 +11,7 @@ import { useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 import { SelectField } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
-import { DatePicker, DatePickerForm } from 'components/forms/DatePicker';
+import { DatePicker, DatePickerForm, SmallDatePickerForm } from 'components/forms/DatePicker';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -63,7 +63,7 @@ export function MusicFeaturePanel({
           }))}
         />
       </FormControlCard>
-      <DatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
+      <SmallDatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
     </SimpleGrid>
   );
 }
