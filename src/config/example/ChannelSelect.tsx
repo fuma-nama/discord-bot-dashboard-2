@@ -3,7 +3,7 @@ import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
 import { FormControlCard } from 'components/forms/FormCard';
 import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
-import { MdCategory, MdRecordVoiceOver } from 'react-icons/md';
+import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
