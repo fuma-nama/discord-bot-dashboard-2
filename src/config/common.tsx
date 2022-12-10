@@ -1,10 +1,11 @@
-import { createIcon, Icon, Input } from '@chakra-ui/react';
+import { createIcon, Icon } from '@chakra-ui/react';
 import { PermissionFlags } from 'api/discord';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { useDashboard } from './example/dashboard';
+import { MusicFeaturePanel } from './example/music';
 import { AppConfig } from './types';
 import { useFeatureValue } from './utils';
 
@@ -41,19 +42,11 @@ export const config: AppConfig = {
         description: 'Play music in Your Discord Server',
         icon: <Icon as={BsMusicNoteBeamed} />,
         useRender: (data) => {
-          const { value, setValue, render } = useFeatureValue<'music'>({
+          const result = useFeatureValue<'music'>({
             valid: (v) => v.message?.length > 0,
           });
 
-          return render(
-            <>
-              <Input
-                variant="main"
-                value={value.message ?? data.message}
-                onChange={(e) => setValue((prev) => ({ ...prev, message: e.target.value }))}
-              />
-            </>
-          );
+          return result.render(<MusicFeaturePanel result={result} data={data} />);
         },
       },
       gaming: {

@@ -62,7 +62,7 @@ function Content<K extends keyof CustomFeatures>({
 
   return (
     <Flex direction="column" w="full" h="full">
-      <Flex direction="column" flex={1}>
+      <Flex direction="column" flex={1} gap={5}>
         <Heading>{config.name}</Heading>
         {result.component}
       </Flex>

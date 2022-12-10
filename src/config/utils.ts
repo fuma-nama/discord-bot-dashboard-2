@@ -30,19 +30,23 @@ export type UseFeatureValueOptions<V> = {
   valid?: (v: V) => boolean;
 };
 
-export function useFeatureValue<K extends keyof CustomFeatures, V = Partial<CustomFeatures[K]>>(
-  options?: UseFeatureValueOptions<V>
-): {
+export type UseFeatureValueResult<V> = {
   value: V;
+  update: Dispatch<Partial<V>>;
   setValue: Dispatch<SetStateAction<V>>;
   render: (element: ReactElement) => FeatureRender;
-} {
+};
+
+export function useFeatureValue<K extends keyof CustomFeatures, V = Partial<CustomFeatures[K]>>(
+  options?: UseFeatureValueOptions<V>
+): UseFeatureValueResult<V> {
   const defaultValue = options?.defaultValue ?? ({} as V);
   const [value, setValue] = useState<V>(defaultValue);
   const convert = converter(options?.converter ?? 'json');
 
   return {
     value,
+    update: (action) => setValue((prev) => ({ ...prev, ...action })),
     setValue,
     render: (element) => {
       const valid = options?.valid == null ? true : options.valid(value);
