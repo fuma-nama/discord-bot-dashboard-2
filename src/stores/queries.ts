@@ -7,6 +7,7 @@ import {
   disableFeature,
   enableFeature,
   fetchGuildInfo,
+  fetchGuildRoles,
   getFeature,
   logout,
   updateFeature,
@@ -30,6 +31,7 @@ export const Keys = {
   login: ['login'],
   guild_info: (guild: string) => ['guild_info', guild],
   features: (guild: string, feature: string) => ['feature', guild, feature],
+  guildRoles: (guild: string) => ['gulid_roles', guild],
 };
 export const Mutations = {
   updateFeature: (guild: string, id: string) => ['feature', guild, id],
@@ -140,4 +142,8 @@ export function useUpdateFeatureMutation() {
       },
     }
   );
+}
+
+export function useGuildRolesQuery(guild: string) {
+  return useQuery(Keys.guildRoles(guild), () => fetchGuildRoles(guild));
 }

@@ -3,6 +3,17 @@ import { withBot, callDefault, callReturn } from './core';
 
 export const bot = 'http://localhost:8080';
 
+export type Role = {
+  id: string;
+  name: string;
+  color: number;
+  position: number;
+  icon?: {
+    iconUrl?: string;
+    emoji?: string;
+  };
+};
+
 /**
  * Get discord oauth2 access token if logged in, otherwise return null
  */
@@ -83,6 +94,21 @@ export async function updateFeature<K extends keyof CustomFeatures>(
     withBot({
       method: 'PATCH',
       body: options,
+    })
+  );
+}
+
+/**
+ * Used for custom forms
+ *
+ * The dashboard itself doesn't use it
+ * @returns Guild roles
+ */
+export async function fetchGuildRoles(guild: string) {
+  return await callReturn<Role[]>(
+    `/guilds/${guild}/roles`,
+    withBot({
+      method: 'GET',
     })
   );
 }
