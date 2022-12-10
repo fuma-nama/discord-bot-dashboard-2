@@ -1,23 +1,39 @@
+import { ChatIcon, Icon } from '@chakra-ui/icons';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
 import { FormControlCard } from 'components/forms/FormCard';
-import { SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { MdCategory, MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 
-type ChannelOption = {
+type ChannelOption = Option & {
   label: string;
   value: string;
   options?: ChannelOption[];
 };
 
-const mapOption = (channel: GuildChannel): ChannelOption =>
-  ({
+const mapOption = (channel: GuildChannel): ChannelOption => {
+  let icon;
+  switch (channel.type) {
+    case ChannelTypes.GUILD_STAGE_VOICE:
+    case ChannelTypes.GUILD_VOICE: {
+      icon = <Icon as={MdRecordVoiceOver} />;
+      break;
+    }
+    default: {
+      icon = <ChatIcon />;
+      break;
+    }
+  }
+
+  return {
     label: channel.name,
     value: channel.id,
-    options: [],
-  } as ChannelOption);
+    icon,
+  };
+};
 
 export function ChannelSelect({
   value,
