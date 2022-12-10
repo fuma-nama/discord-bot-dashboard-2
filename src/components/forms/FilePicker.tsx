@@ -109,19 +109,24 @@ export function FilePickerForm({
 }
 
 function useFileUrl(file: Blob) {
-  const [url, setUrl] = useState<string | null>();
+  const [url, setUrl] = useState<string>();
 
   useEffect(() => {
     if (file != null) {
-      setUrl(URL.createObjectURL(file));
-    }
+      const fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result != null && typeof result === 'string') {
+          setUrl(result);
+        }
+      };
 
-    return () => {
-      if (url != null) {
-        URL.revokeObjectURL(url);
-        setUrl(null);
-      }
-    };
+      fileReader.readAsDataURL(file);
+      return () => {
+        fileReader.abort();
+      };
+    }
   }, [file]);
+
   return url;
 }
