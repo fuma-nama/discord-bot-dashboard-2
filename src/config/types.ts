@@ -79,13 +79,13 @@ export type FeatureRender = {
   canSave?: boolean;
 
   /**
-   * The form/json body of update feature request
+   * Get the form/json body of update feature request
    *
    * Should be handled by the server
    *
    * endpoint: (PATCH `/guilds/{guild}/features/{feature}`)
    */
-  value: FormData | string;
+  serialize: () => FormData | string;
 
   /**
    * Reset current value

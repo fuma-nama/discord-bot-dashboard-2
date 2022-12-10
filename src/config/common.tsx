@@ -62,7 +62,7 @@ export const config: AppConfig = {
         icon: <Icon as={FaGamepad} />,
         useRender(data) {
           return {
-            value: '{}',
+            serialize: () => '{}',
             component: <></>,
           };
         },
@@ -73,7 +73,7 @@ export const config: AppConfig = {
         icon: <Icon as={MdAddReaction} />,
         useRender(data) {
           return {
-            value: '{}',
+            serialize: () => '{}',
             component: <></>,
           };
         },
@@ -84,7 +84,7 @@ export const config: AppConfig = {
         icon: <Icon as={IoHappy} />,
         useRender(data) {
           return {
-            value: '{}',
+            serialize: () => '{}',
             component: <></>,
           };
         },

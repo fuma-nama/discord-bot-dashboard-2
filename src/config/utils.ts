@@ -29,6 +29,7 @@ export type UseFeatureValueOptions<V> = {
    */
   valid?: (v: V) => boolean;
 };
+
 export function useFeatureValue<K extends keyof CustomFeatures, V = Partial<CustomFeatures[K]>>(
   options?: UseFeatureValueOptions<V>
 ): {
@@ -48,7 +49,7 @@ export function useFeatureValue<K extends keyof CustomFeatures, V = Partial<Cust
 
       return {
         canSave: Object.entries(value).length !== 0 && valid,
-        value: convert(value),
+        serialize: () => convert(value),
         reset: () => setValue(defaultValue),
         component: element,
       };

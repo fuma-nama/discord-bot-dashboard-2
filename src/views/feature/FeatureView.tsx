@@ -71,7 +71,7 @@ function Content<K extends keyof CustomFeatures>({
   );
 }
 
-function Savebar({ result: { value, canSave, reset } }: { result: FeatureRender }) {
+function Savebar({ result: { serialize, canSave, reset } }: { result: FeatureRender }) {
   const { guild, feature } = useParams<Params>();
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
@@ -81,7 +81,7 @@ function Savebar({ result: { value, canSave, reset } }: { result: FeatureRender 
       {
         guild,
         feature,
-        options: value,
+        options: serialize(),
       },
       {
         onSuccess: reset,
