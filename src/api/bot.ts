@@ -75,12 +75,14 @@ export async function getFeature<K extends keyof CustomFeatures>(
 
 export async function updateFeature<K extends keyof CustomFeatures>(
   guild: string,
-  feature: K
+  feature: K,
+  options: FormData | string
 ): Promise<CustomFeatures[K]> {
   return await callReturn<CustomFeatures[K]>(
     `/guilds/${guild}/features/${feature}`,
     withBot({
       method: 'PATCH',
+      body: options,
     })
   );
 }

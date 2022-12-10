@@ -2,7 +2,15 @@ import { CustomFeatures, CustomGuildInfo } from './../config/custom-types';
 import { useAPIStore } from './apiStore';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { UserInfo, getGuild, getGuilds, fetchUserInfo } from 'api/discord';
-import { auth, disableFeature, enableFeature, fetchGuildInfo, getFeature, logout } from 'api/bot';
+import {
+  auth,
+  disableFeature,
+  enableFeature,
+  fetchGuildInfo,
+  getFeature,
+  logout,
+  updateFeature,
+} from 'api/bot';
 import { GuildInfo } from 'config/types';
 
 export const client = new QueryClient({
@@ -87,11 +95,11 @@ export function useFeatureQuery<K extends keyof CustomFeatures>(guild: string, f
   return useQuery(Keys.features(guild, feature), () => getFeature(guild, feature));
 }
 
-export type UpdateFeatureOptions = { enabled: boolean };
-export function useUpdateFeatureMutation(guild: string, feature: string) {
+export type EnableFeatureOptions = { enabled: boolean };
+export function useEnableFeatureMutation(guild: string, feature: string) {
   return useMutation(
     Mutations.updateFeature(guild, feature),
-    async ({ enabled }: UpdateFeatureOptions) =>
+    ({ enabled }: EnableFeatureOptions) =>
       enabled ? enableFeature(guild, feature) : disableFeature(guild, feature),
     {
       async onSuccess(_, { enabled }) {
@@ -112,6 +120,23 @@ export function useUpdateFeatureMutation(guild: string, feature: string) {
             };
           }
         });
+      },
+    }
+  );
+}
+
+export type UpdateFeatureOptions = {
+  guild: string;
+  feature: keyof CustomFeatures;
+  options: FormData | string;
+};
+export function useUpdateFeatureMutation() {
+  return useMutation(
+    (options: UpdateFeatureOptions) =>
+      updateFeature(options.guild, options.feature, options.options),
+    {
+      async onSuccess(updated, options) {
+        return await client.setQueryData(Keys.features(options.guild, options.feature), updated);
       },
     }
   );

@@ -1,15 +1,16 @@
 import Icon from '@chakra-ui/icon';
 import { WarningIcon } from '@chakra-ui/icons';
 import { Center, Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
-import { Button, SlideFade } from '@chakra-ui/react';
+import { Button, ButtonGroup, SlideFade } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { config } from 'config/common';
 import { CustomFeatures } from 'config/custom-types';
 import { FeatureConfig } from 'config/types';
 import { BsSearch } from 'react-icons/bs';
+import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
-import { useFeatureQuery } from 'stores';
+import { useFeatureQuery, useUpdateFeatureMutation } from 'stores';
 import { useColors } from 'theme';
 
 type Params = {
@@ -71,8 +72,23 @@ function Content<K extends keyof CustomFeatures>({
 }
 
 function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
+  const { guild, feature } = useParams<Params>();
   const open = Object.entries(value).length !== 0;
   const { cardBg } = useColors();
+  const mutation = useUpdateFeatureMutation();
+
+  const onSave = () => {
+    mutation.mutate(
+      {
+        guild,
+        feature,
+        options: JSON.stringify(value),
+      },
+      {
+        onSuccess: onReset,
+      }
+    );
+  };
 
   return (
     <SlideFade in={open}>
@@ -87,8 +103,17 @@ function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
           Save changes
         </Text>
         <Spacer />
-        <Button variant="brand">Save</Button>
-        <Button onClick={onReset}>Discard</Button>
+        <ButtonGroup isDisabled={mutation.isLoading}>
+          <Button
+            variant="brand"
+            leftIcon={<IoSave />}
+            isLoading={mutation.isLoading}
+            onClick={onSave}
+          >
+            Save
+          </Button>
+          <Button onClick={onReset}>Discard</Button>
+        </ButtonGroup>
       </HStack>
     </SlideFade>
   );

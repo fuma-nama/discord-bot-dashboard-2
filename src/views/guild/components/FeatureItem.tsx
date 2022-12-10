@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Card, CardBody, CardFooter, Switch } from '@chakra
 import { IdFeature } from 'config/utils';
 import { IoOpen, IoOptions } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { useUpdateFeatureMutation } from 'stores';
+import { useEnableFeatureMutation } from 'stores';
 import { useColors, useItemHoverBg } from 'theme';
 
 export function FeatureItem({
@@ -17,7 +17,7 @@ export function FeatureItem({
 }) {
   const navigate = useNavigate();
   const { textColorSecondary, brand, globalBg } = useColors();
-  const mutation = useUpdateFeatureMutation(guild, feature.id);
+  const mutation = useEnableFeatureMutation(guild, feature.id);
 
   return (
     <Card>
