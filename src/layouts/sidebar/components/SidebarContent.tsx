@@ -14,23 +14,23 @@ import {
   VStack,
 } from '@chakra-ui/react';
 //   Custom components
-import Links from './Items';
-import { SidebarItem } from 'utils/routeUtils';
-import { GuildItem } from 'components/item/GuildItem';
+import { getActiveSidebarItem, SidebarItemInfo } from 'utils/routeUtils';
 import { useGuilds, useSelfUserQuery } from 'stores';
 import { SearchBar } from 'components/forms/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
 import { SettingsIcon } from '@chakra-ui/icons';
 import { avatarUrl } from 'api/discord';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { GuildItem } from './GuildItem';
+import { SidebarItem } from './SidebarItem';
 
 export function SidebarContent({
   items,
   selected: selectedGroup,
   onSelect,
 }: {
-  items: SidebarItem[];
+  items: SidebarItemInfo[];
   selected: string;
   onSelect: (id: string) => void;
 }) {
@@ -57,7 +57,7 @@ export function SidebarContent({
       </Flex>
       <Stack direction="column" mt="18px" mb="auto">
         <Flex direction="column" px="10px" gap={1}>
-          <Links items={items.filter((item) => item.name !== '/user/settings')} />
+          <Items items={items} />
         </Flex>
         <Box px="10px">
           <SearchBar
@@ -102,5 +102,20 @@ function BottomCard() {
         />
       </CardBody>
     </Card>
+  );
+}
+
+function Items({ items }: { items: SidebarItemInfo[] }) {
+  const location = useLocation();
+  const active = getActiveSidebarItem(items, location);
+
+  return (
+    <>
+      {items
+        .filter((item) => !item.hidden)
+        .map((route: SidebarItemInfo, index: number) => (
+          <SidebarItem key={index} item={route} active={active === route} />
+        ))}
+    </>
   );
 }

@@ -1,9 +1,9 @@
 import { SettingsIcon } from '@chakra-ui/icons';
 import { Icon } from '@chakra-ui/react';
 import { MdPerson, MdDashboard } from 'react-icons/md';
-import { SidebarItem } from 'utils/routeUtils';
+import { SidebarItemInfo } from 'utils/routeUtils';
 
-const items: SidebarItem[] = [
+const items: SidebarItemInfo[] = [
   {
     name: 'Dashboard',
     path: '/user/home',

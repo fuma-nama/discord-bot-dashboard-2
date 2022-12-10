@@ -44,7 +44,10 @@ export function getActiveLayout(location: Location, layouts: RootLayout[]): Norm
   return matches[matches.length - 1];
 }
 
-export function getActiveSidebarItem(items: SidebarItem[], location: Location): SidebarItem | null {
+export function getActiveSidebarItem(
+  items: SidebarItemInfo[],
+  location: Location
+): SidebarItemInfo | null {
   const matches = matchRoutes(
     items.map((item) => ({
       item,
@@ -79,7 +82,7 @@ export type RootLayout = NormalLayout & {
   loggedIn: boolean;
 };
 
-export interface SidebarItem {
+export interface SidebarItemInfo {
   name: string;
   icon?: JSX.Element;
   path: string;

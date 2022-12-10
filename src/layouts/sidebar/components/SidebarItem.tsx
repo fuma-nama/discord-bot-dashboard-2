@@ -1,27 +1,12 @@
 /* eslint-disable */
 
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // chakra imports
-import { Box, Card, CardBody, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react';
-import { SidebarItem, getActiveSidebarItem } from 'utils/routeUtils';
+import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react';
+import { SidebarItemInfo as SidebarItemType } from 'utils/routeUtils';
 import { useColors, useItemHoverBg } from 'theme';
 
-export function SidebarItems({ items }: { items: SidebarItem[] }) {
-  const location = useLocation();
-  const active = getActiveSidebarItem(items, location);
-
-  return (
-    <>
-      {items
-        .filter((item) => !item.hidden)
-        .map((route: SidebarItem, index: number) => (
-          <Link key={index} item={route} active={active === route} />
-        ))}
-    </>
-  );
-}
-
-function Link(props: { item: SidebarItem; active: boolean }) {
+export function SidebarItem(props: { item: SidebarItemType; active: boolean }) {
   const { item, active } = props;
   let activeColor = useColorModeValue('gray.700', 'white');
   let textColor = useColorModeValue('secondaryGray.500', 'navy.100');
@@ -47,5 +32,3 @@ function Link(props: { item: SidebarItem; active: boolean }) {
     </NavLink>
   );
 }
-
-export default SidebarItems;

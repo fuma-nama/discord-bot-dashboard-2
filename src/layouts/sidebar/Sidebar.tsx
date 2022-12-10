@@ -10,10 +10,10 @@ import {
 } from '@chakra-ui/react';
 import { SidebarContent } from './components/SidebarContent';
 
-import { SidebarItem } from 'utils/routeUtils';
+import { SidebarItemInfo } from 'utils/routeUtils';
 import { usePageStore, useSelectedGuild } from 'stores';
 
-export function Sidebar({ items }: { items: SidebarItem[] }) {
+export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
   const { selected, setSelected } = useSelectedGuild();
 
   const variantChange = '0.2s linear';
@@ -42,7 +42,7 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
 }
 
 // FUNCTIONS
-export function SidebarResponsive({ items }: { items: SidebarItem[] }) {
+export function SidebarResponsive({ items }: { items: SidebarItemInfo[] }) {
   const sidebarBackgroundColor = useColorModeValue('white', 'navy.800');
   const [isOpen, setOpen] = usePageStore((s) => [s.sidebarIsOpen, s.setSidebarIsOpen]);
   const { selected, setSelected } = useSelectedGuild();
