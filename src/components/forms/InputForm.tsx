@@ -1,6 +1,6 @@
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import { FormLabel } from '@chakra-ui/form-control';
 import { Input, InputProps } from '@chakra-ui/react';
-import { useColors } from 'theme';
+import { FormCard } from './FormCard';
 
 export type InputFormProps = {
   label: string;
@@ -10,10 +10,10 @@ export type InputFormProps = {
   placeholder?: string;
   input?: InputProps;
 };
+
 export function InputForm({ label, required, ...props }: InputFormProps) {
-  const { cardBg } = useColors();
   return (
-    <FormControl isRequired={required} rounded="3xl" bg={cardBg} p={4}>
+    <FormCard isRequired={required}>
       <FormLabel>{label}</FormLabel>
       <Input
         variant="main"
@@ -22,6 +22,6 @@ export function InputForm({ label, required, ...props }: InputFormProps) {
         placeholder={props.placeholder}
         {...props.input}
       />
-    </FormControl>
+    </FormCard>
   );
 }
