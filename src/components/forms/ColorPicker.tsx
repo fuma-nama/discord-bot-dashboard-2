@@ -1,8 +1,22 @@
-import { FormLabel } from '@chakra-ui/form-control';
-import { Box, Fade, Flex, Grid, Input, SimpleGrid, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  InputAddon,
+  InputGroup,
+  InputLeftAddon,
+  InputLeftElement,
+  InputRightElement,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import { HexAlphaColorPicker, HexColorInput, HexColorPicker } from 'react-colorful';
 import { ColorPickerBaseProps } from 'react-colorful/dist/types';
-import { FormCard } from './FormCard';
+import { FormComponentProps, FormControlCard } from './FormCard';
 import { useDebouncedCallback } from 'use-debounce';
 
 export type ColorPickerProps = {
@@ -14,31 +28,61 @@ export type ColorPickerProps = {
   supportAlpha?: boolean;
 };
 
-export type ColorPickerFormProps = ColorPickerProps & {
-  label: string;
-};
+export type ColorPickerFormProps = FormComponentProps<ColorPickerProps>;
 
-export function ColorPickerForm({ label, ...props }: ColorPickerFormProps) {
-  const onChange = useDebouncedCallback((value: string) => props.onChange(value), 100);
+export function SmallColorPickerForm({
+  value,
+  onChange,
+  supportAlpha,
+  ...props
+}: ColorPickerFormProps) {
+  const onChangeDebounced = useDebouncedCallback((value: string) => onChange(value), 100);
 
   return (
-    <FormCard>
-      <FormLabel>{label}</FormLabel>
+    <FormControlCard {...props}>
+      <Popover>
+        <PopoverTrigger>
+          <InputGroup>
+            <InputLeftAddon bg={value} rounded="xl" h="full" />
+            <Input
+              as={HexColorInput}
+              color={value}
+              placeholder={value ?? 'Select a color'}
+              onChange={onChange as any}
+              variant="main"
+            />
+          </InputGroup>
+        </PopoverTrigger>
+        <PopoverContent>
+          <PopoverBody>
+            <ColorPicker value={value} onChange={onChangeDebounced} supportAlpha={supportAlpha} />
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+    </FormControlCard>
+  );
+}
+
+export function ColorPickerForm({ value, onChange, supportAlpha, ...props }: ColorPickerFormProps) {
+  const onChangeDebounced = useDebouncedCallback((value: string) => onChange(value), 100);
+
+  return (
+    <FormControlCard {...props}>
       <SimpleGrid minChildWidth="200px" gap={2}>
         <Flex direction="column" gap={3}>
-          <Box minH="150px" rounded="xl" bgColor={props.value} flex={1} />
+          <Box minH="150px" rounded="xl" bgColor={value} flex={1} />
           <Input
             mt="auto"
             as={HexColorInput}
-            color={props.value}
-            placeholder={props.value ?? 'Select a color'}
-            onChange={props.onChange as any}
+            color={value}
+            placeholder={value ?? 'Select a color'}
+            onChange={onChange as any}
             variant="main"
           />
         </Flex>
-        <ColorPicker {...props} onChange={onChange} />
+        <ColorPicker value={value} onChange={onChangeDebounced} supportAlpha={supportAlpha} />
       </SimpleGrid>
-    </FormCard>
+    </FormControlCard>
   );
 }
 

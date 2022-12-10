@@ -1,7 +1,7 @@
-import { Box, Circle, SimpleGrid } from '@chakra-ui/layout';
-import { Avatar, FormLabel, Icon, Image } from '@chakra-ui/react';
-import { ColorPickerForm } from 'components/forms/ColorPicker';
-import { FormCard } from 'components/forms/FormCard';
+import { SimpleGrid } from '@chakra-ui/layout';
+import { Icon, Image } from '@chakra-ui/react';
+import { ColorPickerForm, SmallColorPickerForm } from 'components/forms/ColorPicker';
+import { FormControlCard } from 'components/forms/FormCard';
 import { InputForm } from 'components/forms/InputForm';
 import { MusicFeature } from 'config/custom-types';
 import { UseFeatureValueResult } from 'config/utils';
@@ -30,6 +30,7 @@ export function MusicFeaturePanel({
     <SimpleGrid columns={2} gap={3}>
       <InputForm
         label="Message"
+        description="Hello world!!!"
         value={combined.message}
         onChange={(v) => update({ message: v })}
         placeholder="Your message here..."
@@ -38,17 +39,16 @@ export function MusicFeaturePanel({
       <InputForm
         label="Count"
         placeholder="Put a number"
+        value={count}
+        onChange={(v) => setCount(v)}
         input={{
-          value: count,
-          onChange: (e) => setCount(e.target.value),
           type: 'number',
         }}
       />
-      <ColorPickerForm label="Role Color" value={color} onChange={(v) => setColor(v)} />
-      <FormCard>
-        <FormLabel>Roles</FormLabel>
+      <SmallColorPickerForm label="Role Color" value={color} onChange={(v) => setColor(v)} />
+      <FormControlCard label="Roles" description="Select a role">
         <SelectField
-          id="roles"
+          placeholder="Select a role"
           options={query.data?.map((role) => ({
             label: role.name,
             value: role.id,
@@ -60,7 +60,7 @@ export function MusicFeaturePanel({
               ),
           }))}
         />
-      </FormCard>
+      </FormControlCard>
     </SimpleGrid>
   );
 }
