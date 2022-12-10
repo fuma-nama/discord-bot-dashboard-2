@@ -29,7 +29,7 @@ export function MusicFeaturePanel({
   const combined = { ...data, ...value };
 
   return (
-    <SimpleGrid columns={2} gap={3}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={3}>
       <InputForm
         label="Message"
         description="Hello world!!!"

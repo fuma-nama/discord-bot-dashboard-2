@@ -61,13 +61,15 @@ function Content<K extends keyof CustomFeatures>({
   const result = config.useRender(feature);
 
   return (
-    <Flex direction="column" w="full" h="full">
-      <Flex direction="column" flex={1} gap={5}>
-        <Heading>{config.name}</Heading>
-        {result.component}
+    <>
+      <Flex direction="column" w="full" h="full">
+        <Flex direction="column" flex={1} gap={5}>
+          <Heading>{config.name}</Heading>
+          {result.component}
+        </Flex>
       </Flex>
       <Savebar result={result} />
-    </Flex>
+    </>
   );
 }
 
@@ -90,30 +92,40 @@ function Savebar({ result: { serialize, canSave, reset } }: { result: FeatureRen
   };
 
   return (
-    <SlideFade in={canSave}>
-      <HStack bg={cardBg} rounded="3xl" pos="sticky" left={0} bottom={0} w="full" px={5} py={3}>
-        <WarningIcon
-          _light={{ color: 'orange.400' }}
-          _dark={{ color: 'orange.300' }}
-          w="30px"
-          h="30px"
-        />
-        <Text fontSize="lg" fontWeight="500">
-          Save changes
-        </Text>
-        <Spacer />
-        <ButtonGroup isDisabled={mutation.isLoading}>
-          <Button
-            variant="brand"
-            leftIcon={<IoSave />}
-            isLoading={mutation.isLoading}
-            onClick={onSave}
-          >
-            Save
-          </Button>
-          <Button onClick={reset}>Discard</Button>
-        </ButtonGroup>
-      </HStack>
-    </SlideFade>
+    <HStack
+      as={SlideFade}
+      in={canSave}
+      bg={cardBg}
+      rounded="3xl"
+      pos="sticky"
+      bottom={2}
+      w="full"
+      px={5}
+      py={3}
+      mt={2}
+      zIndex={3}
+    >
+      <WarningIcon
+        _light={{ color: 'orange.400' }}
+        _dark={{ color: 'orange.300' }}
+        w="30px"
+        h="30px"
+      />
+      <Text fontSize="lg" fontWeight="500">
+        Save changes
+      </Text>
+      <Spacer />
+      <ButtonGroup isDisabled={mutation.isLoading}>
+        <Button
+          variant="brand"
+          leftIcon={<IoSave />}
+          isLoading={mutation.isLoading}
+          onClick={onSave}
+        >
+          Save
+        </Button>
+        <Button onClick={reset}>Discard</Button>
+      </ButtonGroup>
+    </HStack>
   );
 }

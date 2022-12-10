@@ -50,13 +50,14 @@ export const SelectField: SelectComponent = (props) => {
             },
           },
         }),
-        control: (provided) => ({
+        control: (provided, data) => ({
           ...provided,
+          rounded: '2xl',
           _light: {
-            borderColor: 'secondaryGray.400',
+            borderColor: data.isFocused ? brand : 'secondaryGray.400',
           },
           _dark: {
-            borderColor: 'navy.600',
+            borderColor: data.isFocused ? brand : 'navy.600',
           },
         }),
       }}

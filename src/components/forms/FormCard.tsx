@@ -38,7 +38,13 @@ export function FormControlCard({
       isRequired={required}
       {...form}
     >
-      <FormLabel mb={0}>{label}</FormLabel>
+      <FormLabel
+        fontSize={{ base: 'lg', lg: 'xl' }}
+        fontWeight={{ base: '600', lg: 'bold' }}
+        mb={0}
+      >
+        {label}
+      </FormLabel>
       <Text color={textColorSecondary}>{description}</Text>
       <Spacer mt={1} />
       {children}
