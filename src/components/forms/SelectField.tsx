@@ -34,6 +34,15 @@ export const SelectField: SelectComponent = (props) => {
           ...provided,
           bg: 'transparent',
         }),
+        groupHeading: (provided) => ({
+          ...provided,
+          _light: {
+            bg: 'secondaryGray.100',
+          },
+          _dark: {
+            bg: 'navy.800',
+          },
+        }),
         option: (provided, options) => ({
           ...provided,
           color: options.isSelected && 'white',
