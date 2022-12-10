@@ -5,17 +5,14 @@ import { FormControlCard } from 'components/forms/FormCard';
 import { InputForm } from 'components/forms/InputForm';
 import { MusicFeature } from 'config/custom-types';
 import { UseFeatureValueResult } from 'config/utils';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGuildChannelsQuery, useGuildRolesQuery } from 'stores';
+import { useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
-import { SelectField } from 'components/forms/SelectField';
+import { SelectField, useSelectOptions } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
 import { SmallDatePickerForm } from 'components/forms/DatePicker';
 import { FilePickerForm } from 'components/forms/FilePicker';
-import { ChannelTypes } from 'api/discord';
-import { GuildChannel } from 'api/bot';
-import { useMemo } from 'react';
+import { ChannelSelect } from './ChannelSelect';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -24,18 +21,6 @@ export function MusicFeaturePanel({
   result: UseFeatureValueResult<Partial<MusicFeature>>;
   data: MusicFeature;
 }) {
-  const { guild } = useParams<Params>();
-  const rolesQuery = useGuildRolesQuery(guild);
-  const channelsQuery = useGuildChannelsQuery(guild);
-  const [count, setCount] = useState('0');
-  const [color, setColor] = useState<string>();
-  const [date, setDate] = useState(() => new Date(Date.now()));
-  const [file, setFile] = useState<File[]>(null);
-
-  const channelsOptions = useMemo(
-    () => (channelsQuery.data != null ? mapChannelOptions(channelsQuery.data) : []),
-    [channelsQuery.data]
-  );
   const combined = { ...data, ...value };
 
   return (
@@ -51,35 +36,27 @@ export function MusicFeaturePanel({
       <InputForm
         label="Count"
         placeholder="Put a number"
-        value={count}
-        onChange={(v) => setCount(v)}
+        value={combined.count ?? '0'}
+        onChange={(v) => update({ count: v })}
         input={{
           type: 'number',
         }}
       />
-      <SmallColorPickerForm label="Role Color" value={color} onChange={(v) => setColor(v)} />
-      <FormControlCard label="Roles" description="Select a role">
-        <SelectField
-          placeholder="Select a role"
-          options={rolesQuery.data?.map((role) => ({
-            label: role.name,
-            value: role.id,
-            icon:
-              role.icon?.iconUrl != null ? (
-                <Image src={role.icon?.iconUrl} bg={toRGB(role.color)} w="25px" h="25px" />
-              ) : (
-                <Icon as={BsPeopleFill} color={toRGB(role.color)} w="20px" h="20px" />
-              ),
-          }))}
-        />
-      </FormControlCard>
-      <FormControlCard label="Channels" description="Select a channel">
-        <SelectField placeholder="Select a channel" options={channelsOptions} />
-      </FormControlCard>
-      <SmallDatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
+      <SmallColorPickerForm
+        label="Role Color"
+        value={combined.color}
+        onChange={(v) => update({ color: v })}
+      />
+      <RolesSelect value={combined.role} onChange={(role) => update({ role })} />
+      <ChannelSelect value={combined.channel} onChange={(channel) => update({ channel })} />
+      <SmallDatePickerForm
+        label="Date"
+        value={combined.date}
+        onChange={(value: Date) => update({ date: value })}
+      />
       <FilePickerForm
-        value={file}
-        onChange={(v) => setFile(v)}
+        value={combined.file}
+        onChange={(v) => update({ file: v })}
         label="Your File"
         helperText="Support Gif, Jpg, Png and Svg files"
         accept={{
@@ -96,30 +73,30 @@ export function MusicFeaturePanel({
   );
 }
 
-type ChannelOption = {
-  label: string;
-  value: string;
-  options: ChannelOption[];
-};
+function RolesSelect({ value, onChange }: { value?: string; onChange: (role: string) => void }) {
+  const { guild } = useParams<Params>();
+  const rolesQuery = useGuildRolesQuery(guild);
+  const { options, values } = useSelectOptions(rolesQuery.data, (role) => ({
+    value: role.id,
+    label: role.name,
+    icon:
+      role.icon?.iconUrl != null ? (
+        <Image src={role.icon?.iconUrl} bg={toRGB(role.color)} w="25px" h="25px" />
+      ) : (
+        <Icon as={BsPeopleFill} color={toRGB(role.color)} w="20px" h="20px" />
+      ),
+  }));
 
-function mapChannelOptions(channels: GuildChannel[]) {
-  const map = (channel: GuildChannel) =>
-    ({
-      label: channel.name,
-      value: channel.id,
-      options: [],
-    } as ChannelOption);
-
-  return channels
-    .filter((c) => c.type === ChannelTypes.GUILD_CATEGORY || c.category == null)
-    .map((root) =>
-      root.type === ChannelTypes.GUILD_CATEGORY
-        ? {
-            ...map(root),
-            options: channels.filter((child) => child.category === root.id).map(map),
-          }
-        : map(root)
-    );
+  return (
+    <FormControlCard label="Roles" description="Select a role">
+      <SelectField
+        placeholder="Select a role"
+        value={value != null && options.get(value)}
+        onChange={(e) => onChange(e.value)}
+        options={values}
+      />
+    </FormControlCard>
+  );
 }
 
 function toRGB(num: number) {

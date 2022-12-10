@@ -1,5 +1,6 @@
 import { Box, HStack } from '@chakra-ui/layout';
-import { chakraComponents, Select, SelectComponent } from 'chakra-react-select';
+import { chakraComponents, OptionBase, Select, SelectComponent } from 'chakra-react-select';
+import { DependencyList, ReactNode, useMemo } from 'react';
 import { useColors } from 'theme';
 
 const customComponents = {
@@ -20,6 +21,12 @@ const customComponents = {
       </chakraComponents.Option>
     );
   },
+};
+
+export type Option = OptionBase & {
+  label: string;
+  value: string;
+  icon?: ReactNode;
 };
 
 export const SelectField: SelectComponent = (props) => {
@@ -74,3 +81,35 @@ export const SelectField: SelectComponent = (props) => {
     />
   );
 };
+
+export function useSelectOptions<R, T extends Option>(data: R[] | null, mapper: (v: R) => T) {
+  return useMemo(() => {
+    const options = new Map<string, Option>();
+
+    data?.forEach((item) => {
+      const mapped = mapper(item);
+
+      options.set(mapped.value, mapped);
+    });
+
+    return {
+      options,
+      values: [...options.values()],
+    };
+  }, [data]);
+}
+
+export function useSelectOptionsMap<T extends Option>(
+  mapper: (map: Map<string, T>) => void,
+  dependencies: DependencyList
+) {
+  return useMemo(() => {
+    const options = new Map<string, T>();
+    mapper(options);
+
+    return {
+      options,
+      values: [...options.values()],
+    };
+  }, [dependencies]);
+}

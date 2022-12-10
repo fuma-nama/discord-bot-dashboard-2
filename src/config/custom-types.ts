@@ -19,4 +19,11 @@ export type CustomFeatures = {
 export type MusicFeature = {
   message: string;
   channel?: string;
+
+  /** example only */
+  role?: string;
+  color?: string;
+  count?: string;
+  date?: Date;
+  file?: File[];
 };

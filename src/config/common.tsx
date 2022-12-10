@@ -43,7 +43,7 @@ export const config: AppConfig = {
         icon: <Icon as={BsMusicNoteBeamed} />,
         useRender: (data) => {
           const result = useFeatureValue<'music'>({
-            valid: (v) => v.message?.length > 0,
+            valid: (v) => v.message == null || v.message?.length > 0,
           });
 
           return result.render(<MusicFeaturePanel result={result} data={data} />);
