@@ -1,4 +1,4 @@
-import { Box, Center, HStack } from '@chakra-ui/layout';
+import { Box, HStack } from '@chakra-ui/layout';
 import { chakraComponents, Select, SelectComponent } from 'chakra-react-select';
 import { useColors } from 'theme';
 

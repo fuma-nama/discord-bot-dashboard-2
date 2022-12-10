@@ -1,27 +1,29 @@
-import { FormLabel } from '@chakra-ui/form-control';
 import { Input, InputProps } from '@chakra-ui/react';
-import { FormCard } from './FormCard';
+import { FormCard, FormComponentProps, FormControlCard } from './FormCard';
 
 export type InputFormProps = {
-  label: string;
-  required?: boolean;
   value?: string;
   onChange?: (v: string) => void;
   placeholder?: string;
   input?: InputProps;
 };
 
-export function InputForm({ label, required, ...props }: InputFormProps) {
+export function InputForm({
+  value,
+  onChange,
+  placeholder,
+  input,
+  ...props
+}: FormComponentProps<InputFormProps>) {
   return (
-    <FormCard isRequired={required}>
-      <FormLabel>{label}</FormLabel>
+    <FormControlCard {...props}>
       <Input
         variant="main"
-        value={props.value}
-        onChange={(e) => props.onChange?.(e.target.value)}
-        placeholder={props.placeholder}
-        {...props.input}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
+        placeholder={placeholder}
+        {...input}
       />
-    </FormCard>
+    </FormControlCard>
   );
 }
