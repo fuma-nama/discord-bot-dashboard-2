@@ -57,26 +57,24 @@ export function SmallDatePickerForm({
   onChange?: CalendarProps['onChange'];
   picker?: DatePickerProps;
 }>) {
+  const text = (value ?? picker?.value)?.toLocaleString(undefined, {
+    dateStyle: 'short',
+  });
+
   return (
     <FormControlCard {...props}>
       <Popover>
         <PopoverTrigger>
           <InputGroup>
-            <Input
-              value={(value ?? picker.value).toLocaleString(undefined, {
-                dateStyle: 'short',
-              })}
-              variant="main"
-              readOnly
-            />
-            <InputRightElement>
+            <Input value={text ?? ''} placeholder="Select a Date" variant="main" readOnly />
+            <InputRightElement zIndex={0}>
               <CalendarIcon />
             </InputRightElement>
           </InputGroup>
         </PopoverTrigger>
         <PopoverContent>
           <PopoverBody>
-            <DatePicker value={value} onChange={onChange} {...picker} />
+            <DatePicker value={value ?? null} onChange={onChange} {...picker} />
           </PopoverBody>
         </PopoverContent>
       </Popover>
