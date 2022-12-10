@@ -7,12 +7,15 @@ import { MusicFeature } from 'config/custom-types';
 import { UseFeatureValueResult } from 'config/utils';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useGuildRolesQuery } from 'stores';
+import { useGuildChannelsQuery, useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 import { SelectField } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
 import { SmallDatePickerForm } from 'components/forms/DatePicker';
 import { FilePickerForm } from 'components/forms/FilePicker';
+import { ChannelTypes } from 'api/discord';
+import { GuildChannel } from 'api/bot';
+import { useMemo } from 'react';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -22,12 +25,17 @@ export function MusicFeaturePanel({
   data: MusicFeature;
 }) {
   const { guild } = useParams<Params>();
-  const query = useGuildRolesQuery(guild);
+  const rolesQuery = useGuildRolesQuery(guild);
+  const channelsQuery = useGuildChannelsQuery(guild);
   const [count, setCount] = useState('0');
   const [color, setColor] = useState<string>();
   const [date, setDate] = useState(() => new Date(Date.now()));
   const [file, setFile] = useState<File[]>(null);
 
+  const channelsOptions = useMemo(
+    () => (channelsQuery.data != null ? mapChannelOptions(channelsQuery.data) : []),
+    [channelsQuery.data]
+  );
   const combined = { ...data, ...value };
 
   return (
@@ -53,7 +61,7 @@ export function MusicFeaturePanel({
       <FormControlCard label="Roles" description="Select a role">
         <SelectField
           placeholder="Select a role"
-          options={query.data?.map((role) => ({
+          options={rolesQuery.data?.map((role) => ({
             label: role.name,
             value: role.id,
             icon:
@@ -64,6 +72,9 @@ export function MusicFeaturePanel({
               ),
           }))}
         />
+      </FormControlCard>
+      <FormControlCard label="Channels" description="Select a channel">
+        <SelectField placeholder="Select a channel" options={channelsOptions} />
       </FormControlCard>
       <SmallDatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
       <FilePickerForm
@@ -81,16 +92,34 @@ export function MusicFeaturePanel({
           maxFiles: 2,
         }}
       />
-      <FilePickerForm
-        value={file}
-        onChange={(v) => setFile(v)}
-        label="Your File"
-        picker={{
-          multiple: false,
-        }}
-      />
     </SimpleGrid>
   );
+}
+
+type ChannelOption = {
+  label: string;
+  value: string;
+  options: ChannelOption[];
+};
+
+function mapChannelOptions(channels: GuildChannel[]) {
+  const map = (channel: GuildChannel) =>
+    ({
+      label: channel.name,
+      value: channel.id,
+      options: [],
+    } as ChannelOption);
+
+  return channels
+    .filter((c) => c.type === ChannelTypes.GUILD_CATEGORY || c.category == null)
+    .map((root) =>
+      root.type === ChannelTypes.GUILD_CATEGORY
+        ? {
+            ...map(root),
+            options: channels.filter((child) => child.category === root.id).map(map),
+          }
+        : map(root)
+    );
 }
 
 function toRGB(num: number) {
