@@ -4,7 +4,6 @@ import { useColors } from 'theme';
 
 const customComponents = {
   SingleValue: ({ children, ...props }: any) => {
-    console.log(props);
     return (
       <chakraComponents.SingleValue {...props}>
         <HStack>
@@ -15,7 +14,6 @@ const customComponents = {
     );
   },
   Option: ({ children, ...props }: any) => {
-    console.log(props);
     return (
       <chakraComponents.Option {...props}>
         <Box mr={2}>{props.data.icon}</Box> {children}
