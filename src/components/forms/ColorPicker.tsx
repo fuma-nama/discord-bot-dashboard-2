@@ -1,5 +1,5 @@
 import { FormLabel } from '@chakra-ui/form-control';
-import { Box, Flex, Grid, Input, VStack } from '@chakra-ui/react';
+import { Box, Fade, Flex, Grid, Input, SimpleGrid, VStack } from '@chakra-ui/react';
 import { HexAlphaColorPicker, HexColorInput, HexColorPicker } from 'react-colorful';
 import { ColorPickerBaseProps } from 'react-colorful/dist/types';
 import { FormCard } from './FormCard';
@@ -24,19 +24,20 @@ export function ColorPickerForm({ label, ...props }: ColorPickerFormProps) {
   return (
     <FormCard>
       <FormLabel>{label}</FormLabel>
-      <Flex direction="row" flexWrap="wrap" gap={3}>
-        <Flex direction="column" gap={3} flex={1} minW="100px" minH="200px">
-          <Box rounded="xl" bgColor={props.value} flex={1} />
+      <SimpleGrid minChildWidth="200px" gap={2}>
+        <Flex direction="column" gap={3}>
+          <Box minH="150px" rounded="xl" bgColor={props.value} flex={1} />
           <Input
+            mt="auto"
             as={HexColorInput}
             color={props.value}
-            placeholder={props.value}
+            placeholder={props.value ?? 'Select a color'}
             onChange={props.onChange as any}
             variant="main"
           />
         </Flex>
         <ColorPicker {...props} onChange={onChange} />
-      </Flex>
+      </SimpleGrid>
     </FormCard>
   );
 }
@@ -45,6 +46,9 @@ export function ColorPicker({ value, onChange, supportAlpha }: ColorPickerProps)
   const props: Partial<ColorPickerBaseProps<string>> = {
     color: value,
     onChange,
+    style: {
+      width: '100%',
+    },
   };
 
   return supportAlpha ? <HexAlphaColorPicker {...props} /> : <HexColorPicker {...props} />;
