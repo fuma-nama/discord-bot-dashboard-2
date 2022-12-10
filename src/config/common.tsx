@@ -41,7 +41,9 @@ export const config: AppConfig = {
         description: 'Play music in Your Discord Server',
         icon: <Icon as={BsMusicNoteBeamed} />,
         useRender: (data) => {
-          const { value, setValue, render } = useFeatureValue<'music'>();
+          const { value, setValue, render } = useFeatureValue<'music'>({
+            valid: (v) => v.message?.length > 0,
+          });
 
           return render(
             <>
@@ -60,7 +62,7 @@ export const config: AppConfig = {
         icon: <Icon as={FaGamepad} />,
         useRender(data) {
           return {
-            value: {},
+            value: '{}',
             component: <></>,
           };
         },
@@ -71,7 +73,7 @@ export const config: AppConfig = {
         icon: <Icon as={MdAddReaction} />,
         useRender(data) {
           return {
-            value: {},
+            value: '{}',
             component: <></>,
           };
         },
@@ -82,7 +84,7 @@ export const config: AppConfig = {
         icon: <Icon as={IoHappy} />,
         useRender(data) {
           return {
-            value: {},
+            value: '{}',
             component: <></>,
           };
         },

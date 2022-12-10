@@ -73,7 +73,23 @@ export interface FeatureConfig<K extends keyof CustomFeatures> {
 }
 
 export type FeatureRender = {
-  value: { [key: string]: any };
+  /**
+   * Save bar will be disappeared if `canSave` is false
+   */
+  canSave?: boolean;
+
+  /**
+   * The form/json body of update feature request
+   *
+   * Should be handled by the server
+   *
+   * endpoint: (PATCH `/guilds/{guild}/features/{feature}`)
+   */
+  value: FormData | string;
+
+  /**
+   * Reset current value
+   */
   reset?: () => void;
   component: ReactElement;
 };

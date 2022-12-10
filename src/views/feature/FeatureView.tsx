@@ -6,7 +6,7 @@ import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { config } from 'config/common';
 import { CustomFeatures } from 'config/custom-types';
-import { FeatureConfig } from 'config/types';
+import { FeatureConfig, FeatureRender } from 'config/types';
 import { BsSearch } from 'react-icons/bs';
 import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
@@ -58,22 +58,21 @@ function Content<K extends keyof CustomFeatures>({
   feature: CustomFeatures[K];
   config: FeatureConfig<K>;
 }) {
-  const { value, reset, component } = config.useRender(feature);
+  const result = config.useRender(feature);
 
   return (
     <Flex direction="column" w="full" h="full">
       <Flex direction="column" flex={1}>
         <Heading>{config.name}</Heading>
-        {component}
+        {result.component}
       </Flex>
-      <Savebar value={value} onReset={() => reset?.()} />
+      <Savebar result={result} />
     </Flex>
   );
 }
 
-function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
+function Savebar({ result: { value, canSave, reset } }: { result: FeatureRender }) {
   const { guild, feature } = useParams<Params>();
-  const open = Object.entries(value).length !== 0;
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
 
@@ -82,16 +81,16 @@ function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
       {
         guild,
         feature,
-        options: JSON.stringify(value),
+        options: value,
       },
       {
-        onSuccess: onReset,
+        onSuccess: reset,
       }
     );
   };
 
   return (
-    <SlideFade in={open}>
+    <SlideFade in={canSave}>
       <HStack bg={cardBg} rounded="3xl" pos="sticky" left={0} bottom={0} w="full" px={5} py={3}>
         <WarningIcon
           _light={{ color: 'orange.400' }}
@@ -112,7 +111,7 @@ function Savebar({ value, onReset }: { value: any; onReset: () => void }) {
           >
             Save
           </Button>
-          <Button onClick={onReset}>Discard</Button>
+          <Button onClick={reset}>Discard</Button>
         </ButtonGroup>
       </HStack>
     </SlideFade>
