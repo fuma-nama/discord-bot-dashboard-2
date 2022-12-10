@@ -34,7 +34,7 @@ export function ProfileView() {
           </Text>
         </VStack>
       </Flex>
-      <Card w="full" flex={1} rounded="3xl">
+      <Card w="full" rounded="3xl" h="fit-content">
         <CardHeader fontSize="2xl">Settings</CardHeader>
         <CardBody as={Flex} direction="column" gap={3} mt={3}>
           <SwitchField
@@ -51,7 +51,7 @@ export function ProfileView() {
             isChecked={devMode}
             onChange={(e) => setDevMode(e.target.checked)}
           />
-          <Spacer />
+          <Spacer mt="100px" />
           <Button leftIcon={<IoLogOut />} variant="danger">
             Logout
           </Button>
