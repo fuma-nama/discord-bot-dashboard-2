@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import { useFeatureQuery, useUpdateFeatureMutation } from 'stores';
 import { useColors } from 'theme';
 
-type Params = {
+export type Params = {
   guild: string;
   feature: keyof CustomFeatures;
 };

@@ -23,7 +23,6 @@ export const theme = extendTheme(
   buttonStyles, // button styles
   linkStyles, // link styles
   sliderStyles, // slider styles
-  inputStyles, // input styles
   switchStyles, // switch styles
   modalStyles,
   avatarStyles,
