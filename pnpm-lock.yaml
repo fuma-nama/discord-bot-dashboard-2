@@ -48,7 +48,7 @@ specifiers:
   react-calendar: ^3.7.0
   react-colorful: ^5.6.1
   react-dom: ^18.0.0
-  react-dropzone: ^12.0.4
+  react-dropzone: ^14.2.3
   react-icons: ^4.3.1
   react-router-dom: ^6.3.0
   react-table: ^7.8.0
@@ -92,7 +92,7 @@ dependencies:
   react-calendar: 3.9.0_biqbaboplfbrettd7655fr4n2y
   react-colorful: 5.6.1_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
-  react-dropzone: 12.1.0_react@18.2.0
+  react-dropzone: 14.2.3_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
   react-router-dom: 6.4.4_biqbaboplfbrettd7655fr4n2y
   react-table: 7.8.0_react@18.2.0
@@ -3440,9 +3440,9 @@ packages:
       flat-cache: 3.0.4
     dev: true
 
-  /file-selector/0.5.0:
-    resolution: {integrity: sha512-s8KNnmIDTBoD0p9uJ9uD0XY38SCeBOtj0UMXyQSLg1Ypfrfj8+dAvwsLjYQkQ2GjhVtp2HrnF5cJzMhBjfD8HA==}
-    engines: {node: '>= 10'}
+  /file-selector/0.6.0:
+    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
+    engines: {node: '>= 12'}
     dependencies:
       tslib: 2.4.1
     dev: false
@@ -4359,14 +4359,14 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
 
-  /react-dropzone/12.1.0_react@18.2.0:
-    resolution: {integrity: sha512-iBYHA1rbopIvtzokEX4QubO6qk5IF/x3BtKGu74rF2JkQDXnwC4uO/lHKpaw4PJIV6iIAYOlwLv2FpiGyqHNog==}
+  /react-dropzone/14.2.3_react@18.2.0:
+    resolution: {integrity: sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==}
     engines: {node: '>= 10.13'}
     peerDependencies:
-      react: '>= 16.8'
+      react: '>= 16.8 || 18.0.0'
     dependencies:
       attr-accept: 2.2.2
-      file-selector: 0.5.0
+      file-selector: 0.6.0
       prop-types: 15.8.1
       react: 18.2.0
     dev: false

@@ -11,7 +11,8 @@ import { useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 import { SelectField } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
-import { DatePicker, DatePickerForm, SmallDatePickerForm } from 'components/forms/DatePicker';
+import { SmallDatePickerForm } from 'components/forms/DatePicker';
+import { FilePickerForm } from 'components/forms/FilePicker';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -25,6 +26,7 @@ export function MusicFeaturePanel({
   const [count, setCount] = useState('0');
   const [color, setColor] = useState<string>();
   const [date, setDate] = useState(() => new Date(Date.now()));
+  const [file, setFile] = useState<File[]>(null);
 
   const combined = { ...data, ...value };
 
@@ -64,6 +66,29 @@ export function MusicFeaturePanel({
         />
       </FormControlCard>
       <SmallDatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
+      <FilePickerForm
+        value={file}
+        onChange={(v) => setFile(v)}
+        label="Your File"
+        helperText="Support Gif, Jpg, Png and Svg files"
+        accept={{
+          'image/png': ['.png'],
+          'image/jpg': ['.jpg'],
+          'image/svg': ['.svg'],
+          'image/gif': ['.gif'],
+        }}
+        picker={{
+          maxFiles: 2,
+        }}
+      />
+      <FilePickerForm
+        value={file}
+        onChange={(v) => setFile(v)}
+        label="Your File"
+        picker={{
+          multiple: false,
+        }}
+      />
     </SimpleGrid>
   );
 }
