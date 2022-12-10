@@ -1,6 +1,6 @@
 import { SimpleGrid } from '@chakra-ui/layout';
 import { Icon, Image } from '@chakra-ui/react';
-import { ColorPickerForm, SmallColorPickerForm } from 'components/forms/ColorPicker';
+import { SmallColorPickerForm } from 'components/forms/ColorPicker';
 import { FormControlCard } from 'components/forms/FormCard';
 import { InputForm } from 'components/forms/InputForm';
 import { MusicFeature } from 'config/custom-types';
@@ -11,6 +11,7 @@ import { useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 import { SelectField } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
+import { DatePicker, DatePickerForm } from 'components/forms/DatePicker';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -23,6 +24,7 @@ export function MusicFeaturePanel({
   const query = useGuildRolesQuery(guild);
   const [count, setCount] = useState('0');
   const [color, setColor] = useState<string>();
+  const [date, setDate] = useState(() => new Date(Date.now()));
 
   const combined = { ...data, ...value };
 
@@ -61,6 +63,7 @@ export function MusicFeaturePanel({
           }))}
         />
       </FormControlCard>
+      <DatePickerForm label="Date" value={date} onChange={(value: Date) => setDate(value)} />
     </SimpleGrid>
   );
 }

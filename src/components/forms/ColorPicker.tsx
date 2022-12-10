@@ -1,13 +1,9 @@
 import {
   Box,
-  Button,
   Flex,
   Input,
-  InputAddon,
   InputGroup,
   InputLeftAddon,
-  InputLeftElement,
-  InputRightElement,
   Popover,
   PopoverBody,
   PopoverContent,
