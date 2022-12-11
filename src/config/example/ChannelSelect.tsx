@@ -2,7 +2,6 @@ import { ChatIcon, Icon } from '@chakra-ui/icons';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
 import { FormControlCard } from 'components/forms/Form';
-import { formComponent } from 'components/forms/FormComponent';
 import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
 import { FormProps } from 'config/utils';
 import { MdRecordVoiceOver } from 'react-icons/md';
@@ -72,5 +71,3 @@ export function ChannelSelect({ value, onChange }: FormProps<string>) {
     </FormControlCard>
   );
 }
-
-export const MemoChannelSelect = formComponent(ChannelSelect);
