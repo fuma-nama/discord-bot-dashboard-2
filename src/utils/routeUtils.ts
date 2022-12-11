@@ -1,5 +1,6 @@
 import { ReactNode, ReactElement } from 'react';
-import { Location, matchRoutes } from 'react-router-dom';
+import { Location, matchRoutes, useLocation } from 'react-router-dom';
+import { findLast } from './common';
 
 type MatchRoute = (
   | {
@@ -60,6 +61,13 @@ export function getActiveSidebarItem(
   return matches[matches.length - 1].route.item;
 }
 
+export function useLayoutOverride(layouts: RootLayout[], filter: (item: NormalLayout) => boolean) {
+  const location = useLocation();
+  const override = findLast(getActiveLayouts(location, layouts), filter);
+
+  return override;
+}
+
 export type NormalLayout = IndexRoute | NestedLayout;
 
 export type NestedLayout = Layout & {
@@ -74,8 +82,8 @@ export type IndexRoute = Layout & {
 
 export type Layout = {
   component?: ReactNode;
-  navbarLinks?: ReactNode;
   navbar?: ReactElement;
+  sidebar?: ReactElement;
 };
 
 export type RootLayout = NormalLayout & {

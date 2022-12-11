@@ -1,8 +1,10 @@
 import { ChatIcon, Icon } from '@chakra-ui/icons';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
-import { FormControlCard } from 'components/forms/FormCard';
+import { FormControlCard } from 'components/forms/Form';
+import { formComponent } from 'components/forms/FormComponent';
 import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { FormProps } from 'config/utils';
 import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
@@ -35,32 +37,26 @@ const mapOption = (channel: GuildChannel): ChannelOption => {
   };
 };
 
-export function ChannelSelect({
-  value,
-  onChange,
-}: {
-  value?: string;
-  onChange: (v: string) => void;
-}) {
+export function ChannelSelect({ value, onChange }: FormProps<string>) {
+  console.log('rerender');
   const { guild } = useParams<Params>();
   const channelsQuery = useGuildChannelsQuery(guild);
 
   const { options, values } = useSelectOptionsMap<ChannelOption>(
     (map) => {
-      if (channelsQuery.data != null) {
-        const channels = channelsQuery.data;
+      if (channelsQuery.data == null) return;
+      const channels = channelsQuery.data;
 
-        channels
-          .filter((c) => c.type === ChannelTypes.GUILD_CATEGORY || c.category == null)
-          .forEach((root) => {
-            if (root.type === ChannelTypes.GUILD_CATEGORY)
-              map.set(root.id, {
-                ...mapOption(root),
-                options: channels.filter((child) => child.category === root.id).map(mapOption),
-              });
-            else map.set(root.id, mapOption(root));
-          });
-      }
+      channels
+        .filter((c) => c.type === ChannelTypes.GUILD_CATEGORY || c.category == null)
+        .forEach((root) => {
+          if (root.type === ChannelTypes.GUILD_CATEGORY)
+            map.set(root.id, {
+              ...mapOption(root),
+              options: channels.filter((child) => child.category === root.id).map(mapOption),
+            });
+          else map.set(root.id, mapOption(root));
+        });
     },
     [channelsQuery.data]
   );
@@ -76,3 +72,5 @@ export function ChannelSelect({
     </FormControlCard>
   );
 }
+
+export const MemoChannelSelect = formComponent(ChannelSelect);

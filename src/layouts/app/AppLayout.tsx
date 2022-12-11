@@ -6,6 +6,8 @@ import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { DefaultNavbar } from 'components/navbar/Navbar';
 import { Outlet } from 'react-router-dom';
 import { Sidebar, SidebarResponsive } from 'layouts/sidebar/Sidebar';
+import { useLayoutOverride } from 'utils/routeUtils';
+import { layouts } from 'layouts';
 
 export default function AppLayout() {
   const query = useSelfUserQuery();
@@ -26,6 +28,8 @@ export default function AppLayout() {
 }
 
 function Content() {
+  const navbar = useLayoutOverride(layouts, (layout) => layout.navbar != null)?.navbar;
+
   return (
     <Flex
       pos="relative"
@@ -43,7 +47,7 @@ function Content() {
       transitionProperty="top, bottom, width"
       transitionTimingFunction="linear, linear, ease"
     >
-      <DefaultNavbar />
+      {navbar ?? <DefaultNavbar />}
       <Box mx="auto" w="full" maxW="1200px" padding={0} flex={1} mt="30px">
         <Outlet />
       </Box>

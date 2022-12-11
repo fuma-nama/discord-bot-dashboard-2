@@ -13,31 +13,17 @@ import {
 } from '@chakra-ui/react';
 import { useLocation, Link } from 'react-router-dom';
 import { ReactNode } from 'react';
-import { getActiveLayouts, getActiveSidebarItem, NormalLayout, RootLayout } from 'utils/routeUtils';
+import { getActiveSidebarItem } from 'utils/routeUtils';
 import AdminNavbarLinks from './NavbarItems';
-import { findLast } from 'utils/common';
 import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
-import { layouts } from 'layouts';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 
-export function useLayoutOverride(layouts: RootLayout[], filter: (item: NormalLayout) => boolean) {
-  const location = useLocation();
-  const override = findLast(getActiveLayouts(location, layouts), filter);
-
-  return override;
-}
-
-export function DefaultNavbar() {
+export function DefaultNavbar({ children }: { children?: ReactNode }) {
   const activeItem = getActiveSidebarItem(items, useLocation());
 
   const mainText = useColorModeValue('navy.700', 'white');
   const linkColor = useColorModeValue('brand.400', 'cyan.200');
-  const override = useLayoutOverride(layouts, (layout) => layout.navbar != null);
-
-  if (override?.navbar != null) {
-    return override.navbar;
-  }
 
   const breadcrumb = [
     {
@@ -78,7 +64,7 @@ export function DefaultNavbar() {
           {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>
-      {override?.navbarLinks || <AdminNavbarLinks />}
+      {children ?? <AdminNavbarLinks />}
     </NavbarBox>
   );
 }

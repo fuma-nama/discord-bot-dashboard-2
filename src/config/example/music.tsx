@@ -1,7 +1,7 @@
 import { SimpleGrid } from '@chakra-ui/layout';
 import { Icon, Image } from '@chakra-ui/react';
 import { SmallColorPickerForm } from 'components/forms/ColorPicker';
-import { FormControlCard } from 'components/forms/FormCard';
+import { form, FormControlCard, item } from 'components/forms/Form';
 import { InputForm } from 'components/forms/InputForm';
 import { MusicFeature } from 'config/custom-types';
 import { UseFeatureValueResult } from 'config/utils';
@@ -13,6 +13,7 @@ import { BsPeopleFill } from 'react-icons/bs';
 import { SmallDatePickerForm } from 'components/forms/DatePicker';
 import { FilePickerForm } from 'components/forms/FilePicker';
 import { ChannelSelect } from './ChannelSelect';
+import { Memoize } from 'components/forms/FormComponent';
 
 export function MusicFeaturePanel({
   result: { value, update },
@@ -25,7 +26,8 @@ export function MusicFeaturePanel({
 
   return (
     <SimpleGrid columns={{ base: 1, md: 2 }} gap={3}>
-      <InputForm
+      <Memoize
+        as={InputForm}
         label="Message"
         description="Hello world!!!"
         value={combined.message}
@@ -33,7 +35,8 @@ export function MusicFeaturePanel({
         placeholder="Your message here..."
         required
       />
-      <InputForm
+      <Memoize
+        as={InputForm}
         label="Count"
         placeholder="Put a number"
         value={combined.count ?? '0'}
@@ -42,19 +45,26 @@ export function MusicFeaturePanel({
           type: 'number',
         }}
       />
-      <SmallColorPickerForm
+      <Memoize
+        as={SmallColorPickerForm}
         label="Role Color"
         value={combined.color}
-        onChange={(v) => update({ color: v })}
+        onChange={(color) => update({ color })}
       />
-      <RolesSelect value={combined.role} onChange={(role) => update({ role })} />
-      <ChannelSelect value={combined.channel} onChange={(channel) => update({ channel })} />
-      <SmallDatePickerForm
+      <Memoize as={RolesSelect} value={combined.role} onChange={(role) => update({ role })} />
+      <Memoize
+        as={ChannelSelect}
+        value={combined.channel}
+        onChange={(channel) => update({ channel })}
+      />
+      <Memoize
+        as={SmallDatePickerForm}
         label="Date"
         value={combined.date}
         onChange={(value: Date) => update({ date: value })}
       />
-      <FilePickerForm
+      <Memoize
+        as={FilePickerForm}
         value={combined.file}
         onChange={(v) => update({ file: v })}
         label="Your File"

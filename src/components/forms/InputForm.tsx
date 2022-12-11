@@ -1,5 +1,5 @@
 import { Input, InputProps } from '@chakra-ui/react';
-import { FormCard, FormComponentProps, FormControlCard } from './FormCard';
+import { FormCard, FormComponentProps, FormControlCard } from './Form';
 
 export type InputFormProps = {
   value?: string;

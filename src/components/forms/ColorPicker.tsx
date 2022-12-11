@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { HexAlphaColorPicker, HexColorInput, HexColorPicker } from 'react-colorful';
 import { ColorPickerBaseProps } from 'react-colorful/dist/types';
-import { FormComponentProps, FormControlCard } from './FormCard';
+import { FormComponentProps, FormControlCard } from './Form';
 import { useDebouncedCallback } from 'use-debounce';
 
 export type ColorPickerProps = {

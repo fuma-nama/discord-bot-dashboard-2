@@ -1,5 +1,5 @@
 import { Calendar, CalendarProps } from 'react-calendar';
-import { FormComponentProps, FormControlCard } from './FormCard';
+import { FormComponentProps, FormControlCard } from './Form';
 import 'react-calendar/dist/Calendar.css';
 import './DatePicker.css';
 import Icon from '@chakra-ui/icon';
@@ -57,6 +57,7 @@ export function SmallDatePickerForm({
   onChange?: CalendarProps['onChange'];
   picker?: DatePickerProps;
 }>) {
+  console.log('date rerender');
   const text = (value ?? picker?.value)?.toLocaleString(undefined, {
     dateStyle: 'short',
   });

@@ -1,4 +1,4 @@
-import { Dispatch, ReactElement, SetStateAction, useState } from 'react';
+import { Dispatch, ReactElement, SetStateAction, useMemo, useState } from 'react';
 import { config } from './common';
 import { CustomFeatures } from './custom-types';
 import { FeatureConfig, FeatureRender } from './types';
@@ -28,6 +28,11 @@ export type UseFeatureValueOptions<V> = {
    * Return true if value is valid
    */
   valid?: (v: V) => boolean;
+};
+
+export type FormProps<T> = {
+  value: T;
+  onChange: (v: T) => void;
 };
 
 export type UseFeatureValueResult<V> = {
@@ -60,7 +65,6 @@ export function useFeatureValue<K extends keyof CustomFeatures, V = Partial<Cust
     },
   };
 }
-
 export function converter<V>(
   base: 'json' | 'form' | ((v: V) => FormData | string)
 ): (v: V) => FormData | string {

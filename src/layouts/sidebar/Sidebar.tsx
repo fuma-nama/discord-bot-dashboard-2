@@ -10,12 +10,11 @@ import {
 } from '@chakra-ui/react';
 import { SidebarContent } from './components/SidebarContent';
 
-import { SidebarItemInfo } from 'utils/routeUtils';
+import { SidebarItemInfo, useLayoutOverride } from 'utils/routeUtils';
 import { usePageStore, useSelectedGuild } from 'stores';
+import { layouts } from 'layouts';
 
 export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
-  const { selected, setSelected } = useSelectedGuild();
-
   const variantChange = '0.2s linear';
   const shadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
   // Chakra Color Mode
@@ -35,7 +34,7 @@ export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
         overflowX="hidden"
         boxShadow={shadow}
       >
-        <SidebarContent items={items} selected={selected} onSelect={setSelected} />
+        <Content items={items} />
       </Box>
     </Box>
   );
@@ -45,7 +44,6 @@ export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
 export function SidebarResponsive({ items }: { items: SidebarItemInfo[] }) {
   const sidebarBackgroundColor = useColorModeValue('white', 'navy.800');
   const [isOpen, setOpen] = usePageStore((s) => [s.sidebarIsOpen, s.setSidebarIsOpen]);
-  const { selected, setSelected } = useSelectedGuild();
 
   return (
     <Drawer
@@ -62,11 +60,18 @@ export function SidebarResponsive({ items }: { items: SidebarItemInfo[] }) {
           _hover={{ boxShadow: 'none' }}
         />
         <DrawerBody maxW="285px" px="0rem" pb="0">
-          <SidebarContent items={items} selected={selected} onSelect={setSelected} />
+          <Content items={items} />
         </DrawerBody>
       </DrawerContent>
     </Drawer>
   );
+}
+
+function Content({ items }: { items: SidebarItemInfo[] }) {
+  const sidebar = useLayoutOverride(layouts, (layout) => layout.sidebar != null)?.sidebar;
+  const { selected, setSelected } = useSelectedGuild();
+
+  return sidebar ?? <SidebarContent items={items} selected={selected} onSelect={setSelected} />;
 }
 // PROPS
 

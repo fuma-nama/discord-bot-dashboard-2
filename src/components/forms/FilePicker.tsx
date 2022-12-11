@@ -5,7 +5,7 @@ import { Accept, DropzoneOptions, useDropzone } from 'react-dropzone';
 import { FaFile } from 'react-icons/fa';
 import { MdUpload } from 'react-icons/md';
 import { useColorsExtend } from 'theme';
-import { FormComponentProps, FormControlCard } from './FormCard';
+import { FormComponentProps, FormControlCard } from './Form';
 
 export type FilePickerProps = DropzoneOptions & {
   value?: File[];
