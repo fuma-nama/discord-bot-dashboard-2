@@ -1,10 +1,7 @@
 import { FormControl, FormControlProps, FormLabel } from '@chakra-ui/form-control';
 import { Flex, Spacer, Text } from '@chakra-ui/layout';
-import { ComponentProps, JSXElementConstructor, ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useColors } from 'theme';
-import { DatePickerForm } from './DatePicker';
-import { Memoize } from './FormComponent';
-import { InputForm } from './InputForm';
 
 export function FormCard(props: FormControlProps) {
   const { cardBg } = useColors();
@@ -53,20 +50,4 @@ export function FormControlCard({
       {children}
     </FormControl>
   );
-}
-
-export type FormInput<C extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>> =
-  ComponentProps<C> & {
-    as: C;
-  };
-export function form(...inputs: ReactElement[]) {
-  return <>{inputs}</>;
-}
-
-export function item<C extends JSXElementConstructor<any> | keyof JSX.IntrinsicElements>(
-  input: FormInput<C>
-) {
-  const { as, ...props } = input;
-
-  return <Memoize as={as} {...props} />;
 }

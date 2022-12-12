@@ -37,7 +37,6 @@ const mapOption = (channel: GuildChannel): ChannelOption => {
 };
 
 export function ChannelSelect({ value, onChange }: FormProps<string>) {
-  console.log('rerender');
   const { guild } = useParams<Params>();
   const channelsQuery = useGuildChannelsQuery(guild);
 

@@ -1,6 +1,4 @@
-import { As, MergeWithAs } from '@chakra-ui/react';
-import { ComponentProps } from 'react';
-import { DependencyList, FC, memo, PropsWithRef, ReactElement } from 'react';
+import { DependencyList, memo, ReactElement } from 'react';
 
 export function formComponent<T extends { value: any }>(
   component: (props: T) => ReactElement,
@@ -21,20 +19,20 @@ export function memorized<T>(
   return memo(component, (prev, next) => {
     const prevDeps = dependencies(prev);
     const nextDeps = dependencies(next);
+    const eq = (a: any, b: any): boolean => {
+      if (Array.isArray(a) && Array.isArray(b)) return a.every((v, i) => eq(v, b[i]));
+      return a === b;
+    };
 
-    return prevDeps.every((v, i) => v === nextDeps[i]);
+    return eq(prevDeps, nextDeps);
   });
 }
-
-export const Memoize: <Component extends As>(
-  props: PropsWithRef<
-    React.ComponentProps<Component> & {
-      as: Component;
-    }
-  >
-) => ReactElement = memorized(
-  ({ as, ...props }) => {
-    return as(props as any);
+export const Memoize = memorized<{
+  dependencies: DependencyList;
+  children: ReactElement;
+}>(
+  ({ children }) => {
+    return children;
   },
-  (p) => [p.value]
+  (p) => p.dependencies
 );

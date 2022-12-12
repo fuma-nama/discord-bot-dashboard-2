@@ -57,7 +57,6 @@ export function SmallDatePickerForm({
   onChange?: CalendarProps['onChange'];
   picker?: DatePickerProps;
 }>) {
-  console.log('date rerender');
   const text = (value ?? picker?.value)?.toLocaleString(undefined, {
     dateStyle: 'short',
   });

@@ -5,7 +5,7 @@ import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { useDashboard } from './example/dashboard';
-import { MusicFeaturePanel } from './example/music';
+import MusicFeaturePanel from './example/music';
 import { AppConfig } from './types';
 import { useFeatureValue } from './utils';
 
