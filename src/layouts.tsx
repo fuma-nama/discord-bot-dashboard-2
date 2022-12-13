@@ -9,6 +9,7 @@ import { GuildLayout } from 'layouts/guild/GuildLayout';
 import { FeatureView } from 'views/feature/FeatureView';
 import { DashboardView } from 'views/dashboard/DashboardView';
 import { ProfileView } from 'views/profile/ProfileView';
+import { FeatureSidebar } from 'layouts/feature/FeatureSidebar';
 
 export const layouts: RootLayout[] = [
   {
@@ -42,6 +43,7 @@ export const layouts: RootLayout[] = [
           {
             path: 'features/:feature',
             component: <FeatureView />,
+            sidebar: <FeatureSidebar />,
           },
           {
             path: 'settings',
