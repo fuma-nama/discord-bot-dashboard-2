@@ -1,4 +1,4 @@
-import { CustomFeatures } from './custom-types';
+import { CustomFeatures } from './types';
 import { features } from './features';
 import { FeatureConfig } from './types';
 

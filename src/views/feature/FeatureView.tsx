@@ -3,7 +3,7 @@ import { Center, Heading, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
-import { CustomFeatures } from 'config/custom-types';
+import { CustomFeatures } from 'config/types';
 import { features } from 'config/features';
 import { FeatureConfig } from 'config/types';
 import { BsSearch } from 'react-icons/bs';

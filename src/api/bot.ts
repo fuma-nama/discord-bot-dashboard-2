@@ -1,4 +1,4 @@
-import { CustomFeatures, CustomGuildInfo } from 'config/custom-types';
+import { CustomFeatures, CustomGuildInfo } from 'config/types/custom-types';
 import { withBot, callDefault, callReturn } from './core';
 import { ChannelTypes } from './discord';
 

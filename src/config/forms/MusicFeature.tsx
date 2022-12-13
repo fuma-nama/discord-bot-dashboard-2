@@ -1,5 +1,5 @@
 import { SimpleGrid } from '@chakra-ui/layout';
-import { MusicFeature } from 'config/custom-types';
+import { MusicFeature } from 'config/types';
 import { ChannelSelect } from '../example/ChannelSelect';
 import { RolesSelect } from '../example/RolesSelect';
 import { createForm } from 'hooks/forms/createForm';

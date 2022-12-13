@@ -2,7 +2,7 @@
  * Custom types that should be configured by developer
  ***/
 
-import { GuildInfo } from './types';
+import { GuildInfo } from '.';
 
 export type CustomGuildInfo = GuildInfo & {};
 

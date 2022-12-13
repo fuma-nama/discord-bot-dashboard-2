@@ -1,4 +1,4 @@
-import { CustomFeatures, CustomGuildInfo } from './../config/custom-types';
+import { CustomFeatures, CustomGuildInfo } from '../config/types';
 import { useAPIStore } from './apiStore';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { UserInfo, getGuild, getGuilds, fetchUserInfo } from 'api/discord';

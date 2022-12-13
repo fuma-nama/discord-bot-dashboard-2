@@ -2,7 +2,7 @@ import { WarningIcon } from '@chakra-ui/icons';
 import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { ButtonGroup, Button } from '@chakra-ui/react';
 import { SlideFade } from '@chakra-ui/transition';
-import { CustomFeatures } from 'config/custom-types';
+import { CustomFeatures } from 'config/types';
 import { FeatureConfig, FeatureRender } from 'config/types';
 import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
