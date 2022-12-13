@@ -1,18 +1,16 @@
 import Icon from '@chakra-ui/icon';
-import { WarningIcon } from '@chakra-ui/icons';
-import { Center, Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
-import { Button, ButtonGroup, SlideFade } from '@chakra-ui/react';
+import { Center, Heading, Text } from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
-import { config } from 'config/common';
 import { CustomFeatures } from 'config/custom-types';
 import { features } from 'config/features';
-import { FeatureConfig, FeatureRender } from 'config/types';
+import { FeatureConfig } from 'config/types';
 import { BsSearch } from 'react-icons/bs';
-import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
-import { useFeatureQuery, useUpdateFeatureMutation } from 'stores';
+import { useEnableFeatureMutation, useFeatureQuery } from 'stores';
 import { useColors } from 'theme';
+import { UpdateFeaturePanel } from './UpdateFeaturePanel';
 
 export type Params = {
   guild: string;
@@ -26,8 +24,8 @@ export function FeatureView() {
   const query = useFeatureQuery(guild, feature);
   const featureConfig = features[feature] as FeatureConfig<typeof feature>;
   const skeleton = featureConfig?.useSkeleton?.();
-
   if (featureConfig == null) return <NotFound />;
+  if (query.isError) return <NotEnabled />;
 
   return (
     <QueryStatus
@@ -35,8 +33,31 @@ export function FeatureView() {
       loading={skeleton ?? <LoadingPanel size="sm" />}
       error="Failed to load feature"
     >
-      <Content id={feature} feature={query.data} config={featureConfig} />
+      <UpdateFeaturePanel id={feature} feature={query.data} config={featureConfig} />
     </QueryStatus>
+  );
+}
+
+function NotEnabled() {
+  const { guild, feature } = useParams<Params>();
+  const { textColorSecondary } = useColors();
+  const enable = useEnableFeatureMutation(guild, feature);
+
+  return (
+    <Center flexDirection="column" h="full" gap={1}>
+      <Text fontSize="xl" fontWeight="600">
+        Not Enabled
+      </Text>
+      <Text color={textColorSecondary}>Try enable this feature?</Text>
+      <Button
+        mt={3}
+        isLoading={enable.isLoading}
+        onClick={() => enable.mutate({ enabled: true })}
+        variant="brand"
+      >
+        Enable Feature
+      </Button>
+    </Center>
   );
 }
 
@@ -48,85 +69,5 @@ function NotFound() {
       <Heading size="lg">Not Found</Heading>
       <Text color={textColorSecondary}>Hmm... Weird we can't find it</Text>
     </Center>
-  );
-}
-
-function Content<K extends keyof CustomFeatures>({
-  feature,
-  config,
-}: {
-  id: K;
-  feature: CustomFeatures[K];
-  config: FeatureConfig<K>;
-}) {
-  const result = config.useRender(feature);
-
-  return (
-    <>
-      <Flex direction="column" w="full" h="full">
-        <Flex direction="column" flex={1} gap={5}>
-          <Heading>{config.name}</Heading>
-          {result.component}
-        </Flex>
-      </Flex>
-      <Savebar result={result} />
-    </>
-  );
-}
-
-function Savebar({ result: { serialize, canSave, reset } }: { result: FeatureRender }) {
-  const { guild, feature } = useParams<Params>();
-  const { cardBg } = useColors();
-  const mutation = useUpdateFeatureMutation();
-
-  const onSave = () => {
-    mutation.mutate(
-      {
-        guild,
-        feature,
-        options: serialize(),
-      },
-      {
-        onSuccess: reset,
-      }
-    );
-  };
-
-  return (
-    <HStack
-      as={SlideFade}
-      in={canSave}
-      bg={cardBg}
-      rounded="3xl"
-      pos="sticky"
-      bottom={2}
-      w="full"
-      px={5}
-      py={3}
-      mt={2}
-      zIndex={3}
-    >
-      <WarningIcon
-        _light={{ color: 'orange.400' }}
-        _dark={{ color: 'orange.300' }}
-        w="30px"
-        h="30px"
-      />
-      <Text fontSize="lg" fontWeight="500">
-        Save changes
-      </Text>
-      <Spacer />
-      <ButtonGroup isDisabled={mutation.isLoading}>
-        <Button
-          variant="brand"
-          leftIcon={<IoSave />}
-          isLoading={mutation.isLoading}
-          onClick={onSave}
-        >
-          Save
-        </Button>
-        <Button onClick={reset}>Discard</Button>
-      </ButtonGroup>
-    </HStack>
   );
 }
