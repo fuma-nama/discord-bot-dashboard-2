@@ -26,8 +26,6 @@ export function FeatureSidebar() {
           <FeatureItem key={feature.id} feature={feature} />
         ))}
       </VStack>
-      <Spacer />
-      <Button leftIcon={<ChevronLeftIcon />}>Back</Button>
     </Flex>
   );
 }
