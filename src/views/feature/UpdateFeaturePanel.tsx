@@ -33,12 +33,15 @@ export function UpdateFeaturePanel<K extends keyof CustomFeatures>({
   );
 }
 
-function Savebar({ result: { serialize, canSave, reset } }: { result: FeatureRender }) {
+function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: FeatureRender }) {
   const { guild, feature } = useParams<Params>();
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
 
   const onSave = () => {
+    //prevent submit if returns true
+    if (onSubmit?.() === true) return;
+
     mutation.mutate(
       {
         guild,

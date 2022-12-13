@@ -68,6 +68,13 @@ export type FeatureRender = {
   canSave?: boolean;
 
   /**
+   * called before submit
+   *
+   * If returns true, prevent submit
+   */
+  onSubmit?: () => boolean;
+
+  /**
    * Get the form/json body of update feature request
    *
    * Should be handled by the server
@@ -80,5 +87,6 @@ export type FeatureRender = {
    * Reset current value
    */
   reset?: () => void;
+
   component: ReactElement;
 };

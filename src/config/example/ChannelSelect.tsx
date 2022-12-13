@@ -1,9 +1,7 @@
 import { ChatIcon, Icon } from '@chakra-ui/icons';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
-import { FormControlCard } from 'components/forms/Form';
 import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
-import { FormProps } from 'hooks/forms/useFormValue';
 import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
@@ -36,7 +34,13 @@ const mapOption = (channel: GuildChannel): ChannelOption => {
   };
 };
 
-export function ChannelSelect({ value, onChange }: FormProps<string>) {
+export function ChannelSelect({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
   const { guild } = useParams<Params>();
   const channelsQuery = useGuildChannelsQuery(guild);
 

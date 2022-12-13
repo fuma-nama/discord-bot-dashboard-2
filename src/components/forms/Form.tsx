@@ -1,4 +1,9 @@
-import { FormControl, FormControlProps, FormLabel } from '@chakra-ui/form-control';
+import {
+  FormControl,
+  FormControlProps,
+  FormErrorMessage,
+  FormLabel,
+} from '@chakra-ui/form-control';
 import { Flex, Spacer, Text } from '@chakra-ui/layout';
 import { ReactNode } from 'react';
 import { useColors } from 'theme';
@@ -13,7 +18,11 @@ export type FormControlCardProps = {
   label?: string;
   description?: string;
   required?: boolean;
-  form?: FormControlProps;
+  baseControl?: FormControlProps;
+  /**
+   * Show an error message if not null
+   */
+  error?: string;
   children: ReactNode;
 };
 
@@ -23,8 +32,9 @@ export function FormControlCard({
   label,
   description,
   required,
-  form,
+  baseControl,
   children,
+  error,
 }: FormControlCardProps) {
   const { cardBg, textColorSecondary } = useColors();
 
@@ -36,7 +46,8 @@ export function FormControlCard({
       rounded="3xl"
       p={4}
       isRequired={required}
-      {...form}
+      isInvalid={error != null}
+      {...baseControl}
     >
       <FormLabel
         fontSize={{ base: 'lg', lg: 'xl' }}
@@ -48,6 +59,7 @@ export function FormControlCard({
       <Text color={textColorSecondary}>{description}</Text>
       <Spacer mt={2} />
       {children}
+      <FormErrorMessage>{error}</FormErrorMessage>
     </FormControl>
   );
 }

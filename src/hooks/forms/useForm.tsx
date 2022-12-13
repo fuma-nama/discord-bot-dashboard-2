@@ -1,106 +1,94 @@
-import { ComponentProps, DependencyList, Fragment, ReactElement } from 'react';
-import { ColorPickerForm, SmallColorPickerForm } from 'components/forms/ColorPicker';
-import { DatePickerForm, SmallDatePickerForm } from 'components/forms/DatePicker';
-import { FilePickerForm } from 'components/forms/FilePicker';
-import { FormComponentProps, FormControlCard } from 'components/forms/Form';
-import { Memoize } from 'hooks/Memorize';
-import { InputForm } from 'components/forms/InputForm';
+import { FeatureRender } from 'config/types';
+import { Dispatch, SetStateAction, ReactElement, useState } from 'react';
+import { converter } from './useFormValue';
 
-export type FormInput = (
-  | Input
-  | DatePicker
-  | SmallDatePicker
-  | ColorPicker
-  | SmallColorPicker
-  | FilePicker
-  | Custom
-  | CustomForm
-) &
-  IForm;
-
-interface IForm {
-  /**
-   * prevent re-renders until objects in memorize list is changed
-   *
-   * This settings may imporve performance
-   *
-   * default: not enabled
-   */
-  memorize?: DependencyList;
-}
-
-export type Input = ComponentProps<typeof InputForm> & { type: 'input' };
-
-export type DatePicker = ComponentProps<typeof DatePickerForm> & { type: 'date' };
-export type SmallDatePicker = ComponentProps<typeof SmallDatePickerForm> & { type: 'small-date' };
-
-export type ColorPicker = ComponentProps<typeof ColorPickerForm> & { type: 'color' };
-export type SmallColorPicker = ComponentProps<typeof SmallColorPickerForm> & {
-  type: 'small-color';
+export type FormErrors<V> = {
+  [K in keyof V]?: string;
 };
 
-export type FilePicker = ComponentProps<typeof FilePickerForm> & { type: 'file' };
+export type UseFormOptions<V> = {
+  defaultValue: V;
 
-export type Custom = { type: 'custom'; component: ReactElement };
-export type CustomForm = FormComponentProps<{ type: 'custom-form'; component: ReactElement }>;
-
-export type FormOptions = {
   /**
-   * memorize specified keys in all inputs
+   * Convert value to json/form body used for http request
    */
-  defaultMemorize?: string[];
+  converter?: 'json' | 'form' | ((v: V) => FormData | string);
+
+  /**
+   * Verify input value before submit
+   */
+  verify?: (v: V, errors: FormErrors<V>) => void;
 };
 
-export function useForm(options: FormOptions = {}, ...inputs: FormInput[]) {
-  return form(options, ...inputs);
+export type UseFormResult<V> = {
+  value: V;
+  update: Dispatch<Partial<V>>;
+  setValue: Dispatch<SetStateAction<V>>;
+
+  /**
+   * Check if value contains errors and update errors state
+   *
+   * @param keys If not empty, Only update errors of specified keys
+   * @return true if invalid
+   */
+  checkValue: (...keys: (keyof V)[]) => boolean;
+  errors: FormErrors<V>;
+  setErrors: (dispatch: (prev: FormErrors<V>) => FormErrors<V>) => void;
+
+  render: (element: ReactElement) => FeatureRender;
+};
+
+type FormState<V> = {
+  updated: boolean;
+  errors: {
+    [K in keyof V]?: string;
+  };
+};
+
+export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
+  const [value, setValue] = useState<V>(options.defaultValue);
+  const [state, setState] = useState<FormState<V>>({
+    updated: false,
+    errors: {},
+  });
+  const convert = converter(options.converter ?? 'json');
+
+  const checkValue = (...keys: (keyof V)[]) => {
+    let errors: FormErrors<V> = {};
+    options.verify?.(value, errors);
+    errors = filterKeys<FormErrors<V>>(errors, keys);
+
+    const hasError = Object.keys(errors).length > 0;
+
+    setState((prev) => ({ ...prev, errors }));
+    return hasError;
+  };
+
+  return {
+    value,
+    errors: state.errors,
+    checkValue,
+    setErrors: (dispatch) => setState((prev) => ({ ...prev, errors: dispatch(prev.errors) })),
+    update: (action) => setValue((prev) => ({ ...prev, ...action })),
+    setValue,
+    render: (element) => {
+      return {
+        canSave: Object.entries(value).length !== 0,
+        onSubmit: () => checkValue(),
+        serialize: () => convert(value),
+        reset: () => setValue(options.defaultValue),
+        component: element,
+      };
+    },
+  };
 }
 
-export function form(options: FormOptions = {}, ...inputs: FormInput[]) {
-  function getForm(input: FormInput) {
-    const { type, memorize, ...props } = input;
+function filterKeys<V>(obj: V, keys: (keyof V)[]): Partial<V> {
+  const temp: Partial<V> = {};
 
-    switch (type) {
-      case 'input':
-        return <InputForm {...(props as any)} />;
-      case 'date':
-        return <DatePickerForm {...(props as any)} />;
-      case 'small-date':
-        return <SmallDatePickerForm {...(props as any)} />;
-      case 'custom-form': {
-        const { component, ...form } = props as any as CustomForm;
-
-        return <FormControlCard {...form}>{component}</FormControlCard>;
-      }
-      case 'custom':
-        return input.component;
-      case 'color':
-        return <ColorPickerForm {...(props as any)} />;
-      case 'small-color':
-        return <SmallColorPickerForm {...(props as any)} />;
-      case 'file':
-        return <FilePickerForm {...(props as any)} />;
-    }
+  for (const key of keys) {
+    temp[key] = obj[key];
   }
 
-  return (
-    <>
-      {inputs.map((input, i) => {
-        const form = getForm(input);
-
-        if (input.memorize !== undefined || options.defaultMemorize !== undefined) {
-          const memorize =
-            input.memorize ??
-            options.defaultMemorize?.map((key) => input[key as keyof typeof input]);
-
-          return (
-            <Memoize key={i} dependencies={memorize}>
-              {form}
-            </Memoize>
-          );
-        }
-
-        return <Fragment key={i}>{form}</Fragment>;
-      })}
-    </>
-  );
+  return temp;
 }

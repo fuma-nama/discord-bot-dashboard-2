@@ -2,20 +2,25 @@ import { SimpleGrid } from '@chakra-ui/layout';
 import { MusicFeature } from 'config/custom-types';
 import { ChannelSelect } from '../example/ChannelSelect';
 import { RolesSelect } from '../example/RolesSelect';
-import { form, useForm } from 'hooks/forms/useForm';
-import { UseFeatureValueResult } from 'hooks/forms';
+import { createForm } from 'hooks/forms/createForm';
+import { useForm } from 'hooks/forms/useForm';
 
-export function MusicFeaturePanel({
-  result: { value, update },
-  data,
-}: {
-  result: UseFeatureValueResult<Partial<MusicFeature>>;
-  data: MusicFeature;
-}) {
+export function useMusicFeature(data: MusicFeature) {
+  const { value, update, errors, ...form } = useForm<Partial<MusicFeature>>({
+    defaultValue: {},
+    verify: (v, errors) => {
+      if (v.message != null && v.message.trim().length === 0) {
+        errors.message = "Message can't be emtpy or blank";
+      }
+
+      if (v.count === '0') errors.count = "Can't be 0";
+    },
+  });
+
   const combined = { ...data, ...value };
-  const component = form(
+  const component = createForm(
     {
-      defaultMemorize: ['value'],
+      defaultMemorize: ['value', 'error'],
     },
     {
       label: 'Message',
@@ -23,6 +28,7 @@ export function MusicFeaturePanel({
       type: 'input',
       value: combined.message,
       onChange: (message) => update({ message }),
+      error: errors.message,
     },
     {
       type: 'input',
@@ -30,7 +36,10 @@ export function MusicFeaturePanel({
       placeholder: 'Put a number',
       value: combined.count ?? '0',
       onChange: (v) => update({ count: v }),
+      error: errors.count,
       input: {
+        //check instantly after blur
+        onBlur: () => form.checkValue('count'),
         type: 'number',
       },
     },
@@ -96,7 +105,7 @@ export function MusicFeaturePanel({
     }
   );
 
-  return (
+  return form.render(
     <SimpleGrid columns={{ base: 1, md: 2 }} gap={3}>
       {component}
     </SimpleGrid>

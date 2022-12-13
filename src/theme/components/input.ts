@@ -1,46 +1,59 @@
 import { inputAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
 import { dark, light } from '../colors';
 
 const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(
   inputAnatomy.keys
 );
 
-const mainStyle = {
-  border: '2px solid',
-  borderRadius: '16px',
-  fontSize: 'sm',
-  p: '20px',
-  _light: {
-    color: 'secondaryGray.900',
-    bg: 'transparent',
-    _placeholder: {
-      color: 'secondaryGray.700',
+const main = definePartsStyle({
+  field: {
+    border: '2px solid',
+    borderRadius: '16px',
+    fontSize: 'sm',
+    p: '20px',
+    _light: {
+      color: 'secondaryGray.900',
+      bg: 'transparent',
+      _placeholder: {
+        color: 'secondaryGray.700',
+      },
+      _invalid: {
+        borderColor: 'red.400',
+      },
+      borderColor: 'secondaryGray.400',
     },
-    borderColor: 'secondaryGray.400',
-  },
-  _dark: {
-    color: 'white',
-    bg: 'navy.800',
-    _placeholder: {
-      color: 'secondaryGray.600',
+
+    _dark: {
+      color: 'white',
+      bg: 'navy.800',
+      _placeholder: {
+        color: 'secondaryGray.600',
+      },
+      _invalid: {
+        borderColor: 'red.400',
+      },
+      borderColor: 'navy.600',
     },
-    borderColor: 'navy.600',
   },
-};
+});
 
 export const inputStyles = defineMultiStyleConfig({
-  baseStyle: definePartsStyle((props) => ({
+  baseStyle: definePartsStyle({
     field: {
       fontWeight: 400,
-      borderColor: mode('secondaryGray.400', 'navy.600')(props),
+      _light: {
+        borderColor: 'secondaryGray.400',
+      },
+      _dark: {
+        borderColor: 'navy.600',
+      },
       borderRadius: '8px',
     },
-  })),
+  }),
 
   variants: {
-    flushed: definePartsStyle(() => ({
+    flushed: definePartsStyle({
       field: {
         _focus: {
           _dark: {
@@ -63,13 +76,11 @@ export const inputStyles = defineMultiStyleConfig({
           borderBottomColor: 'navy.600',
         },
       },
-    })),
-    main: definePartsStyle({
-      field: mainStyle,
     }),
+    main,
     focus: definePartsStyle({
       field: {
-        ...mainStyle,
+        ...main.field,
         _focus: {
           _light: {
             borderColor: 'brand.300',
