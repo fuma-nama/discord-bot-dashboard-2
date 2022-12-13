@@ -23,7 +23,7 @@ export type UseFormOptions<V> = {
 export type UseFormResult<V> = {
   value: V;
   update: Dispatch<Partial<V>>;
-  setValue: Dispatch<SetStateAction<V>>;
+  setState: Dispatch<FormState<V>>;
 
   /**
    * Check if value contains errors and update errors state
@@ -39,6 +39,7 @@ export type UseFormResult<V> = {
 };
 
 type FormState<V> = {
+  value: V;
   updated: boolean;
   errors: {
     [K in keyof V]?: string;
@@ -46,16 +47,30 @@ type FormState<V> = {
 };
 
 export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
-  const [value, setValue] = useState<V>(options.defaultValue);
   const [state, setState] = useState<FormState<V>>({
     updated: false,
     errors: {},
+    value: options.defaultValue,
   });
+  const setValue = (action: SetStateAction<V>) => {
+    typeof action === 'function'
+      ? setState((prev) => ({
+          ...prev,
+          updated: true,
+          value: (action as (prev: V) => V)(prev.value),
+        }))
+      : setState((prev) => ({
+          ...prev,
+          updated: true,
+          value: action,
+        }));
+  };
+
   const convert = converter(options.converter ?? 'json');
 
   const checkValue = (...keys: (keyof V)[]) => {
     let errors: FormErrors<V> = {};
-    options.verify?.(value, errors);
+    options.verify?.(state.value, errors);
     if (keys.length !== 0) errors = filterKeys<FormErrors<V>>(errors, keys);
 
     const hasError = Object.keys(errors).length > 0;
@@ -65,18 +80,23 @@ export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
   };
 
   return {
-    value,
+    value: state.value,
     errors: state.errors,
     checkValue,
     setErrors: (dispatch) => setState((prev) => ({ ...prev, errors: dispatch(prev.errors) })),
     update: (action) => setValue((prev) => ({ ...prev, ...action })),
-    setValue,
+    setState,
     render: (element) => {
       return {
-        canSave: Object.entries(value).length !== 0,
+        canSave: state.updated,
         onSubmit: () => checkValue(),
-        serialize: () => convert(value),
-        reset: () => setValue(options.defaultValue),
+        serialize: () => convert(state.value),
+        reset: () =>
+          setState({
+            updated: false,
+            errors: {},
+            value: options.defaultValue,
+          }),
         component: element,
       };
     },

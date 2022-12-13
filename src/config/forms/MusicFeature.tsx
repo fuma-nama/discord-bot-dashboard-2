@@ -7,7 +7,7 @@ import { useForm } from 'hooks/forms/useForm';
 
 export function useMusicFeature(data: MusicFeature) {
   const { value, update, errors, ...form } = useForm<Partial<MusicFeature>>({
-    defaultValue: {},
+    defaultValue: { count: '2' },
     verify: (v, errors) => {
       if (v.message != null && v.message.trim().length === 0) {
         errors.message = "Message can't be emtpy or blank";
