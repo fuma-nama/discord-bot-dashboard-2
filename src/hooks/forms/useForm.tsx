@@ -33,7 +33,7 @@ export type UseFormResult<V> = {
    */
   checkValue: (...keys: (keyof V)[]) => boolean;
   errors: FormErrors<V>;
-  setErrors: (dispatch: (prev: FormErrors<V>) => FormErrors<V>) => void;
+  setErrors: Dispatch<(prev: FormErrors<V>) => FormErrors<V>>;
 
   render: (element: ReactElement) => FeatureRender;
 };
