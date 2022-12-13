@@ -12,9 +12,8 @@ import {
 } from '@chakra-ui/react';
 import { BottomCard, SidebarContent } from './components/SidebarContent';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactElement } from 'react';
 import { SidebarItemInfo, useLayoutOverride } from 'utils/routeUtils';
-import { usePageStore, useSelectedGuild } from 'stores';
+import { usePageStore } from 'stores';
 import { layouts } from 'layouts';
 
 export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
@@ -37,7 +36,7 @@ export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
         boxShadow={shadow}
       >
         <Flex direction="column" height="100%" overflowX="hidden" overflowY="auto">
-          <AnimatePresence exitBeforeEnter>
+          <AnimatePresence exitBeforeEnter initial={false}>
             <motion.div
               key={sidebar == null ? 'default' : 'new'}
               initial={{ x: '100px', opacity: 0 }}
