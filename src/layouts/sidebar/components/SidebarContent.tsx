@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 //   Custom components
 import { getActiveSidebarItem, SidebarItemInfo } from 'utils/routeUtils';
-import { useGuilds, useSelfUserQuery } from 'stores';
+import { useGuilds, useSelectedGuild, useSelfUserQuery } from 'stores';
 import { SearchBar } from 'components/forms/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
@@ -25,15 +25,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { GuildItem } from './GuildItem';
 import { SidebarItem } from './SidebarItem';
 
-export function SidebarContent({
-  items,
-  selected: selectedGroup,
-  onSelect,
-}: {
-  items: SidebarItemInfo[];
-  selected: string;
-  onSelect: (id: string) => void;
-}) {
+export function SidebarContent({ items }: { items: SidebarItemInfo[] }) {
+  const { selected: selectedGroup, setSelected: onSelect } = useSelectedGuild();
   const [filter, setFilter] = useState('');
   const guilds = useGuilds();
 
