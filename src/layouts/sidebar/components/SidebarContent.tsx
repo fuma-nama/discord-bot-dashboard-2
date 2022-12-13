@@ -84,7 +84,7 @@ export function SidebarContent({
   );
 }
 
-function BottomCard() {
+export function BottomCard() {
   const navigate = useNavigate();
   const user = useSelfUserQuery().data;
   if (user == null) return <></>;

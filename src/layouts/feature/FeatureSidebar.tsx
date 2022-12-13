@@ -1,8 +1,9 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { Flex, HStack, Spacer, Text, VStack } from '@chakra-ui/layout';
-import { Button, IconButton } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
 import { HSeparator } from 'components/layout/Separator';
 import { getFeatures, IdFeature } from 'config/utils';
+import { BottomCard } from 'layouts/sidebar/components/SidebarContent';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGuildPreview, useSelectedGuild } from 'stores';
 import { useColors } from 'theme';
@@ -13,19 +14,23 @@ export function FeatureSidebar() {
   const { guild } = useGuildPreview(selected);
 
   return (
-    <Flex direction="column" gap={2} p={3} h="full">
-      <HStack cursor="pointer" mb={2} onClick={() => navigate(`/guilds/${selected}`)}>
-        <IconButton icon={<ChevronLeftIcon />} aria-label="back" />
-        <Text fontSize="lg" fontWeight="600">
-          {guild?.name}
-        </Text>
-      </HStack>
-      <VStack align="stretch">
-        <HSeparator>Features</HSeparator>
-        {getFeatures().map((feature) => (
-          <FeatureItem key={feature.id} feature={feature} />
-        ))}
-      </VStack>
+    <Flex direction="column" h="full" overflow="auto">
+      <Flex direction="column" gap={2} p={3}>
+        <HStack cursor="pointer" mb={2} onClick={() => navigate(`/guilds/${selected}`)}>
+          <IconButton icon={<ChevronLeftIcon />} aria-label="back" />
+          <Text fontSize="lg" fontWeight="600">
+            {guild?.name}
+          </Text>
+        </HStack>
+        <VStack align="stretch">
+          <HSeparator>Features</HSeparator>
+          {getFeatures().map((feature) => (
+            <FeatureItem key={feature.id} feature={feature} />
+          ))}
+        </VStack>
+      </Flex>
+      <Spacer />
+      <BottomCard />
     </Flex>
   );
 }
