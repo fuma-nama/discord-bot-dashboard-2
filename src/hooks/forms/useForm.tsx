@@ -3,7 +3,7 @@ import { ColorPickerForm, SmallColorPickerForm } from 'components/forms/ColorPic
 import { DatePickerForm, SmallDatePickerForm } from 'components/forms/DatePicker';
 import { FilePickerForm } from 'components/forms/FilePicker';
 import { FormComponentProps, FormControlCard } from 'components/forms/Form';
-import { Memoize } from 'components/forms/FormComponent';
+import { Memoize } from 'hooks/Memorize';
 import { InputForm } from 'components/forms/InputForm';
 
 export type FormInput = (

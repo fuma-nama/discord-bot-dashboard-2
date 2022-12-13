@@ -2,7 +2,7 @@ import { CustomFeatures } from './custom-types';
 import { features } from './features';
 import { FeatureConfig } from './types';
 
-export type IdFeature<K extends keyof CustomFeatures = any> = FeatureConfig<K> & {
+export type IdFeature<K extends keyof CustomFeatures = keyof CustomFeatures> = FeatureConfig<K> & {
   id: K;
 };
 

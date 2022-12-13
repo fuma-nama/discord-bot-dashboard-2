@@ -46,7 +46,7 @@ export function FormControlCard({
         {label}
       </FormLabel>
       <Text color={textColorSecondary}>{description}</Text>
-      <Spacer mt={1} />
+      <Spacer mt={2} />
       {children}
     </FormControl>
   );

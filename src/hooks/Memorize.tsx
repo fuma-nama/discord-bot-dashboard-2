@@ -1,17 +1,5 @@
 import { DependencyList, memo, ReactElement } from 'react';
 
-export function formComponent<T extends { value: any }>(
-  component: (props: T) => ReactElement,
-  dependencies: (props: T) => DependencyList = (p) => [p.value]
-) {
-  return memo<T>(component, (prev, next) => {
-    const prevDeps = dependencies(prev);
-    const nextDeps = dependencies(next);
-
-    return prevDeps.every((v, i) => v === nextDeps[i]);
-  });
-}
-
 export function memorized<T>(
   component: (props: T) => ReactElement,
   dependencies: (props: T) => DependencyList
@@ -27,6 +15,7 @@ export function memorized<T>(
     return eq(prevDeps, nextDeps);
   });
 }
+
 export const Memoize = memorized<{
   dependencies: DependencyList;
   children: ReactElement;

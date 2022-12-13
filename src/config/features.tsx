@@ -5,7 +5,7 @@ import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { MusicFeaturePanel } from './forms/MusicFeature';
-import { FeatureConfig, FeaturesConfig } from './types';
+import { FeaturesConfig } from './types';
 
 export const features: FeaturesConfig = {
   music: {
