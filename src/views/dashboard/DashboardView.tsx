@@ -1,5 +1,5 @@
 import { Center, Heading, Link, Text, VStack } from '@chakra-ui/layout';
-import { Button, Card, CardBody, CardFooter, CardHeader, Icon } from '@chakra-ui/react';
+import { Button, Card, CardFooter, CardHeader, Icon } from '@chakra-ui/react';
 import { config } from 'config/common';
 import { FaRobot } from 'react-icons/fa';
 import { IoOpen } from 'react-icons/io5';

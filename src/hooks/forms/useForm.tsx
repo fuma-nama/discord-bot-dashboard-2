@@ -1,10 +1,10 @@
 import { ComponentProps, DependencyList, Fragment, ReactElement } from 'react';
-import { ColorPickerForm, SmallColorPickerForm } from '../../components/forms/ColorPicker';
-import { DatePickerForm, SmallDatePickerForm } from '../../components/forms/DatePicker';
-import { FilePickerForm } from '../../components/forms/FilePicker';
-import { FormComponentProps, FormControlCard } from '../../components/forms/Form';
-import { Memoize } from '../../components/forms/FormComponent';
-import { InputForm } from '../../components/forms/InputForm';
+import { ColorPickerForm, SmallColorPickerForm } from 'components/forms/ColorPicker';
+import { DatePickerForm, SmallDatePickerForm } from 'components/forms/DatePicker';
+import { FilePickerForm } from 'components/forms/FilePicker';
+import { FormComponentProps, FormControlCard } from 'components/forms/Form';
+import { Memoize } from 'components/forms/FormComponent';
+import { InputForm } from 'components/forms/InputForm';
 
 export type FormInput = (
   | Input
@@ -77,6 +77,8 @@ export function form(options: FormOptions = {}, ...inputs: FormInput[]) {
         return <ColorPickerForm {...(props as any)} />;
       case 'small-color':
         return <SmallColorPickerForm {...(props as any)} />;
+      case 'file':
+        return <FilePickerForm {...(props as any)} />;
     }
   }
 
