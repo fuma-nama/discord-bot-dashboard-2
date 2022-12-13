@@ -42,7 +42,7 @@ export function DatePickerForm({
 }>) {
   return (
     <FormControlCard {...props}>
-      <DatePicker value={value} onChange={onChange} {...picker} />
+      <DatePicker value={value ?? null} onChange={onChange} {...picker} />
     </FormControlCard>
   );
 }
