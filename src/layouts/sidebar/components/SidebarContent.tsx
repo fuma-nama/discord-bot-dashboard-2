@@ -49,7 +49,7 @@ export function SidebarContent({
 
   // SIDEBAR
   return (
-    <Flex direction="column" height="100%" overflow="auto">
+    <>
       <Flex alignItems="center" flexDirection="column" bg="brand.400">
         <VStack align="center" my="32px" color="white">
           <Heading m={0}>{config.name}</Heading>
@@ -79,8 +79,7 @@ export function SidebarContent({
           ))}
         </Flex>
       </Stack>
-      <BottomCard />
-    </Flex>
+    </>
   );
 }
 
