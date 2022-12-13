@@ -56,7 +56,7 @@ export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
   const checkValue = (...keys: (keyof V)[]) => {
     let errors: FormErrors<V> = {};
     options.verify?.(value, errors);
-    errors = filterKeys<FormErrors<V>>(errors, keys);
+    if (keys.length !== 0) errors = filterKeys<FormErrors<V>>(errors, keys);
 
     const hasError = Object.keys(errors).length > 0;
 
@@ -87,7 +87,7 @@ function filterKeys<V>(obj: V, keys: (keyof V)[]): Partial<V> {
   const temp: Partial<V> = {};
 
   for (const key of keys) {
-    temp[key] = obj[key];
+    if (key in obj) temp[key] = obj[key];
   }
 
   return temp;
