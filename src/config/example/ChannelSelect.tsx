@@ -3,7 +3,7 @@ import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
 import { FormControlCard } from 'components/forms/Form';
 import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
-import { FormProps } from 'config/utils';
+import { FormProps } from 'hooks/forms/useFormValue';
 import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
@@ -60,13 +60,11 @@ export function ChannelSelect({ value, onChange }: FormProps<string>) {
   );
 
   return (
-    <FormControlCard label="Channels" description="Select a channel">
-      <SelectField
-        placeholder="Select a channel"
-        options={values as any}
-        value={value != null && options.get(value)}
-        onChange={(e) => onChange(e.value)}
-      />
-    </FormControlCard>
+    <SelectField
+      placeholder="Select a channel"
+      options={values as any}
+      value={value != null && options.get(value)}
+      onChange={(e) => onChange(e.value)}
+    />
   );
 }

@@ -1,11 +1,10 @@
 import { Icon, Image } from '@chakra-ui/react';
-import { FormControlCard } from 'components/forms/Form';
 import { useParams } from 'react-router-dom';
 import { useGuildRolesQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
 import { SelectField, useSelectOptions } from 'components/forms/SelectField';
 import { BsPeopleFill } from 'react-icons/bs';
-import { toRGB } from './music';
+import { toRGB } from 'utils/common';
 
 export function RolesSelect({
   value,
@@ -28,13 +27,11 @@ export function RolesSelect({
   }));
 
   return (
-    <FormControlCard label="Roles" description="Select a role">
-      <SelectField
-        placeholder="Select a role"
-        value={value != null && options.get(value)}
-        onChange={(e) => onChange(e.value)}
-        options={values}
-      />
-    </FormControlCard>
+    <SelectField
+      placeholder="Select a role"
+      value={value != null && options.get(value)}
+      onChange={(e) => onChange(e.value)}
+      options={values}
+    />
   );
 }

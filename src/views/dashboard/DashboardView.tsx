@@ -5,17 +5,14 @@ import { FaRobot } from 'react-icons/fa';
 import { IoOpen } from 'react-icons/io5';
 import { useSelfUser } from 'stores';
 import { useColors } from 'theme';
+import { ExampleDashboardView } from './example';
 
 export function DashboardView() {
-  const hook = config.pages?.useDashboard?.();
-
-  if (hook == null) return <DefaultView />;
-  return <>{hook}</>;
-}
-
-function DefaultView() {
   const { brand } = useColors();
   const user = useSelfUser();
+
+  //use example
+  return <ExampleDashboardView />;
 
   return (
     <Center h="full" flexDirection="column" textAlign="center" p={3}>

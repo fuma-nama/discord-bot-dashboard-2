@@ -2,7 +2,6 @@ import { Flex, Grid, Spacer, Text, VStack } from '@chakra-ui/layout';
 import { Avatar, Button, Card, CardBody, CardHeader, Image, useColorMode } from '@chakra-ui/react';
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SwitchField } from 'components/forms/SwitchField';
-import { config } from 'config/common';
 import { IoLogOut } from 'react-icons/io5';
 import { usePageStore, useSelfUser } from 'stores';
 import { useColors } from 'theme';
@@ -57,13 +56,11 @@ export function ProfileView() {
           </Button>
         </CardBody>
       </Card>
-      <CustomProfileComponent />
+      <Content />
     </Grid>
   );
 }
 
-function CustomProfileComponent() {
-  const hook = config.pages?.useProfile?.();
-
-  return <>{hook}</>;
+function Content() {
+  return <></>;
 }

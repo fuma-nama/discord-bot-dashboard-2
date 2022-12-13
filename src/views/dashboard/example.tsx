@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon, ViewIcon } from '@chakra-ui/icons';
-import { Center, Circle, Flex, Grid, HStack, Link, Spacer, Text, VStack } from '@chakra-ui/layout';
+import { Center, Circle, Flex, Grid, HStack, Link, Spacer, Text } from '@chakra-ui/layout';
 import {
   Avatar,
   Button,
@@ -20,7 +20,7 @@ import { MdVoiceChat } from 'react-icons/md';
 import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 
-export function useDashboard() {
+export function ExampleDashboardView() {
   const { globalBg } = useColors();
 
   return (

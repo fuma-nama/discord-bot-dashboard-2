@@ -21,18 +21,6 @@ export type AppConfig = {
    * example: `https://discord.com/api/oauth2/authorize?client_id=907955781972918281&permissions=8&scope=bot`
    */
   inviteUrl: string;
-
-  pages?: {
-    /**
-     * The Dashboard page
-     */
-    useDashboard?: () => ReactElement;
-
-    /**
-     * The Profile page
-     */
-    useProfile?: () => ReactElement;
-  };
 };
 
 export type GuildConfig = {
@@ -46,14 +34,15 @@ export type GuildConfig = {
    * ```
    */
   filter: (guild: Guild) => boolean;
-  features: {
-    [K in keyof CustomFeatures]: FeatureConfig<K>;
-  };
 };
 
 export interface GuildInfo {
   enabledFeatures: string[];
 }
+
+export type FeaturesConfig = {
+  [K in keyof CustomFeatures]: FeatureConfig<K>;
+};
 
 /**
  * Internal Feature info

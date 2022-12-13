@@ -6,6 +6,7 @@ import { LoadingPanel } from 'components/panel/LoadingPanel';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { config } from 'config/common';
 import { CustomFeatures } from 'config/custom-types';
+import { features } from 'config/features';
 import { FeatureConfig, FeatureRender } from 'config/types';
 import { BsSearch } from 'react-icons/bs';
 import { IoSave } from 'react-icons/io5';
@@ -23,7 +24,7 @@ export type UpdateFeatureValue<K extends keyof CustomFeatures> = Partial<CustomF
 export function FeatureView() {
   const { guild, feature } = useParams<Params>();
   const query = useFeatureQuery(guild, feature);
-  const featureConfig = config.guild.features[feature] as FeatureConfig<typeof feature>;
+  const featureConfig = features[feature] as FeatureConfig<typeof feature>;
   const skeleton = featureConfig?.useSkeleton?.();
 
   if (featureConfig == null) return <NotFound />;
