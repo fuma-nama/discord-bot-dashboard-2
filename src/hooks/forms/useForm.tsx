@@ -12,7 +12,7 @@ export type UseFormOptions<V> = {
   /**
    * Convert value to json/form body used for http request
    */
-  converter?: 'json' | 'form' | ((v: V) => FormData | string);
+  serializer?: 'json' | 'form' | ((v: V) => FormData | string);
 
   /**
    * Verify input value before submit
@@ -66,17 +66,15 @@ export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
         }));
   };
 
-  const convert = converter(options.converter ?? 'json');
+  const convert = converter(options.serializer ?? 'json');
 
   const checkValue = (...keys: (keyof V)[]) => {
     let errors: FormErrors<V> = {};
     options.verify?.(state.value, errors);
     if (keys.length !== 0) errors = filterKeys<FormErrors<V>>(errors, keys);
 
-    const hasError = Object.keys(errors).length > 0;
-
     setState((prev) => ({ ...prev, errors }));
-    return hasError;
+    return Object.keys(errors).length > 0;
   };
 
   return {
@@ -88,7 +86,7 @@ export function useForm<V>(options: UseFormOptions<V>): UseFormResult<V> {
     setState,
     render: (element) => {
       return {
-        canSave: state.updated,
+        canSave: state.updated && Object.keys(state.errors).length === 0,
         onSubmit: () => checkValue(),
         serialize: () => convert(state.value),
         reset: () =>
