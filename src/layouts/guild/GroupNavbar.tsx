@@ -10,7 +10,7 @@ export function GroupNavbar() {
   const { guild } = useGuildPreview(selected);
 
   return (
-    <NavbarBox bar={{ direction: 'row', maxW: { base: 'none', xl: '1200px' } }}>
+    <NavbarBox box={{ maxW: { base: 'none', xl: '1200px' } }} bar={{ direction: 'row' }}>
       <HStack cursor="pointer" onClick={() => setSelected(selected)}>
         {guild == null ? <SkeletonCircle /> : <Avatar name={guild?.name} src={iconUrl(guild)} />}
         <Text fontWeight="600">{guild?.name}</Text>
