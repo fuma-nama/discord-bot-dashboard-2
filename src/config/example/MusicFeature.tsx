@@ -3,6 +3,7 @@ import { MusicFeature } from 'config/types';
 import { ChannelSelect } from './ChannelSelect';
 import { RolesSelect } from './RolesSelect';
 import { useFormRender } from 'hooks/forms/useForm';
+import { SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
 
 /**
  * Used to configure a feature
@@ -14,7 +15,7 @@ import { useFormRender } from 'hooks/forms/useForm';
 export function useMusicFeature(data: MusicFeature) {
   return useFormRender<Partial<MusicFeature>>({
     //we will use current options as the default vlaue
-    defaultValue: { ...data, bool: false },
+    defaultValue: { bool: false, tags: [], ...data },
     //verify values
     verify: (v, errors) => {
       if (v.message != null && v.message.trim().length === 0) {
@@ -117,6 +118,21 @@ export function useMusicFeature(data: MusicFeature) {
         },
       },
       {
+        label: 'Tags',
+        description: 'Select some tags',
+        type: 'custom-form',
+        component: (
+          <TagMultiSelect
+            value={value.tags ?? []}
+            onChange={(tags) => {
+              console.log(tags);
+              update({ tags });
+            }}
+          />
+        ),
+        memorize: [value.tags],
+      },
+      {
         type: 'switch',
         label: 'Light',
         description: 'Turn on/off the light',
@@ -125,4 +141,28 @@ export function useMusicFeature(data: MusicFeature) {
       },
     ],
   });
+}
+
+/**
+ * Example for multi select
+ */
+function TagMultiSelect({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
+  const tags = ['meme', 'great', 'bot', 'discord'];
+  const { values, options } = useSelectOptionsMap((map) => {
+    tags.forEach((tag) => {
+      map.set(tag, {
+        label: tag,
+        value: tag,
+      });
+    });
+  }, []);
+
+  return (
+    <SelectField<{ label: string; value: string }, true>
+      isMulti
+      value={value.map((v) => options.get(v))}
+      onChange={(e) => onChange(e.map((tag) => tag.value))}
+      options={values}
+    />
+  );
 }

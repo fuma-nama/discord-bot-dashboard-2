@@ -5,7 +5,7 @@ import { FilePickerForm } from 'components/forms/FilePicker';
 import { FormComponentProps, FormControlCard } from 'components/forms/Form';
 import { Memoize } from 'hooks/Memorize';
 import { InputForm } from 'components/forms/InputForm';
-import { SwitchField, SwitchForm } from 'components/forms/SwitchField';
+import { SwitchForm } from 'components/forms/SwitchField';
 
 export type FormInput = (
   | Input

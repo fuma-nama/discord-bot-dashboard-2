@@ -27,4 +27,5 @@ export type MusicFeature = {
   date?: Date;
   file?: File[];
   bool: boolean;
+  tags: string[];
 };
