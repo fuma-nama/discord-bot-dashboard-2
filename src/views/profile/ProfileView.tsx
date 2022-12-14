@@ -3,7 +3,7 @@ import { Avatar, Button, Card, CardBody, CardHeader, Image, useColorMode } from 
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SwitchField } from 'components/forms/SwitchField';
 import { IoLogOut } from 'react-icons/io5';
-import { usePageStore, useSelfUser } from 'stores';
+import { useLogoutMutation, usePageStore, useSelfUser } from 'stores';
 import { useColors } from 'theme';
 
 /**
@@ -14,6 +14,7 @@ export function ProfileView() {
   const { cardBg } = useColors();
   const { colorMode, setColorMode } = useColorMode();
   const [devMode, setDevMode] = usePageStore((s) => [s.devMode, s.setDevMode]);
+  const logout = useLogoutMutation();
 
   return (
     <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={3}>
@@ -51,7 +52,12 @@ export function ProfileView() {
             onChange={(e) => setDevMode(e.target.checked)}
           />
           <Spacer mt="100px" />
-          <Button leftIcon={<IoLogOut />} variant="danger">
+          <Button
+            leftIcon={<IoLogOut />}
+            variant="danger"
+            isLoading={logout.isLoading}
+            onClick={() => logout.mutate()}
+          >
             Logout
           </Button>
         </CardBody>
