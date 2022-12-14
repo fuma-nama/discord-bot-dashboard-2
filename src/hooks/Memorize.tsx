@@ -8,9 +8,17 @@ export function memorized<T>(
     const prevDeps = dependencies(prev);
     const nextDeps = dependencies(next);
     const eq = (a: any, b: any): boolean => {
-      if (Array.isArray(a) && Array.isArray(b)) return a.every((v, i) => eq(v, b[i]));
+      if (
+        Array.isArray(a) &&
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((v, i) => eq(v, b[i]))
+      )
+        return true;
+
       return a === b;
     };
+    console.log(prevDeps, nextDeps);
 
     return eq(prevDeps, nextDeps);
   });
