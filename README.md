@@ -43,7 +43,7 @@ As a template, you need to customize a few things in order to get it work
 1. **Customize following files**
    - [src/views/dashboard](./src/views/dashboard/DashboardView.tsx) **User Dashboard** - Some states about the user
    - [src/views/home](./src/views/home/HomeView.tsx) **Home page** - introduce your bot
-   - [./src/views/guild](./src/views/guild/GuildView.tsx) **Guild Dashboard** - The place to customize guild (ex: features, actions)
+   - [src/views/guild](./src/views/guild/GuildView.tsx) **Guild Dashboard** - The place to customize guild (ex: features, actions)
 1. **Define Features**
    <br>
    The dashboard has built-in support for configuring features
@@ -76,8 +76,7 @@ As a template, you need to customize a few things in order to get it work
    <br>
    Modify [src/config/common.tsx](./src/config/common.tsx)
    - Bot name & icon
-   - Invite url _(used for inviting the bot to server)_
-     https://discord.com/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot
+   - Invite url _(example: https://discord.com/oauth2/authorize?client_id=1234&scope=bot)_
    - Guild settings
 1. **Done!**
    <br>
