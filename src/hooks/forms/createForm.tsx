@@ -5,6 +5,7 @@ import { FilePickerForm } from 'components/forms/FilePicker';
 import { FormComponentProps, FormControlCard } from 'components/forms/Form';
 import { Memoize } from 'hooks/Memorize';
 import { InputForm } from 'components/forms/InputForm';
+import { SwitchField, SwitchForm } from 'components/forms/SwitchField';
 
 export type FormInput = (
   | Input
@@ -12,6 +13,7 @@ export type FormInput = (
   | SmallDatePicker
   | ColorPicker
   | SmallColorPicker
+  | Switch
   | FilePicker
   | Custom
   | CustomForm
@@ -40,6 +42,8 @@ export type SmallColorPicker = ComponentProps<typeof SmallColorPickerForm> & {
 };
 
 export type FilePicker = ComponentProps<typeof FilePickerForm> & { type: 'file' };
+
+export type Switch = ComponentProps<typeof SwitchForm> & { type: 'switch' };
 
 export type Custom = { type: 'custom'; component: ReactElement };
 export type CustomForm = FormComponentProps<{ type: 'custom-form'; component: ReactElement }>;
@@ -75,6 +79,8 @@ export function createForm(options: FormOptions = {}, ...inputs: FormInput[]) {
         return <SmallColorPickerForm {...(props as any)} />;
       case 'file':
         return <FilePickerForm {...(props as any)} />;
+      case 'switch':
+        return <SwitchForm {...(props as any)} />;
     }
   }
 

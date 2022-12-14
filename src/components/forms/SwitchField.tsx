@@ -1,9 +1,37 @@
 // Chakra imports
-import { Flex, FormLabel, Switch, SwitchProps, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Flex,
+  FormErrorMessage,
+  FormLabel,
+  Switch,
+  SwitchProps,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { FormCard, FormComponentProps, FormControlCard } from './Form';
+
+export type SwitchFormProps = FormComponentProps<{
+  value: boolean;
+  onChange: (v: boolean) => void;
+}>;
+
+export function SwitchForm(props: SwitchFormProps) {
+  return (
+    <FormCard isRequired={props.required} isInvalid={props.error != null} {...props.baseControl}>
+      <SwitchField
+        label={props.label}
+        desc={props.description}
+        isChecked={props.value}
+        onChange={(e) => props.onChange(e.target.checked)}
+      />
+      <FormErrorMessage>{props.error}</FormErrorMessage>
+    </FormCard>
+  );
+}
 // Custom components
 export function SwitchField(
   props: {
-    id: string;
+    id?: string;
     label?: string;
     desc?: string;
   } & SwitchProps

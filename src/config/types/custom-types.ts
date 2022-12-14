@@ -26,4 +26,5 @@ export type MusicFeature = {
   count?: string;
   date?: Date;
   file?: File[];
+  bool: boolean;
 };

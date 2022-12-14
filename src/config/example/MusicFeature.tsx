@@ -14,7 +14,7 @@ import { useFormRender } from 'hooks/forms/useForm';
 export function useMusicFeature(data: MusicFeature) {
   return useFormRender<Partial<MusicFeature>>({
     //we will use current options as the default vlaue
-    defaultValue: data,
+    defaultValue: { ...data, bool: false },
     //verify values
     verify: (v, errors) => {
       if (v.message != null && v.message.trim().length === 0) {
@@ -115,6 +115,13 @@ export function useMusicFeature(data: MusicFeature) {
         picker: {
           maxFiles: 2,
         },
+      },
+      {
+        type: 'switch',
+        label: 'Light',
+        description: 'Turn on/off the light',
+        value: value.bool,
+        onChange: (bool) => update({ bool }),
       },
     ],
   });
