@@ -54,14 +54,14 @@ export interface FeatureConfig<K extends keyof CustomFeatures> {
   /**
    * Render content in Feature view
    */
-  useRender: (data: CustomFeatures[K]) => FeatureRender;
+  useRender: (data: CustomFeatures[K]) => FormRender;
   /**
    * Render skeleton before featrue is loaded
    */
   useSkeleton?: () => ReactNode;
 }
 
-export type FeatureRender = {
+export type FormRender = {
   /**
    * Save bar will be disappeared if `canSave` is false
    */

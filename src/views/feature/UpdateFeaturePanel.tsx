@@ -3,7 +3,7 @@ import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { ButtonGroup, Button } from '@chakra-ui/react';
 import { SlideFade } from '@chakra-ui/transition';
 import { CustomFeatures } from 'config/types';
-import { FeatureConfig, FeatureRender } from 'config/types';
+import { FeatureConfig, FormRender } from 'config/types';
 import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 import { useUpdateFeatureMutation } from 'stores';
@@ -33,7 +33,7 @@ export function UpdateFeaturePanel<K extends keyof CustomFeatures>({
   );
 }
 
-function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: FeatureRender }) {
+function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: FormRender }) {
   const { guild, feature } = useParams<Params>();
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
