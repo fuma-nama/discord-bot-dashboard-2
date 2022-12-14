@@ -124,6 +124,9 @@ export async function fetchGuildRoles(guild: string) {
   );
 }
 
+/**
+ * @returns Guild channels
+ */
 export async function fetchGuildChannels(guild: string) {
   return await callReturn<GuildChannel[]>(
     `/guilds/${guild}/channels`,

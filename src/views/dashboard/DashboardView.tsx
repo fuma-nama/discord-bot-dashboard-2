@@ -11,7 +11,7 @@ export function DashboardView() {
   const { brand } = useColors();
   const user = useSelfUser();
 
-  //use example
+  //used for demo, you should remove it
   return <ExampleDashboardView />;
 
   return (

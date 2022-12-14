@@ -16,11 +16,11 @@ export type CustomFeatures = {
   meme: {};
 };
 
+/** example only */
 export type MusicFeature = {
   message: string;
   channel?: string;
 
-  /** example only */
   role?: string;
   color?: string;
   count?: string;

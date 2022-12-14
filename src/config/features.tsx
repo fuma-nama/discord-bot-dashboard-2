@@ -3,9 +3,14 @@ import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
-import { useMusicFeature } from './forms/MusicFeature';
+import { useMusicFeature } from './example/MusicFeature';
 import { FeaturesConfig } from './types';
 
+/**
+ * Define information for each features
+ *
+ * There is an example:
+ */
 export const features: FeaturesConfig = {
   music: {
     name: 'Music Player',

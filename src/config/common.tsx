@@ -20,11 +20,12 @@ const OmagizeIcon = createIcon({
 });
 
 export const config: AppConfig = {
-  name: 'Omagize',
+  name: 'My Bot',
   icon: OmagizeIcon,
   inviteUrl:
     'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',
   guild: {
+    //filter guilds that user has no permissions to manage it
     filter: (guild) => (Number(guild.permissions) & PermissionFlags.ADMINISTRATOR) !== 0,
   },
 };

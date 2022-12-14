@@ -1,15 +1,21 @@
 import { SimpleGrid } from '@chakra-ui/layout';
 import { MusicFeature } from 'config/types';
-import { ChannelSelect } from '../example/ChannelSelect';
-import { RolesSelect } from '../example/RolesSelect';
+import { ChannelSelect } from './ChannelSelect';
+import { RolesSelect } from './RolesSelect';
 import { useFormRender } from 'hooks/forms/useForm';
-import { useMemo } from 'react';
 
+/**
+ * Used to configure a feature
+ *
+ * It renders a form
+ *
+ * @param data The current options of music feature
+ */
 export function useMusicFeature(data: MusicFeature) {
-  const base = useMemo(() => ({ ...data, count: '2' }), [data]);
-
   return useFormRender<Partial<MusicFeature>>({
-    defaultValue: base,
+    //we will use current options as the default vlaue
+    defaultValue: data,
+    //verify values
     verify: (v, errors) => {
       if (v.message != null && v.message.trim().length === 0) {
         errors.message = "Message can't be emtpy or blank";
@@ -17,13 +23,16 @@ export function useMusicFeature(data: MusicFeature) {
 
       if (v.count === '0') errors.count = "Can't be 0";
     },
+    //define container component
     container: (f) => (
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={3}>
         {f}
       </SimpleGrid>
     ),
+    //render form inputs
     render: ({ value, update, errors, ...form }) => [
       {
+        //memorize values and errors for better performance
         defaultMemorize: ['value', 'error'],
       },
       {
