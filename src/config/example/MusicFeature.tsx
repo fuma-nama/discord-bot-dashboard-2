@@ -64,18 +64,18 @@ export function useMusicFeature(data: MusicFeature) {
         onChange: (color) => update({ color }),
       },
       {
-        type: 'color',
-        label: 'Role Color',
-        description: 'Pick a color',
-        value: value.color,
-        onChange: (color) => update({ color }),
-      },
-      {
         type: 'small-date',
         label: 'Date',
         description: 'Select a date',
         value: value.date,
         onChange: (date: Date) => update({ date }),
+      },
+      {
+        type: 'color',
+        label: 'Role Color',
+        description: 'Pick a color',
+        value: value.color,
+        onChange: (color) => update({ color }),
       },
       {
         type: 'date',

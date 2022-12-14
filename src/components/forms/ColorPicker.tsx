@@ -1,5 +1,6 @@
 import {
   Box,
+  Center,
   Flex,
   Input,
   InputGroup,
@@ -9,11 +10,13 @@ import {
   PopoverContent,
   PopoverTrigger,
   SimpleGrid,
+  Text,
 } from '@chakra-ui/react';
 import { HexAlphaColorPicker, HexColorInput, HexColorPicker } from 'react-colorful';
 import { ColorPickerBaseProps } from 'react-colorful/dist/types';
 import { FormComponentProps, FormControlCard } from './Form';
 import { useDebouncedCallback } from 'use-debounce';
+import { useColors } from 'theme';
 
 export type ColorPickerProps = {
   /**
@@ -60,13 +63,20 @@ export function SmallColorPickerForm({
 }
 
 export function ColorPickerForm({ value, onChange, supportAlpha, ...props }: ColorPickerFormProps) {
+  const { textColorSecondary } = useColors();
   const onChangeDebounced = useDebouncedCallback((value: string) => onChange(value), 100);
 
   return (
     <FormControlCard {...props}>
       <SimpleGrid minChildWidth="200px" gap={2}>
         <Flex direction="column" gap={3}>
-          <Box minH="150px" rounded="xl" bgColor={value} flex={1} />
+          <Center minH="150px" rounded="xl" bgColor={value ?? 'blackAlpha.200'} flex={1}>
+            {value == null && (
+              <Text fontSize="sm" color={textColorSecondary}>
+                No Color
+              </Text>
+            )}
+          </Center>
           <Input
             mt="auto"
             as={HexColorInput}
