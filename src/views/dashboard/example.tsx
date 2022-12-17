@@ -1,17 +1,30 @@
 import { ChevronLeftIcon, ChevronRightIcon, ViewIcon } from '@chakra-ui/icons';
-import { Center, Circle, Flex, Grid, HStack, Link, Spacer, Text } from '@chakra-ui/layout';
+import {
+  Box,
+  Center,
+  Circle,
+  Flex,
+  Grid,
+  Heading,
+  HStack,
+  Link,
+  Spacer,
+  Text,
+} from '@chakra-ui/layout';
 import {
   Avatar,
   Button,
   Card,
   CardBody,
   CardHeader,
+  getToken,
   Hide,
   Icon,
   IconButton,
   Image,
   Progress,
   Show,
+  useToken,
 } from '@chakra-ui/react';
 import { config } from 'config/common';
 import { BsMusicNoteBeamed, BsPlay, BsPlayBtn, BsShareFill } from 'react-icons/bs';
@@ -19,9 +32,11 @@ import { FaRobot } from 'react-icons/fa';
 import { MdVoiceChat } from 'react-icons/md';
 import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
+import Chart from 'react-apexcharts';
+import { IoPricetag } from 'react-icons/io5';
 
 export function ExampleDashboardView() {
-  const { globalBg } = useColors();
+  const { globalBg, textColorSecondary } = useColors();
 
   return (
     <Flex direction="column" gap={5}>
@@ -54,7 +69,6 @@ export function ExampleDashboardView() {
             <Circle p={4} bg={globalBg}>
               <Icon as={BsMusicNoteBeamed} w="80px" h="80px" />
             </Circle>
-
             <Text fontWeight="600">Create a voice channel</Text>
           </CardBody>
         </Card>
@@ -67,7 +81,112 @@ export function ExampleDashboardView() {
           <VoiceChannelItem />
         </Flex>
       </Grid>
+      <Flex direction="column" p={3}>
+        <Box w="fit-content">
+          <Heading>Command Usage</Heading>
+          <Text color={textColorSecondary}>Use of commands of your server</Text>
+          <Button mt={2} leftIcon={<IoPricetag />}>
+            Pricing
+          </Button>
+        </Box>
+        <TestChart />
+      </Flex>
     </Flex>
+  );
+}
+
+function TestChart() {
+  const { theme, ...colors } = useColorsExtend({ theme: 'light' }, { theme: 'dark' });
+  const [textColorPrimary, textColorSecondary] = useToken('colors', [
+    colors.textColorPrimary,
+    colors.textColorSecondary,
+  ]);
+
+  return (
+    <Box
+      sx={{
+        '.tooltip': {
+          bg: colors.cardBg,
+        },
+      }}
+    >
+      <Chart
+        options={{
+          chart: {
+            toolbar: {
+              show: false,
+            },
+            dropShadow: {
+              enabled: true,
+              top: 13,
+              left: 0,
+              blur: 10,
+              opacity: 0.1,
+              color: '#4318FF',
+            },
+          },
+          tooltip: {
+            theme: theme,
+          },
+          colors: ['#4318FF', '#39B8FF'],
+          markers: {
+            size: 0,
+            colors: textColorPrimary,
+            strokeColors: '#7551FF',
+            strokeWidth: 3,
+            strokeOpacity: 0.9,
+            strokeDashArray: 0,
+            fillOpacity: 1,
+            discrete: [],
+            shape: 'circle',
+            radius: 2,
+            offsetX: 0,
+            offsetY: 0,
+            showNullDataPoints: true,
+          },
+          stroke: {
+            curve: 'smooth',
+          },
+          legend: {
+            labels: {
+              colors: textColorSecondary,
+            },
+          },
+          grid: {
+            show: false,
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors: textColorSecondary,
+              },
+            },
+          },
+          xaxis: {
+            categories: ['SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB'],
+            labels: {
+              style: {
+                colors: textColorSecondary,
+                fontSize: '12px',
+                fontWeight: '500',
+              },
+            },
+          },
+        }}
+        series={[
+          {
+            name: 'Paid',
+            data: [50, 64, 48, 66, 49, 68],
+          },
+          {
+            name: 'Free Usage',
+            data: [30, 40, 24, 46, 20, 46],
+          },
+        ]}
+        type="line"
+        height="300"
+      />
+    </Box>
   );
 }
 

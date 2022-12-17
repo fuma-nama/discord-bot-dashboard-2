@@ -30,7 +30,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.36.1
   '@vitejs/plugin-react': ^3.0.0
   '@vitest/ui': ^0.9.3
-  apexcharts: ^3.35.2
+  apexcharts: ^3.36.3
   chakra-react-select: ^4.4.2
   core-js: ^3.6.5
   emotion-theming: ^10.0.0
