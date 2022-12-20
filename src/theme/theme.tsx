@@ -8,7 +8,6 @@ import { textareaStyles } from './components/textarea';
 import { switchStyles } from './components/switch';
 import { linkStyles } from './components/link';
 import { breakpoints } from './breakpoints';
-import { globalStyles } from './styles';
 import { modalStyles } from './components/modal';
 import { avatarStyles } from './components/avatar';
 import { menuTheme } from './components/menu';
@@ -16,9 +15,11 @@ import { pinInputTheme } from './components/pin-input';
 import { skeletonStyles } from './components/skeleton';
 import { tabsStyles } from './components/tabs';
 import { cardStyles } from './components/card';
+import { textStyles } from './components/text';
+import { globalStyles } from './styles';
+import { colors } from './colors';
 
 export const theme = extendTheme(
-  globalStyles,
   badgeStyles, // badge styles
   buttonStyles, // button styles
   linkStyles, // link styles
@@ -29,6 +30,10 @@ export const theme = extendTheme(
   menuTheme,
   {
     breakpoints,
+    colors,
+    styles: {
+      global: globalStyles,
+    },
     components: {
       Input: inputStyles,
       PinInput: pinInputTheme,
@@ -37,6 +42,7 @@ export const theme = extendTheme(
       Tabs: tabsStyles,
       Card: cardStyles,
       Progress: progressStyles,
+      Text: textStyles,
     },
   }
 );
