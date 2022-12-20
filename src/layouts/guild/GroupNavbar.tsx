@@ -5,6 +5,8 @@ import { iconUrl } from 'api/discord';
 import { NavbarBox } from 'components/navbar/Navbar';
 import { NavbarDefaultItems, NavbarLinksBox } from 'components/navbar/NavbarItems';
 import { useGuildPreview, useSelectedGuild } from 'stores';
+import { motion } from 'framer-motion';
+import { ReactElement } from 'react';
 import { show } from 'theme';
 
 export function GroupNavbar({ back }: { back?: boolean }) {
@@ -12,16 +14,16 @@ export function GroupNavbar({ back }: { back?: boolean }) {
   const { guild } = useGuildPreview(selected);
 
   return (
-    <NavbarBox bar={{ direction: 'row' }}>
+    <NavbarBox>
       <HStack cursor="pointer" onClick={() => setSelected(selected)}>
-        {back && (
+        <HorizontalCollapse in={back}>
           <IconButton
             display={{ [show.sidebar]: 'none' }}
             aria-label="back"
             icon={<ChevronLeftIcon />}
             onClick={() => setSelected(selected)}
           />
-        )}
+        </HorizontalCollapse>
         {guild == null ? <SkeletonCircle /> : <Avatar name={guild?.name} src={iconUrl(guild)} />}
         <Text fontWeight="600">{guild?.name}</Text>
       </HStack>
@@ -29,5 +31,27 @@ export function GroupNavbar({ back }: { back?: boolean }) {
         <NavbarDefaultItems />
       </NavbarLinksBox>
     </NavbarBox>
+  );
+}
+
+export function HorizontalCollapse({
+  in: isOpen,
+  children,
+}: {
+  in: boolean;
+  children: ReactElement;
+}) {
+  return (
+    <motion.section
+      animate={isOpen ? 'open' : 'collapsed'}
+      exit="collapsed"
+      variants={{
+        open: { opacity: 1, width: 'auto' },
+        collapsed: { opacity: 0, width: 0 },
+      }}
+      transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+    >
+      {children}
+    </motion.section>
   );
 }

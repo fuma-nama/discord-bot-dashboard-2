@@ -6,7 +6,7 @@ import { getFeatures, IdFeature } from 'config/utils';
 import { IoSettings } from 'react-icons/io5';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGuildPreview, useSelectedGuild } from 'stores';
-import { useColors } from 'theme';
+import { show, useColors } from 'theme';
 
 export function InGuildSidebar() {
   const { selected } = useSelectedGuild();
@@ -15,32 +15,33 @@ export function InGuildSidebar() {
   const { guild } = useGuildPreview(selected);
 
   return (
-    <>
-      <Flex direction="column" gap={2} p={3}>
-        <HStack cursor="pointer" mb={2} onClick={() => navigate(`/guilds/${selected}`)}>
-          <IconButton icon={<ChevronLeftIcon />} aria-label="back" />
-          <Text fontSize="lg" fontWeight="600">
-            {guild?.name}
-          </Text>
-        </HStack>
-        <CardItem
-          active={location.pathname === `/guilds/${selected}/settings`}
-          onClick={() => navigate(`/guilds/${selected}/settings`)}
-        >
-          <IoSettings />
-          <Text fontSize="lg" fontWeight="600">
-            Settings
-          </Text>
-        </CardItem>
-        <VStack align="stretch">
-          <HSeparator>Features</HSeparator>
-          {getFeatures().map((feature) => (
-            <FeatureItem key={feature.id} feature={feature} />
-          ))}
-        </VStack>
-      </Flex>
-      <Spacer />
-    </>
+    <Flex direction="column" gap={2} p={3}>
+      <HStack cursor="pointer" mb={2} onClick={() => navigate(`/guilds/${selected}`)}>
+        <IconButton
+          display={{ base: 'none', [show.sidebar]: 'block' }}
+          icon={<ChevronLeftIcon />}
+          aria-label="back"
+        />
+        <Text fontSize="lg" fontWeight="600">
+          {guild?.name}
+        </Text>
+      </HStack>
+      <CardItem
+        active={location.pathname === `/guilds/${selected}/settings`}
+        onClick={() => navigate(`/guilds/${selected}/settings`)}
+      >
+        <IoSettings />
+        <Text fontSize="lg" fontWeight="600">
+          Settings
+        </Text>
+      </CardItem>
+      <VStack align="stretch">
+        <HSeparator>Features</HSeparator>
+        {getFeatures().map((feature) => (
+          <FeatureItem key={feature.id} feature={feature} />
+        ))}
+      </VStack>
+    </Flex>
   );
 }
 
