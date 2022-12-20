@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Flex, HStack, Spacer, StackProps, Text, VStack } from '@chakra-ui/layout';
+import { Flex, HStack, StackProps, Text, VStack } from '@chakra-ui/layout';
 import { IconButton } from '@chakra-ui/react';
 import { HSeparator } from 'components/layout/Separator';
 import { getFeatures, IdFeature } from 'config/utils';

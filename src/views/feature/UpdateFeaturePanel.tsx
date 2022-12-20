@@ -37,6 +37,7 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
   const { guild, feature } = useParams<Params>();
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
+  const breakpoint = '3sm';
 
   const onSave = () => {
     //prevent submit if returns true
@@ -60,13 +61,12 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
       in={canSave}
       bg={cardBg}
       rounded="3xl"
+      zIndex="sticky"
       pos="sticky"
       bottom={2}
       w="full"
-      px={5}
-      py={3}
+      p={{ base: 1, [breakpoint]: '15px' }}
       mt={2}
-      zIndex={3}
     >
       <WarningIcon
         _light={{ color: 'orange.400' }}
@@ -74,11 +74,11 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
         w="30px"
         h="30px"
       />
-      <Text fontSize="lg" fontWeight="500">
+      <Text fontSize={{ base: 'md', [breakpoint]: 'lg' }} fontWeight="500">
         Save changes
       </Text>
       <Spacer />
-      <ButtonGroup isDisabled={mutation.isLoading}>
+      <ButtonGroup isDisabled={mutation.isLoading} size={{ base: 'sm', [breakpoint]: 'md' }}>
         <Button
           variant="brand"
           leftIcon={<IoSave />}
