@@ -83,11 +83,15 @@ export function NavbarBox({ bar, children }: { bar?: FlexProps; children: ReactN
       backdropFilter={navbarBackdrop}
       borderRadius={{ [show.navbar]: '16px' }}
       lineHeight="25.6px"
-      px={{
+      pl={{
         base: '15px',
-        md: '10px',
+        [show.navbar]: '10px',
       }}
-      py={{ base: '8px', [show.navbar]: '16px' }}
+      pr={{
+        base: '5px',
+        [show.navbar]: '10px',
+      }}
+      py={{ base: '3px', [show.navbar]: '8px' }}
       direction="row"
       gap={2}
       justify="space-between"

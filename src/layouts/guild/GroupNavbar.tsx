@@ -24,7 +24,15 @@ export function GroupNavbar({ back }: { back?: boolean }) {
             onClick={() => setSelected(selected)}
           />
         </HorizontalCollapse>
-        {guild == null ? <SkeletonCircle /> : <Avatar name={guild?.name} src={iconUrl(guild)} />}
+        {guild == null ? (
+          <SkeletonCircle />
+        ) : (
+          <Avatar
+            name={guild?.name}
+            src={iconUrl(guild)}
+            display={{ base: 'none', [show.navbar]: 'block' }}
+          />
+        )}
         <Text fontWeight="600">{guild?.name}</Text>
       </HStack>
       <NavbarLinksBox>
