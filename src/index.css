@@ -3,6 +3,8 @@
 
 body {
   font-family: 'DM Sans', 'Noto Color Emoji' !important;
+  min-width: 350px;
+  width: auto;
 }
 
 html,
