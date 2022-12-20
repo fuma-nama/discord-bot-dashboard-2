@@ -60,7 +60,7 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
-        <Text color={mainText} fontWeight="bold" fontSize="34px">
+        <Text color={mainText} fontWeight="bold" fontSize={{ base: '25px', '3sm': '34px' }}>
           {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>
@@ -116,17 +116,7 @@ export function NavbarBox({
       w="full"
       {...box}
     >
-      <Flex
-        w="100%"
-        direction={{
-          base: 'column',
-          '3sm': 'row',
-        }}
-        gap={2}
-        justify="space-between"
-        alignItems="stretch"
-        {...bar}
-      >
+      <Flex w="100%" direction="row" gap={2} justify="space-between" alignItems="stretch" {...bar}>
         {children}
       </Flex>
     </Box>

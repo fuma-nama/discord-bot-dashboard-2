@@ -8,3 +8,7 @@ export const breakpoints = {
   '2xl': '1600px',
   '3xl': '1920px',
 };
+
+export const show = {
+  sidebar: 'xl',
+};

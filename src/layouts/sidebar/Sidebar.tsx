@@ -15,6 +15,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SidebarItemInfo, useLayoutOverride } from 'utils/routeUtils';
 import { usePageStore } from 'stores';
 import { layouts } from 'layouts';
+import { show } from 'theme';
 
 export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
   const shadow = useColorModeValue('14px 17px 40px 4px rgba(112, 144, 176, 0.08)', 'unset');
@@ -25,7 +26,7 @@ export function Sidebar({ items }: { items: SidebarItemInfo[] }) {
 
   // SIDEBAR
   return (
-    <Box display={{ base: 'none', xl: 'block' }} minH="100%">
+    <Box display={{ base: 'none', [show.sidebar]: 'block' }} minH="100%">
       <Box
         bg={sidebarBg}
         w="300px"

@@ -1,13 +1,14 @@
 import { Flex, Icon, useColorModeValue } from '@chakra-ui/react';
 import { IoMenuOutline } from 'react-icons/io5';
 import { usePageStore } from 'stores';
+import { show } from 'theme';
 
 export function SidebarTrigger() {
   const menuColor = useColorModeValue('gray.400', 'white');
   const setOpen = usePageStore((s) => s.setSidebarIsOpen);
 
   return (
-    <Flex display={{ sm: 'flex', xl: 'none' }} alignItems="center">
+    <Flex display={{ base: 'flex', [show.sidebar]: 'none' }} alignItems="center">
       <Flex w="max-content" h="max-content" onClick={() => setOpen(true)}>
         <Icon
           as={IoMenuOutline}
