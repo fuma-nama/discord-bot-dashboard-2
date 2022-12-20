@@ -57,8 +57,8 @@ export function ExampleDashboardView() {
         </Flex>
       </HStack>
       <Flex direction="column" gap={2} mt={3}>
-        <Heading size="lg">Music Player</Heading>
-        <Text variant="secondary">Play your favoite songs in Voice Channels</Text>
+        <Heading size="md">Music Player</Heading>
+        <Text variant="secondary">Play Your Favoite songs in Voice channels</Text>
         <MusicPlayer />
       </Flex>
       <Grid templateColumns={{ base: '1fr', lg: '0.5fr 1fr' }} gap={3}>
@@ -158,7 +158,7 @@ function MusicPlayer() {
         </Hide>
 
         <Flex direction="column" bg={cardBg} rounded="xl" gap={3} p={3} flex={1}>
-          <HStack color={textColorSecondary}>
+          <HStack color={textColorSecondary} display={{ base: 'none', md: 'flex' }}>
             <BsPlayBtn />
             <Text>Now Playing</Text>
           </HStack>
