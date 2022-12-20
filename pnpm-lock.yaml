@@ -33,6 +33,7 @@ specifiers:
   apexcharts: ^3.36.3
   chakra-react-select: ^4.4.2
   core-js: ^3.6.5
+  deepmerge-ts: ^4.2.2
   emotion-theming: ^10.0.0
   eslint: ^8.0.0
   eslint-config-prettier: 8.1.0
@@ -85,6 +86,7 @@ dependencies:
   apexcharts: 3.36.3
   chakra-react-select: 4.4.2_dpiagdowermhv4bfodweup4num
   core-js: 3.26.1
+  deepmerge-ts: 4.2.2
   emotion-theming: 10.3.0_53jusob2jhmevmsrhkvbpx2hvm
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -2938,6 +2940,11 @@ packages:
   /deep-is/0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
     dev: true
+
+  /deepmerge-ts/4.2.2:
+    resolution: {integrity: sha512-Ka3Kb21tiWjvQvS9U+1Dx+aqFAHsdTnMdYptLTmC2VAmDFMugWMY1e15aTODstipmCun8iNuqeSfcx6rsUUk0Q==}
+    engines: {node: '>=12.4.0'}
+    dev: false
 
   /define-properties/1.1.4:
     resolution: {integrity: sha512-uckOqKcfaVvtBdsVkdPv3XjveQJsNQqmhXgRi8uhvWWuPYZCNlzT8qAyblUgNoXdHdjMTzAqeGjAoli8f+bzPA==}

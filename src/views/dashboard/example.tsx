@@ -17,7 +17,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  getToken,
   Hide,
   Icon,
   IconButton,
@@ -32,8 +31,8 @@ import { FaRobot } from 'react-icons/fa';
 import { MdVoiceChat } from 'react-icons/md';
 import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
-import Chart from 'react-apexcharts';
 import { IoPricetag } from 'react-icons/io5';
+import { StyledChart } from 'components/chart/StyledChart';
 
 export function ExampleDashboardView() {
   const { globalBg, textColorSecondary } = useColors();
@@ -96,82 +95,25 @@ export function ExampleDashboardView() {
 }
 
 function TestChart() {
-  const { theme, ...colors } = useColorsExtend({ theme: 'light' }, { theme: 'dark' });
-  const [textColorPrimary, textColorSecondary] = useToken('colors', [
-    colors.textColorPrimary,
-    colors.textColorSecondary,
-  ]);
+  const responsive: ApexResponsive = {
+    breakpoint: 500,
+    options: {
+      chart: {
+        width: '100%',
+        height: 'auto',
+      },
+    },
+  };
 
   return (
-    <Box
-      sx={{
-        '.tooltip': {
-          bg: colors.cardBg,
-        },
-      }}
-    >
-      <Chart
+    <Grid templateColumns={{ base: '1fr', lg: '1fr 0.5fr' }}>
+      <StyledChart
         options={{
-          chart: {
-            toolbar: {
-              show: false,
-            },
-            dropShadow: {
-              enabled: true,
-              top: 13,
-              left: 0,
-              blur: 10,
-              opacity: 0.1,
-              color: '#4318FF',
-            },
-          },
-          tooltip: {
-            theme: theme,
-          },
           colors: ['#4318FF', '#39B8FF'],
-          markers: {
-            size: 0,
-            colors: textColorPrimary,
-            strokeColors: '#7551FF',
-            strokeWidth: 3,
-            strokeOpacity: 0.9,
-            strokeDashArray: 0,
-            fillOpacity: 1,
-            discrete: [],
-            shape: 'circle',
-            radius: 2,
-            offsetX: 0,
-            offsetY: 0,
-            showNullDataPoints: true,
-          },
-          stroke: {
-            curve: 'smooth',
-          },
-          legend: {
-            labels: {
-              colors: textColorSecondary,
-            },
-          },
-          grid: {
-            show: false,
-          },
-          yaxis: {
-            labels: {
-              style: {
-                colors: textColorSecondary,
-              },
-            },
-          },
           xaxis: {
             categories: ['SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB'],
-            labels: {
-              style: {
-                colors: textColorSecondary,
-                fontSize: '12px',
-                fontWeight: '500',
-              },
-            },
           },
+          responsive: [responsive],
         }}
         series={[
           {
@@ -183,10 +125,20 @@ function TestChart() {
             data: [30, 40, 24, 46, 20, 46],
           },
         ]}
-        type="line"
         height="300"
+        type="line"
       />
-    </Box>
+      <StyledChart
+        options={{
+          colors: ['#4318FF', '#39B8FF'],
+          labels: ['Paid', 'Free Usage'],
+          responsive: [responsive],
+        }}
+        series={[30, 1000]}
+        type="pie"
+        width="400"
+      />
+    </Grid>
   );
 }
 
