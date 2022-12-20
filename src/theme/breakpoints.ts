@@ -11,4 +11,5 @@ export const breakpoints = {
 
 export const show = {
   sidebar: 'xl',
+  navbar: '3sm',
 };

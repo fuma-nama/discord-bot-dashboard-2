@@ -44,11 +44,13 @@ export const layouts: RootLayout[] = [
           {
             path: 'features/:feature',
             component: <FeatureView />,
+            navbar: <GroupNavbar back />,
             sidebar: <InGuildSidebar />,
           },
           {
             path: 'settings',
             component: <GuildSettingsView />,
+            navbar: <GroupNavbar back />,
             sidebar: <InGuildSidebar />,
           },
         ],
