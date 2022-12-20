@@ -3,15 +3,7 @@ import { Flex, FlexProps } from '@chakra-ui/react';
 import { UserMenu } from 'components/menu/UserMenu';
 import { SidebarTrigger } from 'components/SidebarTrigger';
 import { ThemeSwitch } from 'components/ThemeSwitch';
-import { useNavbarColors } from 'theme';
-
-export default function AdminNavbarLinks() {
-  return (
-    <NavbarLinksBox>
-      <NavbarDefaultItems />
-    </NavbarLinksBox>
-  );
-}
+import { useColorsExtend } from 'theme';
 
 export function NavbarDefaultItems() {
   const { iconColor, textColorPrimary, menuBg, shadow } = useNavbarColors();
@@ -40,5 +32,18 @@ export function NavbarLinksBox(props: FlexProps) {
       boxShadow={shadow}
       {...props}
     />
+  );
+}
+
+export function useNavbarColors() {
+  return useColorsExtend(
+    {
+      textColorBrand: 'brand.700',
+      iconColor: 'gray.400',
+    },
+    {
+      textColorBrand: 'brand.400',
+      iconColor: 'white',
+    }
   );
 }

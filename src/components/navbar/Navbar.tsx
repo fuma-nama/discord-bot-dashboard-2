@@ -14,7 +14,7 @@ import {
 import { useLocation, Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 import { getActiveSidebarItem } from 'utils/routeUtils';
-import AdminNavbarLinks from './NavbarItems';
+import { NavbarDefaultItems, NavbarLinksBox } from './NavbarItems';
 import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
 import { ChevronRightIcon } from '@chakra-ui/icons';
@@ -64,7 +64,11 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
           {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>
-      {children ?? <AdminNavbarLinks />}
+      {children ?? (
+        <NavbarLinksBox>
+          <NavbarDefaultItems />
+        </NavbarLinksBox>
+      )}
     </NavbarBox>
   );
 }

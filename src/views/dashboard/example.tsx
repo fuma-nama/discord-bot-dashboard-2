@@ -35,7 +35,7 @@ import { IoPricetag } from 'react-icons/io5';
 import { StyledChart } from 'components/chart/StyledChart';
 
 export function ExampleDashboardView() {
-  const { globalBg, textColorSecondary } = useColors();
+  const { globalBg } = useColors();
 
   return (
     <Flex direction="column" gap={5}>
@@ -57,9 +57,8 @@ export function ExampleDashboardView() {
         </Flex>
       </HStack>
       <Flex direction="column" gap={2} mt={3}>
-        <Text fontSize="xl" fontWeight="600">
-          Music Time
-        </Text>
+        <Heading size="lg">Music Player</Heading>
+        <Text variant="secondary">Play your favoite songs in Voice Channels</Text>
         <MusicPlayer />
       </Flex>
       <Grid templateColumns={{ base: '1fr', lg: '0.5fr 1fr' }} gap={3}>
@@ -82,8 +81,8 @@ export function ExampleDashboardView() {
       </Grid>
       <Flex direction="column" p={3}>
         <Box w="fit-content">
-          <Heading>Command Usage</Heading>
-          <Text color={textColorSecondary}>Use of commands of your server</Text>
+          <Heading size="lg">Command Usage</Heading>
+          <Text variant="secondary">Use of commands of your server</Text>
           <Button mt={2} leftIcon={<IoPricetag />}>
             Pricing
           </Button>
