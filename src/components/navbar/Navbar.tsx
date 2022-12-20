@@ -16,13 +16,18 @@ import { NavbarDefaultItems, NavbarLinksBox } from './NavbarItems';
 import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { show } from 'theme';
+import { show, useColorsExtend } from 'theme';
 
 export function DefaultNavbar({ children }: { children?: ReactNode }) {
   const activeItem = getActiveSidebarItem(items, useLocation());
-
-  const mainText = useColorModeValue('navy.700', 'white');
-  const linkColor = useColorModeValue('brand.400', 'cyan.200');
+  const { textColorPrimary, linkColor } = useColorsExtend(
+    {
+      linkColor: 'brand.400',
+    },
+    {
+      linkColor: 'cyan.200',
+    }
+  );
 
   const breadcrumb = [
     {
@@ -59,7 +64,7 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
-        <Text color={mainText} fontWeight="bold" fontSize={{ base: '25px', '3sm': '34px' }}>
+        <Text color={textColorPrimary} fontWeight="bold" fontSize={{ base: '25px', '3sm': '34px' }}>
           {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>
@@ -78,6 +83,7 @@ export function NavbarBox({ bar, children }: { bar?: FlexProps; children: ReactN
 
   return (
     <Flex
+      direction="row"
       mx="auto"
       bg={navbarBg}
       backdropFilter={navbarBackdrop}
@@ -92,7 +98,6 @@ export function NavbarBox({ bar, children }: { bar?: FlexProps; children: ReactN
         [show.navbar]: '10px',
       }}
       py={{ base: '3px', [show.navbar]: '8px' }}
-      direction="row"
       gap={2}
       justify="space-between"
       alignItems="stretch"
