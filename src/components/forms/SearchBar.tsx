@@ -8,12 +8,14 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
+import { common } from 'config/translations';
 export function SearchBar(
   props: {
     input?: InputProps;
     onSearch?: () => void;
   } & InputGroupProps
 ) {
+  const t = common.useTranslations();
   // Pass the computed styles into the `__css` prop
   const { input, onSearch, ...rest } = props;
   // Chakra Color Mode
@@ -41,7 +43,7 @@ export function SearchBar(
         fontWeight="500"
         _placeholder={{ color: 'gray.400', fontSize: '14px' }}
         borderRadius="30px"
-        placeholder="Search..."
+        placeholder={`${t.search}...`}
         onKeyDown={(e) => {
           if (e.key === 'Enter') onSearch();
         }}

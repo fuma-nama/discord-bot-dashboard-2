@@ -9,6 +9,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { UserInfo, avatarUrl } from 'api/discord';
+import { common } from 'config/translations';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from 'stores';
 import { useSelfUser } from 'stores';
@@ -35,6 +36,7 @@ export function UserMenu(props: { color: string; shadow: string; bg: string }) {
 }
 
 function List(props: { textColor: string; shadow: string; menuBg: string; user: UserInfo }) {
+  const t = common.useTranslations();
   const { menuBg, shadow, textColor, user } = props;
   const borderColor = useColorModeValue('#E6ECFA', 'rgba(135, 140, 189, 0.3)');
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ function List(props: { textColor: string; shadow: string; menuBg: string; user: 
           px="14px"
           onClick={() => navigate(`/user/profile`)}
         >
-          <Text fontSize="sm">Profile Settings</Text>
+          <Text fontSize="sm">{t.profile}</Text>
         </MenuItem>
         <MenuItem
           _hover={{ bg: 'none' }}
@@ -78,7 +80,7 @@ function List(props: { textColor: string; shadow: string; menuBg: string; user: 
           onClick={() => logout.mutate()}
           px="14px"
         >
-          <Text fontSize="sm">Log out</Text>
+          <Text fontSize="sm">{t.logout}</Text>
         </MenuItem>
       </Flex>
     </MenuList>
