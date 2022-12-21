@@ -64,7 +64,12 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
-        <Text color={textColorPrimary} fontWeight="bold" fontSize={{ base: '25px', '3sm': '34px' }}>
+        <Text
+          color={textColorPrimary}
+          fontWeight="bold"
+          fontSize={{ base: '25px', '3sm': '34px' }}
+          mb={2}
+        >
           {activeItem?.name || <SkeletonText w="full" noOfLines={2} />}
         </Text>
       </Flex>

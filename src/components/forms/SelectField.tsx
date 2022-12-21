@@ -72,7 +72,7 @@ const styles: ChakraStylesConfig<any, any, any> = {
     ...provided,
     rounded: '2xl',
     _light: {
-      borderColor: data.isFocused ? light.brand : 'secondaryGray.400',
+      borderColor: data.isFocused ? light.brand : 'secondaryGray.500',
     },
     _dark: {
       borderColor: data.isFocused ? dark.brand : 'navy.600',

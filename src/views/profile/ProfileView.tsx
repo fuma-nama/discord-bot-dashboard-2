@@ -3,7 +3,7 @@ import { Avatar, Button, Card, CardBody, CardHeader, Image, useColorMode } from 
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SwitchField } from 'components/forms/SwitchField';
 import { IoLogOut } from 'react-icons/io5';
-import { useLogoutMutation, usePageStore, useSelfUser } from 'stores';
+import { useLogoutMutation, useSettingsStore, useSelfUser } from 'stores';
 import { useColors } from 'theme';
 
 /**
@@ -13,7 +13,7 @@ export function ProfileView() {
   const user = useSelfUser();
   const { cardBg } = useColors();
   const { colorMode, setColorMode } = useColorMode();
-  const [devMode, setDevMode] = usePageStore((s) => [s.devMode, s.setDevMode]);
+  const [devMode, setDevMode] = useSettingsStore((s) => [s.devMode, s.setDevMode]);
   const logout = useLogoutMutation();
 
   return (
