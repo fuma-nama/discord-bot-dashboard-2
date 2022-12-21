@@ -7,14 +7,17 @@ import { useColors } from 'theme';
 import { HomeView } from 'views/home/HomeView';
 import CloudSvg from 'assets/Cloud.svg';
 import { bot } from 'api/bot';
+import { auth } from 'config/translations';
 
 export function LoginView() {
+  const t = auth.useTranslations();
+
   return (
     <AuthLayout>
       <FormControl>
-        <FormLabel>Login to your Discord Account</FormLabel>
+        <FormLabel children={t['login description']} />
         <a href={`${bot}/login`} target="_self">
-          <Button leftIcon={<BsDiscord />}>Login</Button>
+          <Button leftIcon={<BsDiscord />} children={t.login} />
         </a>
       </FormControl>
     </AuthLayout>
@@ -22,6 +25,7 @@ export function LoginView() {
 }
 
 function AuthLayout({ children }: { children: ReactNode }) {
+  const t = auth.useTranslations();
   const { globalBg, brand } = useColors();
 
   return (
@@ -40,9 +44,7 @@ function AuthLayout({ children }: { children: ReactNode }) {
         gap={4}
         py={10}
       >
-        <Heading color="white" fontSize="9xl">
-          Login
-        </Heading>
+        <Heading color="white" fontSize="8xl" children={t.login} />
         <Box pos="relative" p={10} bg={globalBg} rounded="lg">
           {children}
         </Box>

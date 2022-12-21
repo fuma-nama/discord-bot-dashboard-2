@@ -29,6 +29,10 @@ const en = {
     'auto moderator description': 'Keep your server safe and clean',
     'trusted by': ['Trusted by ', ' servers'],
   },
+  auth: {
+    login: 'Login',
+    'login description': 'Login to your Discord Account',
+  },
 };
 
 const cn: typeof en = {
@@ -45,6 +49,10 @@ const cn: typeof en = {
     'auto moderator description': '確保您的服務器安全免受襲擊',
     'trusted by': ['受到', '個服務器的信任'],
   },
+  auth: {
+    login: '登錄',
+    'login description': '登錄您的 Discord 帳戶',
+  },
 };
 
 export const common = createI18n<typeof en['common']>(provider, {
@@ -55,4 +63,9 @@ export const common = createI18n<typeof en['common']>(provider, {
 export const home = createI18n<typeof en['home']>(provider, {
   cn: cn.home,
   en: en.home,
+});
+
+export const auth = createI18n<typeof en['auth']>(provider, {
+  cn: cn.auth,
+  en: en.auth,
 });
