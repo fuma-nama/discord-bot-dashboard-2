@@ -1,6 +1,7 @@
 import { Center, Heading, Link, Text, VStack } from '@chakra-ui/layout';
 import { Button, Card, CardFooter, CardHeader, Icon } from '@chakra-ui/react';
 import { config } from 'config/common';
+import { dashboard } from 'config/translations';
 import { FaRobot } from 'react-icons/fa';
 import { IoOpen } from 'react-icons/io5';
 import { useSelfUser } from 'stores';
@@ -8,6 +9,7 @@ import { useColors } from 'theme';
 import { ExampleDashboardView } from './example';
 
 export function DashboardView() {
+  const t = dashboard.useTranslations();
   const { brand } = useColors();
   const user = useSelfUser();
 
@@ -17,7 +19,7 @@ export function DashboardView() {
   return (
     <Center h="full" flexDirection="column" textAlign="center" p={3}>
       <Heading size={{ base: 'md', '3sm': 'lg' }}>
-        Welcome back,{' '}
+        {t.welcome}
         <Text as="span" color={brand}>
           {user.username}
         </Text>
@@ -25,7 +27,7 @@ export function DashboardView() {
       <Card rounded="2xl" p={10} pb={5}>
         <CardHeader as={VStack}>
           <Icon as={FaRobot} w="60px" h="60px" />
-          <Text>Invite our Bot Now!</Text>
+          <Text>{t.invite.title}</Text>
         </CardHeader>
         <CardFooter>
           <Button
@@ -36,7 +38,7 @@ export function DashboardView() {
             variant="action"
             target="_blank"
           >
-            Invite
+            {t.invite.bn}
           </Button>
         </CardFooter>
       </Card>

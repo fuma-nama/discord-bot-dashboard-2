@@ -1,24 +1,18 @@
-import { SettingsIcon } from '@chakra-ui/icons';
 import { Icon } from '@chakra-ui/react';
+import { common } from 'config/translations';
 import { MdPerson, MdDashboard } from 'react-icons/md';
 import { SidebarItemInfo } from 'utils/routeUtils';
 
 const items: SidebarItemInfo[] = [
   {
-    name: 'Dashboard',
+    name: <common.T text="dashboard" />,
     path: '/user/home',
     icon: <Icon as={MdDashboard} width="20px" height="20px" color="inherit" />,
   },
   {
-    name: 'Profile',
+    name: <common.T text="profile" />,
     path: '/user/profile',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-  },
-  {
-    name: 'Settings',
-    path: '/user/settings',
-    icon: <Icon as={SettingsIcon} width="20px" height="20px" color="inherit" />,
-    hidden: true,
   },
 ];
 

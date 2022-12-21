@@ -91,7 +91,7 @@ export type RootLayout = NormalLayout & {
 };
 
 export interface SidebarItemInfo {
-  name: string;
+  name: ReactNode;
   icon?: JSX.Element;
   path: string;
   hidden?: boolean;

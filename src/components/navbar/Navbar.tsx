@@ -17,6 +17,7 @@ import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { show, useColorsExtend } from 'theme';
+import { common } from 'config/translations';
 
 export function DefaultNavbar({ children }: { children?: ReactNode }) {
   const activeItem = getActiveSidebarItem(items, useLocation());
@@ -32,7 +33,7 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
   const breadcrumb = [
     {
       icon: <IoHome />,
-      text: 'Pages',
+      text: <common.T text="pages" />,
       to: '/user/home',
     },
   ];
@@ -40,7 +41,7 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
   if (activeItem != null)
     breadcrumb.push({
       icon: activeItem.icon,
-      text: activeItem.name,
+      text: <>{activeItem.name}</>,
       to: activeItem.path,
     });
 

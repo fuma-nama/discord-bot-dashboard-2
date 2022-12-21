@@ -23,7 +23,6 @@ import {
   Image,
   Progress,
   Show,
-  useToken,
 } from '@chakra-ui/react';
 import { config } from 'config/common';
 import { BsMusicNoteBeamed, BsPlay, BsPlayBtn, BsShareFill } from 'react-icons/bs';
@@ -33,8 +32,10 @@ import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 import { IoPricetag } from 'react-icons/io5';
 import { StyledChart } from 'components/chart/StyledChart';
+import { dashboard } from 'config/translations';
 
 export function ExampleDashboardView() {
+  const t = dashboard.useTranslations();
   const { globalBg } = useColors();
 
   return (
@@ -48,17 +49,17 @@ export function ExampleDashboardView() {
 
         <Flex direction="column" align="start" gap={1}>
           <Text color="white" fontSize="2xl" fontWeight="bold">
-            Invite our Bot
+            {t.invite.title}
           </Text>
-          <Text color="whiteAlpha.800">Try our discord bot with one-click</Text>
+          <Text color="whiteAlpha.800">{t.invite.description}</Text>
           <Button mt={3} as={Link} href={config.inviteUrl}>
-            Invite now
+            {t.invite.bn}
           </Button>
         </Flex>
       </HStack>
       <Flex direction="column" gap={2} mt={3}>
-        <Heading size="md">Music Player</Heading>
-        <Text variant="secondary">Play Your Favoite songs in Voice channels</Text>
+        <Heading size="md">{t.music.title}</Heading>
+        <Text variant="secondary">{t.music.description}</Text>
         <MusicPlayer />
       </Flex>
       <Grid templateColumns={{ base: '1fr', lg: '0.5fr 1fr' }} gap={3}>
@@ -67,12 +68,12 @@ export function ExampleDashboardView() {
             <Circle p={4} bg={globalBg}>
               <Icon as={BsMusicNoteBeamed} w="80px" h="80px" />
             </Circle>
-            <Text fontWeight="600">Create a voice channel</Text>
+            <Text fontWeight="600">{t.vc.create}</Text>
           </CardBody>
         </Card>
         <Flex direction="column" gap={3}>
           <Text fontSize="xl" fontWeight="600">
-            Created Voice channels
+            {t.vc['created channels']}
           </Text>
           <VoiceChannelItem />
           <VoiceChannelItem />
@@ -81,10 +82,10 @@ export function ExampleDashboardView() {
       </Grid>
       <Flex direction="column" p={3}>
         <Box w="fit-content">
-          <Heading size="lg">Command Usage</Heading>
-          <Text variant="secondary">Use of commands of your server</Text>
+          <Heading size="lg">{t.command.title}</Heading>
+          <Text variant="secondary">{t.command.description}</Text>
           <Button mt={2} leftIcon={<IoPricetag />}>
-            Pricing
+            {t.pricing}
           </Button>
         </Box>
         <TestChart />
@@ -142,6 +143,7 @@ function TestChart() {
 }
 
 function MusicPlayer() {
+  const t = dashboard.useTranslations();
   const { cardBg, textColorSecondary, brand } = useColors();
 
   return (
@@ -160,7 +162,7 @@ function MusicPlayer() {
         <Flex direction="column" bg={cardBg} rounded="xl" gap={3} p={3} flex={1}>
           <HStack color={textColorSecondary} display={{ base: 'none', md: 'flex' }}>
             <BsPlayBtn />
-            <Text>Now Playing</Text>
+            <Text>{t.music['now playing']}</Text>
           </HStack>
           <HStack>
             <Avatar name="Stay with me" size="sm" />
