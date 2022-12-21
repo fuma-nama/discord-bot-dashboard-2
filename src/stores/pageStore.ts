@@ -1,4 +1,4 @@
-import { Languages, translations } from 'config/translations';
+import { Languages } from 'config/translations';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -27,7 +27,7 @@ export const useSettingsStore = create(
     (set) => ({
       devMode: false,
       setDevMode: (v) => set({ devMode: v }),
-      lang: translations.defaultLang,
+      lang: 'en',
       setLang: (v) => set({ lang: v }),
     }),
     {
