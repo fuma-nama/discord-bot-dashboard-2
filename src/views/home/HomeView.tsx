@@ -1,5 +1,5 @@
 import { Center, Flex, Heading, HStack, SimpleGrid, Text } from '@chakra-ui/layout';
-import { Card, CardBody, CardFooter, CardHeader, Icon, Image, Select } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, CardHeader, Icon, Image } from '@chakra-ui/react';
 import { config } from 'config/common';
 import { BsEmojiAngryFill, BsPeopleFill, BsSafe } from 'react-icons/bs';
 import { IoEarth, IoPeopleCircle } from 'react-icons/io5';

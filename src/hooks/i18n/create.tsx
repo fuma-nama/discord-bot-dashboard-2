@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Translation, TranslationModel } from './translations';
 
 type I18nProviderLang<Provider> = Provider extends I18nProvider<infer Languages>
@@ -7,11 +7,11 @@ type I18nProviderLang<Provider> = Provider extends I18nProvider<infer Languages>
 
 export type I18nConfig<Languages extends string, Model extends TranslationModel> = {
   useTranslations: () => Translation<Model>;
-  translate: (key: keyof Model) => string;
+  translate: (key: keyof Model) => Model[typeof key];
   translations: {
     [lang in Languages]: Translation<Model>;
   };
-  T: (props: { text: keyof Model }) => ReactElement;
+  T: (props: { text: keyof Model | ((model: Model) => ReactNode) }) => ReactElement;
 };
 
 export type I18nProvider<Languages extends string> = {
@@ -64,6 +64,7 @@ export function createI18n<Model extends TranslationModel>(
     T({ text }) {
       const lang = provider.useLang();
       const translation = translations[lang];
+      if (typeof text === 'function') return <>{text(translation)}</>;
 
       return <>{translation[text]}</>;
     },
