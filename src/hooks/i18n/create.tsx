@@ -1,36 +1,31 @@
-import { TranslationKey, Translation, I18nConfig } from './translations';
+import { ReactElement } from 'react';
+import { Translation, TranslationModel } from './translations';
+
+type I18nProviderLang<Provider> = Provider extends I18nProvider<infer Languages>
+  ? Languages
+  : never;
+
+export type I18nConfig<Languages extends string, Model extends TranslationModel> = {
+  useTranslations: () => Translation<Model>;
+  translate: (key: keyof Model) => string;
+  translations: {
+    [lang in Languages]: Translation<Model>;
+  };
+  T: (props: { text: keyof Model }) => ReactElement;
+};
 
 export type I18nProvider<Languages extends string> = {
   getLang: () => Languages;
   useLang: () => Languages;
 };
 
-type I18nProviderLang<Provider> = Provider extends I18nProvider<infer Languages>
-  ? Languages
+export type TranslationofConfig<T> = T extends I18nConfig<never, infer Keys>
+  ? Translation<Keys>
   : never;
 
-export type LanguagesProvider<Languages extends string> = {
-  names: {
-    [K in Languages]: string;
-  };
-  languages: {
-    key: Languages;
-    name: string;
-  }[];
-};
-
-export function initLanguages<Langs extends string>(languages: {
-  [K in Langs]: string;
-}): LanguagesProvider<Langs> {
-  return {
-    languages: Object.entries<string>(languages).map(([key, name]) => ({
-      key: key as Langs,
-      name: name as string,
-    })),
-    names: languages,
-  };
-}
-
+/**
+ * A type-safe light-weight implmentation of i18n
+ */
 export function initI18n<Languages extends string>(config: {
   /**
    * get current langauge
@@ -47,12 +42,12 @@ export function initI18n<Languages extends string>(config: {
   };
 }
 
-export function createI18n<Keys extends TranslationKey>(
+export function createI18n<Model extends TranslationModel>(
   provider: I18nProvider<any>,
   translations: {
-    [lang in I18nProviderLang<typeof provider>]: Translation<Keys>;
+    [lang in I18nProviderLang<typeof provider>]: Translation<Model>;
   }
-): I18nConfig<I18nProviderLang<typeof provider>, Keys> {
+): I18nConfig<I18nProviderLang<typeof provider>, Model> {
   return {
     translations: translations,
     translate(key) {

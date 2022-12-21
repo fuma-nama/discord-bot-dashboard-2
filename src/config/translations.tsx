@@ -16,25 +16,43 @@ const provider = initI18n({
 });
 
 const en = {
-  common: {},
+  common: {
+    'select lang': 'Select your language',
+  },
   home: {
     music: 'Music',
+    'reaction role': 'Reaction Role',
+    'auto moderator': 'Auto Moderator',
+    'next gen discord bot': 'Next-gen Discord Bot',
+    'play music anywhere': 'Play music anywhere',
+    'reaction role description': 'Give user a role when clicking on a button or reaction',
+    'auto moderator description': 'Keep your server safe and clean',
+    'trusted by': ['Trusted by ', ' servers'],
   },
 };
 
 const cn: typeof en = {
-  common: {},
+  common: {
+    'select lang': '選擇你的語言',
+  },
   home: {
     music: '音樂',
+    'reaction role': '反應角色',
+    'auto moderator': '自動管理',
+    'next gen discord bot': '下一代 Discord 機器人',
+    'play music anywhere': '隨處播放音樂',
+    'reaction role description': '單擊按鈕或反應時為用戶賦予角色',
+    'auto moderator description': '確保您的服務器安全免受襲擊',
+    'trusted by': ['受到', '個服務器的信任'],
   },
 };
 
-export const common = createI18n<keyof typeof en['common']>(provider, {
+export const common = createI18n<typeof en['common']>(provider, {
   cn: cn.common,
   en: en.common,
 });
 
-export const home = createI18n<keyof typeof en['home']>(provider, {
+export const home = createI18n<typeof en['home']>(provider, {
   cn: cn.home,
   en: en.home,
 });

@@ -7,23 +7,24 @@ import { MdMusicNote } from 'react-icons/md';
 import { useColorsExtend } from 'theme';
 import WorldSvg from 'assets/World.svg';
 import { useSettingsStore } from 'stores';
-import { languages, home, names } from 'config/translations';
+import { languages, home, names, common } from 'config/translations';
 import { SelectField } from 'components/forms/SelectField';
+import { TranslationofConfig } from 'hooks/i18n';
 
-const features = [
+const features = (t: TranslationofConfig<typeof home>) => [
   {
-    name: <home.T text="music" />,
-    description: 'Play music anywhere',
+    name: t['music'],
+    description: t['play music anywhere'],
     icon: <MdMusicNote />,
   },
   {
-    name: 'Reaction Role',
-    description: 'Give user a role when clicking on a button or reaction',
+    name: t['reaction role'],
+    description: t['reaction role description'],
     icon: <BsPeopleFill />,
   },
   {
-    name: 'Auto Moderator',
-    description: 'Keep your server safe and clean',
+    name: t['auto moderator'],
+    description: t['auto moderator description'],
     icon: <BsSafe />,
   },
 ];
@@ -43,6 +44,10 @@ const servers = [
 
 export function HomeView() {
   const [lang, setLang] = useSettingsStore((s) => [s.lang, s.setLang]);
+  const t = {
+    common: common.useTranslations(),
+    home: home.useTranslations(),
+  };
   const { globalBg, textColorSecondary, brand } = useColorsExtend(
     {
       brand: 'cyan.400',
@@ -60,7 +65,7 @@ export function HomeView() {
           bgGradient={`linear(to-l, blue.200, ${brand})`}
           bgClip="text"
         >
-          Next-gen Discord Bot
+          {t.home['next gen discord bot']}
         </Heading>
         <Heading fontSize={{ base: '5xl', xl: '7xl' }}>{config.name}</Heading>
       </Flex>
@@ -74,11 +79,10 @@ export function HomeView() {
           label: name,
           value: key,
         }))}
-        placeholder="Select your language"
-      ></SelectField>
-
-      <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="3rem" gap={2}>
-        {features.map((feature, i) => (
+        placeholder={t.common['select lang']}
+      />
+      <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="2rem" gap={2}>
+        {features(t.home).map((feature, i) => (
           <Card key={i}>
             <CardHeader fontSize="2xl" fontWeight="600" pb={1}>
               {feature.name}
@@ -95,11 +99,11 @@ export function HomeView() {
       <HStack>
         <Icon as={IoEarth} w={50} h={50} color={brand} />
         <Heading fontSize={{ base: '2xl', xl: '3xl', '2xl': '4xl' }}>
-          Trusted by{' '}
+          {t.home['trusted by'][0]}
           <Text color="pink.400" as="span">
             15000+
-          </Text>{' '}
-          servers
+          </Text>
+          {t.home['trusted by'][1]}
         </Heading>
       </HStack>
       <SimpleGrid columns={{ base: 1, '3sm': 2 }} gap={5} mt={5}>
