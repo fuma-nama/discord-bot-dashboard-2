@@ -1,15 +1,18 @@
-import { Center, Flex, Grid, Heading, HStack, SimpleGrid, Text } from '@chakra-ui/layout';
-import { Card, CardBody, CardFooter, CardHeader, Icon, Image } from '@chakra-ui/react';
+import { Center, Flex, Heading, HStack, SimpleGrid, Text } from '@chakra-ui/layout';
+import { Card, CardBody, CardFooter, CardHeader, Icon, Image, Select } from '@chakra-ui/react';
 import { config } from 'config/common';
 import { BsEmojiAngryFill, BsPeopleFill, BsSafe } from 'react-icons/bs';
 import { IoEarth, IoPeopleCircle } from 'react-icons/io5';
 import { MdMusicNote } from 'react-icons/md';
-import { useColors, useColorsExtend } from 'theme';
+import { useColorsExtend } from 'theme';
 import WorldSvg from 'assets/World.svg';
+import { useSettingsStore } from 'stores';
+import { languages, home, names } from 'config/translations';
+import { SelectField } from 'components/forms/SelectField';
 
 const features = [
   {
-    name: 'Music',
+    name: <home.T text="music" />,
     description: 'Play music anywhere',
     icon: <MdMusicNote />,
   },
@@ -39,6 +42,7 @@ const servers = [
 ];
 
 export function HomeView() {
+  const [lang, setLang] = useSettingsStore((s) => [s.lang, s.setLang]);
   const { globalBg, textColorSecondary, brand } = useColorsExtend(
     {
       brand: 'cyan.400',
@@ -60,6 +64,18 @@ export function HomeView() {
         </Heading>
         <Heading fontSize={{ base: '5xl', xl: '7xl' }}>{config.name}</Heading>
       </Flex>
+      <SelectField
+        value={{
+          label: names[lang],
+          value: lang,
+        }}
+        onChange={(e) => setLang(e.value)}
+        options={languages.map(({ name, key }) => ({
+          label: name,
+          value: key,
+        }))}
+        placeholder="Select your language"
+      ></SelectField>
 
       <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="3rem" gap={2}>
         {features.map((feature, i) => (

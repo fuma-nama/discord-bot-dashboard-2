@@ -1,7 +1,19 @@
 import { Flex, Grid, Spacer, Text, VStack } from '@chakra-ui/layout';
-import { Avatar, Button, Card, CardBody, CardHeader, Image, useColorMode } from '@chakra-ui/react';
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  FormControl,
+  FormLabel,
+  Image,
+  useColorMode,
+} from '@chakra-ui/react';
 import { avatarUrl, bannerUrl } from 'api/discord';
+import { SelectField } from 'components/forms/SelectField';
 import { SwitchField } from 'components/forms/SwitchField';
+import { languages, names } from 'config/translations';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogoutMutation, useSettingsStore, useSelfUser } from 'stores';
 import { useColors } from 'theme';
@@ -11,10 +23,16 @@ import { useColors } from 'theme';
  */
 export function ProfileView() {
   const user = useSelfUser();
+  const logout = useLogoutMutation();
+
   const { cardBg } = useColors();
   const { colorMode, setColorMode } = useColorMode();
-  const [devMode, setDevMode] = useSettingsStore((s) => [s.devMode, s.setDevMode]);
-  const logout = useLogoutMutation();
+  const [devMode, setDevMode, lang, setLang] = useSettingsStore((s) => [
+    s.devMode,
+    s.setDevMode,
+    s.lang,
+    s.setLang,
+  ]);
 
   return (
     <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={3}>
@@ -51,6 +69,24 @@ export function ProfileView() {
             isChecked={devMode}
             onChange={(e) => setDevMode(e.target.checked)}
           />
+          <FormControl>
+            <FormLabel flexDirection="column" fontSize="md">
+              <Text fontWeight="600">Language</Text>
+              <Text color="secondaryGray.600">Select your language</Text>
+            </FormLabel>
+            <SelectField
+              value={{
+                label: names[lang],
+                value: lang,
+              }}
+              onChange={(e) => setLang(e.value)}
+              options={languages.map((lang) => ({
+                label: lang.name,
+                value: lang.key,
+              }))}
+            />
+          </FormControl>
+
           <Spacer mt="100px" />
           <Button
             leftIcon={<IoLogOut />}
