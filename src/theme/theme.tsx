@@ -18,6 +18,7 @@ import { cardStyles } from './components/card';
 import { textStyles } from './components/text';
 import { globalStyles } from './styles';
 import { colors } from './colors';
+import { selectStyles } from './components/select';
 
 export const theme = extendTheme(
   badgeStyles, // badge styles
@@ -43,6 +44,7 @@ export const theme = extendTheme(
       Card: cardStyles,
       Progress: progressStyles,
       Text: textStyles,
+      Select: selectStyles,
     },
   }
 );
