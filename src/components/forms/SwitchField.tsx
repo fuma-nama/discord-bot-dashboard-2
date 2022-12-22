@@ -8,7 +8,8 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { FormCard, FormComponentProps, FormControlCard } from './Form';
+import { ReactNode } from 'react';
+import { FormCard, FormComponentProps } from './Form';
 
 export type SwitchFormProps = FormComponentProps<{
   value: boolean;
@@ -18,22 +19,30 @@ export type SwitchFormProps = FormComponentProps<{
 export function SwitchForm(props: SwitchFormProps) {
   return (
     <FormCard isRequired={props.required} isInvalid={props.error != null} {...props.baseControl}>
-      <SwitchField
-        label={props.label}
-        desc={props.description}
-        isChecked={props.value}
-        onChange={(e) => props.onChange(e.target.checked)}
-      />
+      <Flex justify="space-between" align="center" borderRadius="16px" gap={3}>
+        <FormLabel _hover={{ cursor: 'pointer' }} flexDirection="column">
+          <Text fontSize={{ base: 'lg', lg: 'xl' }} fontWeight={{ base: '600', lg: 'bold' }}>
+            {props.label}
+          </Text>
+          <Text variant="secondary">{props.description}</Text>
+        </FormLabel>
+        <Switch
+          variant="main"
+          size="md"
+          isChecked={props.value}
+          onChange={(e) => props.onChange(e.target.checked)}
+        />
+      </Flex>
       <FormErrorMessage>{props.error}</FormErrorMessage>
     </FormCard>
   );
 }
-// Custom components
+
 export function SwitchField(
   props: {
     id?: string;
-    label?: string;
-    desc?: string;
+    label?: ReactNode;
+    desc?: ReactNode;
   } & SwitchProps
 ) {
   const { id, label, desc, ...rest } = props;
