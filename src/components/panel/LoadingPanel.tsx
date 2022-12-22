@@ -1,5 +1,6 @@
 import { Box, Center, CenterProps, Icon, Spinner, Text, VStack } from '@chakra-ui/react';
 import { UseMutationResult } from '@tanstack/react-query';
+import { common } from 'config/translations/common';
 import { ReactNode } from 'react';
 import { BsCloudRain } from 'react-icons/bs';
 import { useColors } from 'theme';
@@ -26,6 +27,7 @@ export function MutationPanel({
 }
 
 export function LoadingPanel({ size, ...props }: Props & CenterProps) {
+  const t = common.useTranslations();
   const { brand, textColorPrimary } = useColors();
 
   if (size === 'sm') {
@@ -33,7 +35,7 @@ export function LoadingPanel({ size, ...props }: Props & CenterProps) {
       <Center w="full" h="full" {...props}>
         <VStack>
           <Spinner size="lg" />
-          <Text color={textColorPrimary}>Loading</Text>
+          <Text color={textColorPrimary}>{t.loading}</Text>
         </VStack>
       </Center>
     );
@@ -57,7 +59,7 @@ export function LoadingPanel({ size, ...props }: Props & CenterProps) {
         </Box>
 
         <Text color={brand} fontWeight="bold">
-          Loading
+          {t.loading}
         </Text>
       </VStack>
     </Center>

@@ -41,11 +41,9 @@ export function ExampleDashboardView() {
   return (
     <Flex direction="column" gap={5}>
       <HStack rounded="2xl" bg="brand.300" gap={2} p={5}>
-        <Show above="md">
-          <Circle color="white" bg="blackAlpha.300" p={4}>
-            <Icon as={FaRobot} w="60px" h="60px" />
-          </Circle>
-        </Show>
+        <Circle color="white" bg="blackAlpha.300" p={4} display={{ base: 'none', md: 'block' }}>
+          <Icon as={FaRobot} w="60px" h="60px" />
+        </Circle>
 
         <Flex direction="column" align="start" gap={1}>
           <Text color="white" fontSize="2xl" fontWeight="bold">

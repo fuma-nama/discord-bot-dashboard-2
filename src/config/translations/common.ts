@@ -3,6 +3,7 @@ import { createI18n } from 'hooks/i18n';
 
 export const common = createI18n(provider, {
   en: {
+    loading: 'Loading',
     search: 'Search',
     'select lang': 'Select your language',
     dashboard: 'Dashboard',
@@ -14,6 +15,7 @@ export const common = createI18n(provider, {
     },
   },
   cn: {
+    loading: '加載中',
     search: '搜索',
     'select lang': '選擇你的語言',
     dashboard: '儀表板',
