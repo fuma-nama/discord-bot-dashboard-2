@@ -18,7 +18,6 @@ export function memorized<T>(
 
       return a === b;
     };
-    console.log(prevDeps, nextDeps);
 
     return eq(prevDeps, nextDeps);
   });
