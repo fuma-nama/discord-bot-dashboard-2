@@ -4,3 +4,4 @@ export * from './dashboard';
 export * from './feature';
 export * from './home';
 export * from './provider';
+export * from './guild';

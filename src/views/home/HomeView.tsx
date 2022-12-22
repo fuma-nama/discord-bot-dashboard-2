@@ -13,7 +13,7 @@ import { TranslationofConfig } from 'hooks/i18n';
 
 const features = (t: TranslationofConfig<typeof home>) => [
   {
-    name: t['music'],
+    name: t.music,
     description: t['play music anywhere'],
     icon: <MdMusicNote />,
   },
