@@ -19,6 +19,7 @@ specifiers:
   '@emotion/react': ^11.8.1
   '@emotion/styled': ^11.3.0
   '@tanstack/react-query': ^4.2.3
+  '@tanstack/react-table': ^8.7.4
   '@testing-library/react': 13.4.0
   '@types/node': 16.11.7
   '@types/react': ^18.0.0
@@ -52,7 +53,6 @@ specifiers:
   react-dropzone: ^14.2.3
   react-icons: ^4.3.1
   react-router-dom: ^6.3.0
-  react-table: ^7.8.0
   regenerator-runtime: 0.13.7
   ts-node: 10.9.1
   tslib: ^2.3.0
@@ -83,6 +83,7 @@ dependencies:
   '@emotion/react': 11.10.5_xl5my4wapvq2ctl7qwehtbgorq
   '@emotion/styled': 11.10.5_3djhvnr4jirfvebjqpipo7gthy
   '@tanstack/react-query': 4.19.0_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-table': 8.7.4_biqbaboplfbrettd7655fr4n2y
   apexcharts: 3.36.3
   chakra-react-select: 4.4.2_dpiagdowermhv4bfodweup4num
   core-js: 3.26.1
@@ -97,7 +98,6 @@ dependencies:
   react-dropzone: 14.2.3_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
   react-router-dom: 6.4.4_biqbaboplfbrettd7655fr4n2y
-  react-table: 7.8.0_react@18.2.0
   regenerator-runtime: 0.13.7
   tslib: 2.4.1
   use-debounce: 9.0.2_react@18.2.0
@@ -2152,6 +2152,23 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/react-table/8.7.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-4Q1OV3kUSxbtekclS3sqjCyCDowqCPruUCfHm1nGoPSmVLRCHoQ1E2rmzTVGeocEKgV9TDnj39tOgGwcADPuPA==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.7.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/table-core/8.7.4:
+    resolution: {integrity: sha512-OPhzca7e83KGukxLpZ+4F9OBp9CZXi9b/OGJBH8dlC3wpffcSSDczYGUGJKG7wirXQ6cUVYL+9G6UrrdnblKNQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /@testing-library/dom/8.19.0:
@@ -4670,14 +4687,6 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.4.1
-    dev: false
-
-  /react-table/7.8.0_react@18.2.0:
-    resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
-    peerDependencies:
-      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:
