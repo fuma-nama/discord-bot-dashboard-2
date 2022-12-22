@@ -5,6 +5,7 @@
 Using typescript, vite 3, react 18 and chakra ui 2.0
 
 - Support Light/Dark theme
+- Multi languages support (i18n)
 - Typescript support
 - Nice UI & UX + Fast performance
 - Flexiable and Customizable
@@ -83,6 +84,67 @@ As a template, you need to customize a few things in order to get it work
    Start the app by `npm run dev` _(depends on your package manager)_
    <br>
    Then you should see the app started in port `3000`
+
+## Localization
+
+We provide a built-in localizaion utils for you which is light-weight and type-safe
+
+Create the provider
+
+> provider.ts
+
+```typescript
+import { initLanguages, initI18n } from 'hooks/i18n';
+import { useSettingsStore } from 'stores';
+
+// Supported languages
+export const { languages, names } = initLanguages<'en' | 'cn'>({
+  en: 'English',
+  cn: '中文',
+});
+
+// Create provider and export it
+// We need to define how to get the current language
+export const provider = initI18n({
+  getLang: () => useSettingsStore.getState().lang,
+  useLang: () => useSettingsStore((s) => s.lang),
+});
+```
+
+Create the translation config (Default folder: [src/config/translations](./src/config/translations))
+
+> test.ts
+
+```ts
+import { provider } from './provider'; //import the provider
+import { createI18n } from 'hooks/i18n';
+
+export const test = createI18n(provider, {
+  en: {
+    hello: 'Hello',
+  },
+  cn: {
+    hello: '你好',
+  },
+});
+```
+
+Use it in any places
+
+> component.tsx
+
+```tsx
+import {test} from 'config/translations/test'
+
+export function YourComponent() {
+  const t = test.useTranslations();
+
+  return <>
+   <p>{t.hello}</p>
+   <test.T text='hello'>
+  </>
+}
+```
 
 ## Authorize
 
