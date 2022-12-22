@@ -4,8 +4,8 @@ import { IdFeature } from 'config/utils';
 import { IoOpen, IoOptions } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useEnableFeatureMutation } from 'stores';
-import { useColors, useItemHoverBg } from 'theme';
-
+import { useColors } from 'theme';
+import { guild as view } from 'config/translations';
 export function FeatureItem({
   guild,
   feature,
@@ -15,6 +15,7 @@ export function FeatureItem({
   feature: IdFeature;
   enabled: boolean;
 }) {
+  const t = view.useTranslations();
   const navigate = useNavigate();
   const { textColorSecondary, brand, globalBg } = useColors();
   const mutation = useEnableFeatureMutation(guild, feature.id);
@@ -56,12 +57,12 @@ export function FeatureItem({
                 rounded: '2xl',
                 leftIcon: <IoOptions />,
                 onClick: () => navigate(`/guilds/${guild}/features/${feature.id}`),
-                children: 'Config',
+                children: t.bn['config feature'],
               }
             : {
                 leftIcon: <IoOpen />,
                 onClick: () => mutation.mutate({ enabled: true }),
-                children: 'Enable',
+                children: t.bn['enable feature'],
               })}
         />
       </CardFooter>

@@ -2,13 +2,13 @@ import { WarningIcon } from '@chakra-ui/icons';
 import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { ButtonGroup, Button } from '@chakra-ui/react';
 import { SlideFade } from '@chakra-ui/transition';
-import { CustomFeatures } from 'config/types';
-import { FeatureConfig, FormRender } from 'config/types';
+import { FeatureConfig, FormRender, CustomFeatures } from 'config/types';
 import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 import { useUpdateFeatureMutation } from 'stores';
 import { useColors } from 'theme';
 import { Params } from './FeatureView';
+import { feature as view } from 'config/translations';
 
 export function UpdateFeaturePanel<K extends keyof CustomFeatures>({
   feature,
@@ -37,8 +37,9 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
   const { guild, feature } = useParams<Params>();
   const { cardBg } = useColors();
   const mutation = useUpdateFeatureMutation();
-  const breakpoint = '3sm';
+  const t = view.useTranslations();
 
+  const breakpoint = '3sm';
   const onSave = () => {
     //prevent submit if returns true
     if (onSubmit?.() === true) return;
@@ -63,7 +64,7 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
       rounded="3xl"
       zIndex="sticky"
       pos="sticky"
-      bottom={2}
+      bottom={{ base: 2, [breakpoint]: '10px' }}
       w="full"
       p={{ base: 1, [breakpoint]: '15px' }}
       mt={2}
@@ -75,7 +76,7 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
         h="30px"
       />
       <Text fontSize={{ base: 'md', [breakpoint]: 'lg' }} fontWeight="500">
-        Save changes
+        {t.unsaved}
       </Text>
       <Spacer />
       <ButtonGroup isDisabled={mutation.isLoading} size={{ base: 'sm', [breakpoint]: 'md' }}>
@@ -85,9 +86,9 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
           isLoading={mutation.isLoading}
           onClick={onSave}
         >
-          Save
+          {t.bn.save}
         </Button>
-        <Button onClick={reset}>Discard</Button>
+        <Button onClick={reset}>{t.bn.discard}</Button>
       </ButtonGroup>
     </HStack>
   );

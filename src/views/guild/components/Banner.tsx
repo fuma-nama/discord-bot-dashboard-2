@@ -4,11 +4,13 @@ import { Button, ButtonGroup } from '@chakra-ui/react';
 import BannerImg from 'assets/Banner1.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useColors } from 'theme';
+import { guild as view } from 'config/translations';
 
 export function Banner() {
   const { brand } = useColors();
   const { guild } = useParams();
   const navigate = useNavigate();
+  const t = view.useTranslations();
 
   return (
     <Flex
@@ -21,9 +23,9 @@ export function Banner() {
       bgSize="cover"
       gap={3}
     >
-      <Heading>Getting Started</Heading>
+      <Heading>{t.banner.title}</Heading>
       <Text fontWeight="400" color="gray.300">
-        Create your bot and type something
+        {t.banner.description}
       </Text>
       <ButtonGroup>
         <Button
@@ -32,7 +34,7 @@ export function Banner() {
           bg="whiteAlpha.200"
           onClick={() => navigate(`/guilds/${guild}/settings`)}
         >
-          Settings
+          {t.bn.settings}
         </Button>
       </ButtonGroup>
     </Flex>

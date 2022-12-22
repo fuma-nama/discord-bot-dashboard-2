@@ -5,6 +5,34 @@ import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { useMusicFeature } from './example/MusicFeature';
 import { FeaturesConfig } from './types';
+import { provider } from 'config/translations';
+import { createI18n } from 'hooks/i18n';
+
+/**
+ * Support i18n (Localization)
+ */
+const { T } = createI18n(provider, {
+  en: {
+    music: 'Music Player',
+    'music description': 'Play music in Your Discord Server',
+    gaming: 'Gaming',
+    'gaming description': 'Enjoy playing games with your friends',
+    'reaction role': 'Reaction Role',
+    'reaction role description': 'Give user a role when clicking on a button',
+    memes: 'Memes Time',
+    'memes description': 'Send memes everyday',
+  },
+  cn: {
+    music: '音樂播放器',
+    'music description': '在您的 Discord 服務器中播放音樂',
+    gaming: '遊戲',
+    'gaming description': 'Enjoy playing games with your friends',
+    'reaction role': '反應角色',
+    'reaction role description': '單擊按鈕時為用戶賦予角色',
+    memes: '模因時間',
+    'memes description': '每天發送模因',
+  },
+});
 
 /**
  * Define information for each features
@@ -13,16 +41,16 @@ import { FeaturesConfig } from './types';
  */
 export const features: FeaturesConfig = {
   music: {
-    name: 'Music Player',
-    description: 'Play music in Your Discord Server',
+    name: <T text="music" />,
+    description: <T text="music description" />,
     icon: <Icon as={BsMusicNoteBeamed} />,
     useRender: (data) => {
       return useMusicFeature(data);
     },
   },
   gaming: {
-    name: 'Gaming',
-    description: 'Enjoy playing games with your friends',
+    name: <T text="gaming" />,
+    description: <T text="gaming description" />,
     icon: <Icon as={FaGamepad} />,
     useRender(data) {
       return {
@@ -32,8 +60,8 @@ export const features: FeaturesConfig = {
     },
   },
   'reaction-role': {
-    name: 'Reaction Role',
-    description: 'Give user a role when clicking on a button',
+    name: <T text="reaction role" />,
+    description: <T text="reaction role description" />,
     icon: <Icon as={MdAddReaction} />,
     useRender(data) {
       return {
@@ -43,8 +71,8 @@ export const features: FeaturesConfig = {
     },
   },
   meme: {
-    name: 'Memes Time',
-    description: 'Send memes everyday',
+    name: <T text="memes" />,
+    description: <T text="memes description" />,
     icon: <Icon as={IoHappy} />,
     useRender(data) {
       return {

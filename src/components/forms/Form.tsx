@@ -15,8 +15,8 @@ export function FormCard(props: FormControlProps) {
 }
 
 export type FormControlCardProps = {
-  label?: string;
-  description?: string;
+  label?: string | ReactNode;
+  description?: string | ReactNode;
   required?: boolean;
   baseControl?: FormControlProps;
   /**

@@ -4,6 +4,20 @@ import { ChannelSelect } from './ChannelSelect';
 import { RolesSelect } from './RolesSelect';
 import { useFormRender } from 'hooks/forms/useForm';
 import { SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { createI18n } from 'hooks/i18n';
+import { provider } from 'config/translations';
+
+/**
+ * Support i18n (Localization)
+ */
+const { T } = createI18n(provider, {
+  en: {
+    message: 'Message',
+  },
+  cn: {
+    message: '信息',
+  },
+});
 
 /**
  * Used to configure a feature
@@ -37,7 +51,7 @@ export function useMusicFeature(data: MusicFeature) {
         defaultMemorize: ['value', 'error'],
       },
       {
-        label: 'Message',
+        label: <T text="message" />,
         description: 'Hello World!!!',
         type: 'input',
         value: value.message,
