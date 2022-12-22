@@ -7,12 +7,14 @@ import { IoSettings } from 'react-icons/io5';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGuildPreview, useSelectedGuild } from 'stores';
 import { show, useColors } from 'theme';
+import { guild as view } from 'config/translations';
 
 export function InGuildSidebar() {
   const { selected } = useSelectedGuild();
   const navigate = useNavigate();
   const location = useLocation();
   const { guild } = useGuildPreview(selected);
+  const t = view.useTranslations();
 
   return (
     <Flex direction="column" gap={2} p={3}>
@@ -32,7 +34,7 @@ export function InGuildSidebar() {
       >
         <IoSettings />
         <Text fontSize="lg" fontWeight="600">
-          Settings
+          {t.bn.settings}
         </Text>
       </CardItem>
       <VStack align="stretch">
