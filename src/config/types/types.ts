@@ -48,8 +48,8 @@ export type FeaturesConfig = {
  * Internal Feature info
  */
 export interface FeatureConfig<K extends keyof CustomFeatures> {
-  name: string;
-  description?: string;
+  name: ReactNode;
+  description?: ReactNode;
   icon?: ReactElement;
   /**
    * Render content in Feature view

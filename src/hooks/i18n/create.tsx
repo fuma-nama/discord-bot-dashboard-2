@@ -17,6 +17,12 @@ export type I18nConfig<Languages extends string, Model extends TranslationModel>
 export type I18nProvider<Languages extends string> = {
   getLang: () => Languages;
   useLang: () => Languages;
+  useTranslations<Model>(text: {
+    [K in Languages]: Model;
+  }): Model;
+  T<Model>(props: {
+    [K in Languages]: Model;
+  }): ReactElement;
 };
 
 export type TranslationofConfig<T> = T extends I18nConfig<never, infer Keys>
@@ -39,15 +45,25 @@ export function initI18n<Languages extends string>(config: {
   return {
     getLang: config.getLang,
     useLang: config.useLang,
+    useTranslations(text) {
+      const lang = config.useLang();
+
+      return text[lang];
+    },
+    T(props) {
+      const lang = config.useLang();
+
+      return <>{props[lang]}</>;
+    },
   };
 }
 
-export function createI18n<Model extends TranslationModel>(
-  provider: I18nProvider<any>,
+export function createI18n<Model extends TranslationModel, Languages extends string>(
+  provider: I18nProvider<Languages>,
   translations: {
-    [lang in I18nProviderLang<typeof provider>]: Translation<Model>;
+    [lang in Languages]: Translation<Model>;
   }
-): I18nConfig<I18nProviderLang<typeof provider>, Model> {
+): I18nConfig<Languages, Model> {
   return {
     translations: translations,
     translate(key) {
