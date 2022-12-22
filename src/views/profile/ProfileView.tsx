@@ -14,6 +14,7 @@ import { avatarUrl, bannerUrl } from 'api/discord';
 import { SelectField } from 'components/forms/SelectField';
 import { SwitchField } from 'components/forms/SwitchField';
 import { languages, names } from 'config/translations';
+import { profile } from 'config/translations/profile';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogoutMutation, useSettingsStore, useSelfUser } from 'stores';
 import { useColors } from 'theme';
@@ -24,6 +25,7 @@ import { useColors } from 'theme';
 export function ProfileView() {
   const user = useSelfUser();
   const logout = useLogoutMutation();
+  const t = profile.useTranslations();
 
   const { cardBg } = useColors();
   const { colorMode, setColorMode } = useColorMode();
@@ -53,26 +55,26 @@ export function ProfileView() {
         </VStack>
       </Flex>
       <Card w="full" rounded="3xl" h="fit-content">
-        <CardHeader fontSize="2xl">Settings</CardHeader>
+        <CardHeader fontSize="2xl">{t.settings}</CardHeader>
         <CardBody as={Flex} direction="column" gap={3} mt={3}>
           <SwitchField
             id="dark-mode"
-            label="Dark Mode"
-            desc="Enables dark theme in order to protect your eyes"
+            label={t['dark mode']}
+            desc={t['dark mode description']}
             isChecked={colorMode === 'dark'}
             onChange={(e) => setColorMode(e.target.checked ? 'dark' : 'light')}
           />
           <SwitchField
             id="developer-mode"
-            label="Developer Mode"
-            desc="Used for debugging and testing"
+            label={t['dev mode']}
+            desc={t['dev mode description']}
             isChecked={devMode}
             onChange={(e) => setDevMode(e.target.checked)}
           />
           <FormControl>
             <FormLabel flexDirection="column" fontSize="md">
-              <Text fontWeight="600">Language</Text>
-              <Text color="secondaryGray.600">Select your language</Text>
+              <Text fontWeight="600">{t.language}</Text>
+              <Text color="secondaryGray.600">{t['language description']}</Text>
             </FormLabel>
             <SelectField
               value={{
@@ -86,7 +88,6 @@ export function ProfileView() {
               }))}
             />
           </FormControl>
-
           <Spacer mt="100px" />
           <Button
             leftIcon={<IoLogOut />}
@@ -94,7 +95,7 @@ export function ProfileView() {
             isLoading={logout.isLoading}
             onClick={() => logout.mutate()}
           >
-            Logout
+            {t.logout}
           </Button>
         </CardBody>
       </Card>
