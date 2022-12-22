@@ -1,7 +1,7 @@
 import { Center, Heading, Link, Text, VStack } from '@chakra-ui/layout';
 import { Button, Card, CardFooter, CardHeader, Icon } from '@chakra-ui/react';
 import { config } from 'config/common';
-import { dashboard } from 'config/translations';
+import { dashboard } from 'config/translations/dashboard';
 import { FaRobot } from 'react-icons/fa';
 import { IoOpen } from 'react-icons/io5';
 import { useSelfUser } from 'stores';

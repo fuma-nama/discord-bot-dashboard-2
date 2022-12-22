@@ -5,7 +5,7 @@ import { IoHappy } from 'react-icons/io5';
 import { MdAddReaction } from 'react-icons/md';
 import { useMusicFeature } from './example/MusicFeature';
 import { FeaturesConfig } from './types';
-import { provider } from 'config/translations';
+import { provider } from 'config/translations/provider';
 import { createI18n } from 'hooks/i18n';
 
 /**

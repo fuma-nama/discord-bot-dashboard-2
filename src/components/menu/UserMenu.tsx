@@ -9,7 +9,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { UserInfo, avatarUrl } from 'api/discord';
-import { common } from 'config/translations';
+import { common } from 'config/translations/common';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from 'stores';
 import { useSelfUser } from 'stores';

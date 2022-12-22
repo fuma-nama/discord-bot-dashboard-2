@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
-import { common } from 'config/translations';
+import { common } from 'config/translations/common';
 export function SearchBar(
   props: {
     input?: InputProps;

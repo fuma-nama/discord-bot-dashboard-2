@@ -5,7 +5,7 @@ import { IoOpen, IoOptions } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { useEnableFeatureMutation } from 'stores';
 import { useColors } from 'theme';
-import { guild as view } from 'config/translations';
+import { guild as view } from 'config/translations/guild';
 export function FeatureItem({
   guild,
   feature,

@@ -1,5 +1,5 @@
 import { Icon } from '@chakra-ui/react';
-import { common } from 'config/translations';
+import { common } from 'config/translations/common';
 import { MdPerson, MdDashboard } from 'react-icons/md';
 import { SidebarItemInfo } from 'utils/routeUtils';
 

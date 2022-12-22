@@ -7,7 +7,7 @@ import { useColors } from 'theme';
 import { HomeView } from 'views/home/HomeView';
 import CloudSvg from 'assets/Cloud.svg';
 import { bot } from 'api/bot';
-import { auth } from 'config/translations';
+import { auth } from 'config/translations/auth';
 
 export function LoginView() {
   const t = auth.useTranslations();

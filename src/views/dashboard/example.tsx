@@ -32,7 +32,7 @@ import { useColors, useColorsExtend, useItemHoverBg } from 'theme';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 import { IoPricetag } from 'react-icons/io5';
 import { StyledChart } from 'components/chart/StyledChart';
-import { dashboard } from 'config/translations';
+import { dashboard } from 'config/translations/dashboard';
 
 export function ExampleDashboardView() {
   const t = dashboard.useTranslations();

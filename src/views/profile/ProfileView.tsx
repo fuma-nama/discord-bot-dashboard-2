@@ -13,7 +13,7 @@ import {
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SelectField } from 'components/forms/SelectField';
 import { SwitchField } from 'components/forms/SwitchField';
-import { languages, names } from 'config/translations';
+import { languages, names } from 'config/translations/provider';
 import { profile } from 'config/translations/profile';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogoutMutation, useSettingsStore, useSelfUser } from 'stores';

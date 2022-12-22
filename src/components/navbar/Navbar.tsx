@@ -17,7 +17,7 @@ import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { show, useColorsExtend } from 'theme';
-import { common } from 'config/translations';
+import { common } from 'config/translations/common';
 
 export function DefaultNavbar({ children }: { children?: ReactNode }) {
   const activeItem = getActiveSidebarItem(items, useLocation());

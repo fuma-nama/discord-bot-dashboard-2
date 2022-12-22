@@ -10,7 +10,7 @@ import './index.css';
 import { layouts } from './layouts';
 import { NormalLayout } from './utils/routeUtils';
 import { createRoot } from 'react-dom/client';
-import { common } from 'config/translations';
+import { common } from 'config/translations/common';
 
 function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
   function mapNestedLayout(layout: NormalLayout, key: string | number) {

@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from '@chakra-ui/react';
 import BannerImg from 'assets/Banner1.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useColors } from 'theme';
-import { guild as view } from 'config/translations';
+import { guild as view } from 'config/translations/guild';
 
 export function Banner() {
   const { brand } = useColors();

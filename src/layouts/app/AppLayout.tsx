@@ -1,4 +1,4 @@
-import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import items from 'sidebar';
 import { QueryStatus } from 'components/panel/QueryPanel';
 import { useSelfUserQuery } from 'stores';

@@ -1,5 +1,5 @@
 import { Flex, Heading, SimpleGrid } from '@chakra-ui/layout';
-import { guild } from 'config/translations';
+import { guild } from 'config/translations/guild';
 import { CustomGuildInfo } from 'config/types';
 import { getFeatures } from 'config/utils';
 import { Banner } from './components/Banner';

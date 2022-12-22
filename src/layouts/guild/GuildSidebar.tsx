@@ -7,7 +7,7 @@ import { IoSettings } from 'react-icons/io5';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useGuildPreview, useSelectedGuild } from 'stores';
 import { show, useColors } from 'theme';
-import { guild as view } from 'config/translations';
+import { guild as view } from 'config/translations/guild';
 
 export function InGuildSidebar() {
   const { selected } = useSelectedGuild();

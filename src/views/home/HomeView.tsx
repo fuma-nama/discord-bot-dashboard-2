@@ -7,9 +7,11 @@ import { MdMusicNote } from 'react-icons/md';
 import { useColorsExtend } from 'theme';
 import WorldSvg from 'assets/World.svg';
 import { useSettingsStore } from 'stores';
-import { languages, home, names, common } from 'config/translations';
+import { languages, names } from 'config/translations/provider';
 import { SelectField } from 'components/forms/SelectField';
 import { TranslationofConfig } from 'hooks/i18n';
+import { common } from 'config/translations/common';
+import { home } from 'config/translations/home';
 
 const features = (t: TranslationofConfig<typeof home>) => [
   {
@@ -44,10 +46,7 @@ const servers = [
 
 export function HomeView() {
   const [lang, setLang] = useSettingsStore((s) => [s.lang, s.setLang]);
-  const t = {
-    common: common.useTranslations(),
-    home: home.useTranslations(),
-  };
+  const t = home.useTranslations();
   const { globalBg, textColorSecondary, brand } = useColorsExtend(
     {
       brand: 'cyan.400',
@@ -65,7 +64,7 @@ export function HomeView() {
           bgGradient={`linear(to-l, blue.200, ${brand})`}
           bgClip="text"
         >
-          {t.home['next gen discord bot']}
+          {t['next gen discord bot']}
         </Heading>
         <Heading fontSize={{ base: '5xl', xl: '7xl' }}>{config.name}</Heading>
       </Flex>
@@ -79,10 +78,10 @@ export function HomeView() {
           label: name,
           value: key,
         }))}
-        placeholder={t.common['select lang']}
+        placeholder={<common.T text="select lang" />}
       />
       <SimpleGrid columns={{ base: 1, '3sm': 2, xl: 3 }} mt="2rem" gap={2}>
-        {features(t.home).map((feature, i) => (
+        {features(t).map((feature, i) => (
           <Card key={i}>
             <CardHeader fontSize="2xl" fontWeight="600" pb={1}>
               {feature.name}
@@ -99,11 +98,11 @@ export function HomeView() {
       <HStack>
         <Icon as={IoEarth} w={50} h={50} color={brand} />
         <Heading fontSize={{ base: '2xl', xl: '3xl', '2xl': '4xl' }}>
-          {t.home['trusted by'][0]}
+          {t['trusted by'][0]}
           <Text color="pink.400" as="span">
             15000+
           </Text>
-          {t.home['trusted by'][1]}
+          {t['trusted by'][1]}
         </Heading>
       </HStack>
       <SimpleGrid columns={{ base: 1, '3sm': 2 }} gap={5} mt={5}>

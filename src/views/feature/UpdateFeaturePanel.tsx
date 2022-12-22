@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useUpdateFeatureMutation } from 'stores';
 import { useColors } from 'theme';
 import { Params } from './FeatureView';
-import { feature as view } from 'config/translations';
+import { feature as view } from 'config/translations/feature';
 
 export function UpdateFeaturePanel<K extends keyof CustomFeatures>({
   feature,
