@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { LoadingPanel } from 'components/panel/LoadingPanel';
 import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { client, useLoginQuery } from 'stores';
 import { theme } from 'theme';
 import { QueryStatus } from './components/panel/QueryPanel';
@@ -10,6 +10,7 @@ import './index.css';
 import { layouts } from './layouts';
 import { NormalLayout } from './utils/routeUtils';
 import { createRoot } from 'react-dom/client';
+import { common } from 'config/translations';
 
 function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
   function mapNestedLayout(layout: NormalLayout, key: string | number) {
@@ -33,10 +34,11 @@ function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
 }
 
 function Pages() {
+  const t = common.useTranslations();
   const query = useLoginQuery();
 
   return (
-    <QueryStatus query={query} error="Failed to login" loading={<LoadingPanel size="lg" />}>
+    <QueryStatus query={query} error={t.fail.login} loading={<LoadingPanel size="lg" />}>
       <RootRoutes loggedIn={query.data != null} />
     </QueryStatus>
   );
