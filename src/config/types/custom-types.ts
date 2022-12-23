@@ -19,6 +19,7 @@ export type CustomFeatures = {
 
 /** example only */
 export type WelcomeMessageFeature = {
+  channel?: string;
   message: string;
 };
 
