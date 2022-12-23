@@ -9,6 +9,7 @@ import { provider } from 'config/translations/provider';
 import { createI18n } from 'hooks/i18n';
 import { useForm } from 'hooks/forms/useForm';
 import { InputForm } from 'components/forms/InputForm';
+import { useWelcomeMessageFeature } from './example/WelcomeMessageFeature';
 
 /**
  * Support i18n (Localization)
@@ -54,23 +55,7 @@ export const features: FeaturesConfig = {
     name: 'Welcome Message',
     description: 'Send message when user joined the server',
     icon: <Icon as={MdMessage} w={5} h={5} />,
-    useRender(data) {
-      const { render, value, update, errors } = useForm<Partial<WelcomeMessageFeature>>({
-        defaultValue: data,
-        emptyValue: {},
-      });
-
-      return render(
-        <InputForm
-          label="Message"
-          description="The message to send"
-          placeholder="Type something here..."
-          value={value.message}
-          onChange={(message) => update({ message })}
-          error={errors.message}
-        />
-      );
-    },
+    useRender: useWelcomeMessageFeature,
   },
   gaming: {
     name: <T text="gaming" />,
