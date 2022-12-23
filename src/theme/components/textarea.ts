@@ -28,20 +28,23 @@ export const textareaStyles = defineStyleConfig({
         color: mode('secondaryGray.700', 'secondaryGray.600')(props),
       },
     })),
-    auth: defineStyle({
-      bg: 'white',
+    glass: {
+      borderColor: 'var(--border-color)',
       border: '1px solid',
-      borderColor: 'secondaryGray.100',
-      borderRadius: '16px',
-      _placeholder: { color: 'secondaryGray.600' },
-    }),
-    authSecondary: defineStyle({
-      bg: 'white',
-      border: '1px solid',
-
-      borderColor: 'secondaryGray.100',
-      borderRadius: '16px',
-      _placeholder: { color: 'secondaryGray.600' },
-    }),
+      _light: {
+        bg: 'blackApha.100',
+        borderColor: 'blackAlpha.200',
+        _invalid: {
+          borderColor: 'red.300',
+        },
+      },
+      _dark: {
+        bg: 'blackAlpha.300',
+        borderColor: 'whiteAlpha.200',
+        _invalid: {
+          borderColor: 'red.400',
+        },
+      },
+    },
   },
 });
