@@ -6,6 +6,7 @@ import { FormComponentProps, FormControlCard } from 'components/forms/Form';
 import { Memoize } from 'hooks/Memorize';
 import { InputForm } from 'components/forms/InputForm';
 import { SwitchForm } from 'components/forms/SwitchField';
+import { TextAreaForm } from 'components/forms/TextAreaForm';
 
 export type FormInput = (
   | Input
@@ -15,6 +16,7 @@ export type FormInput = (
   | SmallColorPicker
   | Switch
   | FilePicker
+  | TextArea
   | Custom
   | CustomForm
 ) &
@@ -32,6 +34,7 @@ interface IForm {
 }
 
 export type Input = ComponentProps<typeof InputForm> & { type: 'input' };
+export type TextArea = ComponentProps<typeof TextAreaForm> & { type: 'textarea' };
 
 export type DatePicker = ComponentProps<typeof DatePickerForm> & { type: 'date' };
 export type SmallDatePicker = ComponentProps<typeof SmallDatePickerForm> & { type: 'small-date' };
@@ -62,6 +65,8 @@ export function createForm(options: FormOptions = {}, ...inputs: FormInput[]) {
     switch (type) {
       case 'input':
         return <InputForm {...(props as any)} />;
+      case 'textarea':
+        return <TextAreaForm {...(props as any)} />;
       case 'date':
         return <DatePickerForm {...(props as any)} />;
       case 'small-date':
