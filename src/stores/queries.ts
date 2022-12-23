@@ -107,6 +107,7 @@ export function useEnableFeatureMutation(guild: string, feature: string) {
       enabled ? enableFeature(guild, feature) : disableFeature(guild, feature),
     {
       async onSuccess(_, { enabled }) {
+        await client.invalidateQueries(Keys.features(guild, feature));
         await client.setQueryData<GuildInfo>(Keys.guild_info(guild), (prev) => {
           if (prev == null) return null;
 
