@@ -143,7 +143,7 @@ export function useFormRender<V>({
   return result.render(container == null ? rendered : container(rendered));
 }
 
-function filterKeys<V>(obj: V, keys: (keyof V)[]): Partial<V> {
+function filterKeys<V extends object>(obj: V, keys: (keyof V)[]): Partial<V> {
   const temp: Partial<V> = {};
 
   for (const key of keys) {

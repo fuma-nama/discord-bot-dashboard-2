@@ -14,6 +14,12 @@ export type CustomFeatures = {
   gaming: {};
   'reaction-role': {};
   meme: {};
+  'welcome-message': WelcomeMessageFeature;
+};
+
+/** example only */
+export type WelcomeMessageFeature = {
+  message: string;
 };
 
 /** example only */

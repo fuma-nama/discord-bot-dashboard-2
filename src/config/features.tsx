@@ -2,11 +2,13 @@ import Icon from '@chakra-ui/icon';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
-import { MdAddReaction } from 'react-icons/md';
+import { MdAddReaction, MdMessage } from 'react-icons/md';
 import { useMusicFeature } from './example/MusicFeature';
-import { FeaturesConfig } from './types';
+import { FeaturesConfig, WelcomeMessageFeature } from './types';
 import { provider } from 'config/translations/provider';
 import { createI18n } from 'hooks/i18n';
+import { useForm } from 'hooks/forms/useForm';
+import { InputForm } from 'components/forms/InputForm';
 
 /**
  * Support i18n (Localization)
@@ -46,6 +48,28 @@ export const features: FeaturesConfig = {
     icon: <Icon as={BsMusicNoteBeamed} />,
     useRender: (data) => {
       return useMusicFeature(data);
+    },
+  },
+  'welcome-message': {
+    name: 'Welcome Message',
+    description: 'Send message when user joined the server',
+    icon: <Icon as={MdMessage} w={5} h={5} />,
+    useRender(data) {
+      const { render, value, update, errors } = useForm<Partial<WelcomeMessageFeature>>({
+        defaultValue: data,
+        emptyValue: {},
+      });
+
+      return render(
+        <InputForm
+          label="Message"
+          description="The message to send"
+          placeholder="Type something here..."
+          value={value.message}
+          onChange={(message) => update({ message })}
+          error={errors.message}
+        />
+      );
     },
   },
   gaming: {
