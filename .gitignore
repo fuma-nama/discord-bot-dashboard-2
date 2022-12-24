@@ -32,7 +32,7 @@ node_modules
 npm-debug.log
 yarn-error.log
 testem.log
-/typings
+/.env.local
 
 # System Files
 .DS_Store

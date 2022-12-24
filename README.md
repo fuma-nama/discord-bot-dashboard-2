@@ -35,17 +35,17 @@ As a template, you need to customize a few things in order to get it work
 1. **Clone the repo**
    <br>
    `git clone https://github.com/SonMooSans/discord-bot-dashboard-2.git`
-1. **Install dependencies**
+2. **Install dependencies**
 
    |      NPM      |      PNPM      |      Yarn      |
    | :-----------: | :------------: | :------------: |
    | `npm install` | `pnpm install` | `yarn install` |
 
-1. **Customize following files**
+3. **Customize following files**
    - [src/views/dashboard](./src/views/dashboard/DashboardView.tsx) **User Dashboard** - Some states about the user
    - [src/views/home](./src/views/home/HomeView.tsx) **Home page** - introduce your bot
    - [src/views/guild](./src/views/guild/GuildView.tsx) **Guild Dashboard** - The place to customize guild (ex: features, actions)
-1. **Define Features**
+4. **Define Features**
    <br>
    The dashboard has built-in support for configuring features
    <br>
@@ -73,13 +73,18 @@ As a template, you need to customize a few things in order to get it work
    The `useRender` property is used to render Feature Configuration Panel
    Take a look at [example/MusicFeature.tsx](./src/config/example/MusicFeature.tsx) to learn more
 
-1. **Configure General Information**
+5. **Configure General Information**
    <br>
    Modify [src/config/common.tsx](./src/config/common.tsx)
    - Bot name & icon
    - Invite url _(example: https://discord.com/oauth2/authorize?client_id=1234&scope=bot)_
    - Guild settings
-1. **Done!**
+6. **Configure Your API Endpoint url**
+   <br>
+   You can define the API Endpoint by
+   - Setting the `VITE_API_ENDPOINT` environment variable
+   - Modify the default url in [src/api/bot.ts](./src/api/bot.ts) _(default: http://localhost:8080)_
+7. **Done!**
    <br>
    Start the app by `npm run dev` _(depends on your package manager)_
    <br>
@@ -146,7 +151,7 @@ export function YourComponent() {
 }
 ```
 
-## Authorize
+## Authorization
 
 Create your OAuth2 application in https://discord.com/developers/applications
 
@@ -174,12 +179,6 @@ As a frontend template, we doesn't provide an built-in Backend
 <br>
 Check [src/api/bot.ts](./src/api/bot.ts), it defined a built-in API for fetching data and authorization
 <br>
-
-**Configure the backend server url**
-<br>
-Modify the url in `src/api/bot.ts`
-
-`export const bot = 'http://localhost:8080';`
 
 ### Required Routes
 
