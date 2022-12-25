@@ -1,4 +1,6 @@
+import { IOSTokenStorage } from 'api/core/plugins';
 import { Navigate, useLocation } from 'react-router-dom';
+import { client, Keys } from 'stores';
 
 export function CallbackView() {
   const { search } = useLocation();
@@ -6,8 +8,9 @@ export function CallbackView() {
   const token = params.get('token');
 
   if (token != null) {
-    localStorage.setItem('session-token', token);
+    localStorage.setItem(IOSTokenStorage, token);
+    client.invalidateQueries(Keys.login);
   }
 
-  return <Navigate to="/auth" />;
+  return <Navigate to="/home" />;
 }

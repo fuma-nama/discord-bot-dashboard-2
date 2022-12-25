@@ -2,8 +2,13 @@ import { discord } from 'api/discord';
 import { bot } from 'api/bot';
 import { Options } from './core';
 
+/**
+ * CORS cookies are not working on IOS
+ */
+export const IOSTokenStorage = 'ios-session-token';
+
 export function withBot<T extends Options>(init?: T): T {
-  const temp = localStorage.getItem('session-token');
+  const token = localStorage.getItem(IOSTokenStorage);
 
   return {
     ...init,
@@ -11,7 +16,7 @@ export function withBot<T extends Options>(init?: T): T {
     init: {
       ...init?.init,
       headers: {
-        Authorization: temp != null ? `Bearer ${temp}` : undefined,
+        Authorization: token != null ? `Bearer ${token}` : undefined,
       },
       credentials: 'include',
       mode: 'cors',
