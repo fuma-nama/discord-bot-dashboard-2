@@ -231,6 +231,14 @@ GET `/guilds/{guild}/channels`
 - Get Channels of the guild
 - Responds a list of [Guild Channel](https://discord.com/developers/docs/resources/channel#channel-object) _(Same as discord documentation)_
 
+### Example Backend used for Demo?
+
+Not recommended, but I had wrote a backend for the Live Demo
+<br>
+**Kotlin:** https://github.com/SonMooSans/discord-bot-dashboard-backend _(2.0.0 branch)_
+<br>
+**Golang:** https://github.com/SonMooSans/discord-bot-dashboard-backend-go
+
 ## Any issues?
 
 Feel free to ask a question by opening a issue
