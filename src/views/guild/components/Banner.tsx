@@ -32,6 +32,12 @@ export function Banner() {
           leftIcon={<SettingsIcon />}
           color="white"
           bg="whiteAlpha.200"
+          _hover={{
+            bg: 'whiteAlpha.300',
+          }}
+          _active={{
+            bg: 'whiteAlpha.400',
+          }}
           onClick={() => navigate(`/guilds/${guild}/settings`)}
         >
           {t.bn.settings}

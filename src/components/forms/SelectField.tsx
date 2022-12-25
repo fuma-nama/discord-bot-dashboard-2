@@ -98,35 +98,3 @@ export const SelectField: SelectComponent = (props) => {
     />
   );
 };
-
-export function useSelectOptions<R, T extends Option>(data: R[] | null, mapper: (v: R) => T) {
-  return useMemo(() => {
-    const options = new Map<string, Option>();
-
-    data?.forEach((item) => {
-      const mapped = mapper(item);
-
-      options.set(mapped.value, mapped);
-    });
-
-    return {
-      options,
-      values: [...options.values()],
-    };
-  }, [data]);
-}
-
-export function useSelectOptionsMap<T extends Option>(
-  mapper: (map: Map<string, T>) => void,
-  dependencies: DependencyList
-) {
-  return useMemo(() => {
-    const options = new Map<string, T>();
-    mapper(options);
-
-    return {
-      options,
-      values: [...options.values()],
-    };
-  }, [dependencies]);
-}
