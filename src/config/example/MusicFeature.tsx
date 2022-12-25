@@ -162,21 +162,19 @@ export function useMusicFeature(data: MusicFeature) {
  */
 function TagMultiSelect({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
   const tags = ['meme', 'great', 'bot', 'discord'];
-  const { values, options } = useSelectOptionsMap((map) => {
-    tags.forEach((tag) => {
-      map.set(tag, {
-        label: tag,
-        value: tag,
-      });
-    });
-  }, []);
+  const render = (item: string) => {
+    return {
+      label: item,
+      value: item,
+    };
+  };
 
   return (
     <SelectField<{ label: string; value: string }, true>
       isMulti
-      value={value.map((v) => options.get(v))}
+      value={value.map(render)}
       onChange={(e) => onChange(e.map((tag) => tag.value))}
-      options={values}
+      options={tags.map(render)}
     />
   );
 }
