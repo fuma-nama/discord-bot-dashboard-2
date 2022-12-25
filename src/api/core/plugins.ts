@@ -9,6 +9,8 @@ export function withBot<T extends Options>(init?: T): T {
     init: {
       ...init?.init,
       credentials: 'include',
+      mode: 'cors',
+      cache: 'no-store',
     },
   };
 }
