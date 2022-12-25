@@ -3,14 +3,18 @@ import { bot } from 'api/bot';
 import { Options } from './core';
 
 export function withBot<T extends Options>(init?: T): T {
+  const temp = localStorage.getItem('session-token');
+
   return {
     ...init,
     origin: bot,
     init: {
       ...init?.init,
+      headers: {
+        Authorization: temp != null ? `Bearer ${temp}` : undefined,
+      },
       credentials: 'include',
       mode: 'cors',
-      cache: 'no-store',
     },
   };
 }
