@@ -1,7 +1,7 @@
 import { ChatIcon, Icon } from '@chakra-ui/icons';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
-import { Option, SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { Option, SelectField } from 'components/forms/SelectField';
 import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
@@ -43,31 +43,31 @@ export function ChannelSelect({
 }) {
   const { guild } = useParams<Params>();
   const channelsQuery = useGuildChannelsQuery(guild);
+  const isLoading = channelsQuery.isLoading;
 
-  const { options, values } = useSelectOptionsMap<ChannelOption>(
-    (map) => {
-      if (channelsQuery.data == null) return;
-      const channels = channelsQuery.data;
+  const selected = value != null && channelsQuery.data?.find((c) => c.id === value);
+  const render = (channel: GuildChannel) => {
+    if (channel.type === ChannelTypes.GUILD_CATEGORY) {
+      const options = channelsQuery.data
+        .filter((children) => children.category === channel.id)
+        .map(mapOption);
 
-      channels
-        .filter((c) => c.type === ChannelTypes.GUILD_CATEGORY || c.category == null)
-        .forEach((root) => {
-          if (root.type === ChannelTypes.GUILD_CATEGORY)
-            map.set(root.id, {
-              ...mapOption(root),
-              options: channels.filter((child) => child.category === root.id).map(mapOption),
-            });
-          else map.set(root.id, mapOption(root));
-        });
-    },
-    [channelsQuery.data]
-  );
+      return {
+        ...mapOption(channel),
+        options: options,
+      };
+    }
+
+    return mapOption(channel);
+  };
 
   return (
     <SelectField
+      isDisabled={isLoading}
+      isLoading={isLoading}
       placeholder="Select a channel"
-      options={values as any}
-      value={value != null && options.get(value)}
+      value={selected != null && mapOption(selected)}
+      options={channelsQuery.data?.filter((channel) => channel.category == null).map(render)}
       onChange={(e) => onChange(e.value)}
     />
   );
