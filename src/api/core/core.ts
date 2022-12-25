@@ -1,3 +1,4 @@
+import { deepmerge } from 'deepmerge-ts';
 export const orgin = 'http://localhost:3000';
 
 export type ReturnOptions<T> = Options & {
@@ -70,22 +71,19 @@ async function handleError(res: Response, options: Options) {
 }
 
 async function parseOptions<T extends Options>(url: string, options: T) {
-  const init = options.init;
   const isForm = options.body instanceof FormData;
   const request: RequestInit = {
     method: options.method,
     body: options.body,
-    ...init,
     headers: {
       ...(!isForm && {
         'Content-Type': options.contentType ?? 'application/json',
       }),
-      ...init?.headers,
     },
   };
 
   return {
     url: options.origin == null ? url : `${options.origin}${url}`,
-    request,
+    request: deepmerge(request, options.init),
   };
 }
