@@ -20,7 +20,7 @@ const OmagizeIcon = createIcon({
 });
 
 export const config: AppConfig = {
-  name: 'My Bot',
+  name: 'BadDog',
   icon: OmagizeIcon,
   inviteUrl:
     'https://discord.com/api/oauth2/authorize?client_id=907955781972918283&permissions=8&scope=bot',

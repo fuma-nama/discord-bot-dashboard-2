@@ -42,14 +42,14 @@ export async function auth() {
 }
 
 export async function logout() {
-  localStorage.removeItem(IOSTokenStorage);
-
-  return await callDefault(
+  await callDefault(
     `/auth/signout`,
     withBot({
       method: 'POST',
     })
   );
+
+  localStorage.removeItem(IOSTokenStorage);
 }
 
 /**
