@@ -3,7 +3,7 @@ import { MusicFeature } from 'config/types';
 import { ChannelSelect } from './ChannelSelect';
 import { RolesSelect } from './RolesSelect';
 import { useFormRender } from 'hooks/forms/useForm';
-import { SelectField, useSelectOptionsMap } from 'components/forms/SelectField';
+import { SelectField } from 'components/forms/SelectField';
 import { createI18n } from 'hooks/i18n';
 import { provider } from 'config/translations/provider';
 
