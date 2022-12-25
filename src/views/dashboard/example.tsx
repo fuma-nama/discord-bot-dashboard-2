@@ -134,7 +134,7 @@ function TestChart() {
         }}
         series={[30, 1000]}
         type="pie"
-        width="400"
+        width="330"
       />
     </Grid>
   );

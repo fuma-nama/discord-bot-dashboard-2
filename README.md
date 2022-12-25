@@ -11,6 +11,10 @@ Using typescript, vite 3, react 18 and chakra ui 2.0
 - Flexiable and Customizable
 - Detailed Documentation
 
+**Live Demo:** https://demo-discord-dashboard.vercel.app/
+
+- Only 'Welcome message' Feature is Supported
+
 ## Review (might not the latest version)
 
 |                  Light                   |                  Dark                  |
@@ -226,6 +230,14 @@ GET `/guilds/{guild}/channels`
 
 - Get Channels of the guild
 - Responds a list of [Guild Channel](https://discord.com/developers/docs/resources/channel#channel-object) _(Same as discord documentation)_
+
+### Example Backend used for Demo?
+
+Not recommended, but I had wrote a backend for the Live Demo
+<br>
+**Kotlin:** https://github.com/SonMooSans/discord-bot-dashboard-backend _(2.0.0 branch)_
+<br>
+**Golang:** https://github.com/SonMooSans/discord-bot-dashboard-backend-go
 
 ## Any issues?
 

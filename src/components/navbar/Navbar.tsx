@@ -47,7 +47,17 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
 
   return (
     <NavbarBox>
-      <Flex direction="column" gap={3}>
+      <Flex
+        direction="column"
+        gap={{
+          base: 2,
+          [show.navbar]: 3,
+        }}
+        mt={{
+          base: '8px',
+          [show.navbar]: '0',
+        }}
+      >
         <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
           {breadcrumb.map((item, i) => (
             <BreadcrumbItem key={i}>
