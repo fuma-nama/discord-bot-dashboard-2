@@ -32,6 +32,7 @@ export const layouts: RootLayout[] = [
   {
     path: '/callback',
     component: <CallbackView />,
+    loggedIn: false,
   },
   {
     component: <AppLayout />,
