@@ -233,11 +233,13 @@ GET `/guilds/{guild}/channels`
 
 ### Example Backend used for Demo?
 
-Not recommended, but I had wrote a backend for the Live Demo
+Not recommended, but I had written the backend in different programming languages for the Live Demo
 <br>
 **Kotlin:** https://github.com/SonMooSans/discord-bot-dashboard-backend _(2.0.0 branch)_
 <br>
 **Golang:** https://github.com/SonMooSans/discord-bot-dashboard-backend-go
+<br>
+**Node.js (Typescript):** https://github.com/SonMooSans/discord-bot-dashboard-backend-ts
 
 ## Any issues?
 
