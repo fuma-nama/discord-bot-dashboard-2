@@ -14,6 +14,7 @@ Using typescript, vite 3, react 18 and chakra ui 2.0
 **Live Demo:** https://demo-discord-dashboard.vercel.app/
 
 - Only 'Welcome message' Feature is Supported
+- The api might be down since I am using the free plan of [railway](https://railway.app)
 
 ## Review (might not the latest version)
 
