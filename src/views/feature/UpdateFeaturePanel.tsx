@@ -1,6 +1,6 @@
-import { WarningIcon } from '@chakra-ui/icons';
+import { AiFillWarning as WarningIcon } from 'react-icons/ai';
 import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
-import { ButtonGroup, Button } from '@chakra-ui/react';
+import { ButtonGroup, Button, Icon } from '@chakra-ui/react';
 import { SlideFade } from '@chakra-ui/transition';
 import { FeatureConfig, FormRender, CustomFeatures } from 'config/types';
 import { IoSave } from 'react-icons/io5';
@@ -69,7 +69,8 @@ function Savebar({ result: { serialize, canSave, reset, onSubmit } }: { result: 
       p={{ base: 1, [breakpoint]: '15px' }}
       mt={2}
     >
-      <WarningIcon
+      <Icon
+        as={WarningIcon}
         _light={{ color: 'orange.400' }}
         _dark={{ color: 'orange.300' }}
         w="30px"

@@ -15,7 +15,7 @@ import { getActiveSidebarItem } from 'utils/routeUtils';
 import { NavbarDefaultItems, NavbarLinksBox } from './NavbarItems';
 import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { FaChevronRight as ChevronRightIcon } from 'react-icons/fa';
 import { show, useColorsExtend } from 'theme';
 import { common } from 'config/translations/common';
 

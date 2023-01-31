@@ -1,4 +1,4 @@
-import { ChatIcon, Icon } from '@chakra-ui/icons';
+import { BsChatLeftText as ChatIcon } from 'react-icons/bs';
 import { GuildChannel } from 'api/bot';
 import { ChannelTypes } from 'api/discord';
 import { SelectField } from 'components/forms/SelectField';
@@ -7,6 +7,7 @@ import { MdRecordVoiceOver } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { useGuildChannelsQuery } from 'stores';
 import { Params } from 'views/feature/FeatureView';
+import { Icon } from '@chakra-ui/react';
 
 /**
  * Render an options

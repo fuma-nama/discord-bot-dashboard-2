@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { FaChevronLeft as ChevronLeftIcon } from 'react-icons/fa';
 import { HStack, Text } from '@chakra-ui/layout';
 import { Avatar, IconButton, SkeletonCircle } from '@chakra-ui/react';
 import { iconUrl } from 'api/discord';

@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { FaChevronLeft as ChevronLeftIcon } from 'react-icons/fa';
 import { Flex, HStack, StackProps, Text, VStack } from '@chakra-ui/layout';
 import { IconButton } from '@chakra-ui/react';
 import { HSeparator } from 'components/layout/Separator';

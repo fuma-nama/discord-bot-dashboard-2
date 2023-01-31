@@ -1,4 +1,8 @@
-import { ChevronLeftIcon, ChevronRightIcon, ViewIcon } from '@chakra-ui/icons';
+import {
+  FaChevronLeft as ChevronLeftIcon,
+  FaChevronRight as ChevronRightIcon,
+  FaEye as ViewIcon,
+} from 'react-icons/fa';
 import {
   Box,
   Center,
