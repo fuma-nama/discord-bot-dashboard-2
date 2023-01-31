@@ -1,7 +1,7 @@
 import { AiFillWarning as WarningIcon } from 'react-icons/ai';
 import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { ButtonGroup, Button, Icon } from '@chakra-ui/react';
-import { SlideFade } from '@chakra-ui/transition';
+import { SlideFade } from '@chakra-ui/react';
 import { FeatureConfig, FormRender, CustomFeatures } from 'config/types';
 import { IoSave } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
