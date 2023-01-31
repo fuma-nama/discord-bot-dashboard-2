@@ -7,7 +7,7 @@ import {
   InputProps,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
+import { AiOutlineSearch as SearchIcon } from 'react-icons/ai';
 import { common } from 'config/translations/common';
 export function SearchBar(
   props: {
@@ -31,7 +31,7 @@ export function SearchBar(
           borderRadius="inherit"
           _active={{}}
           variant="ghost"
-          icon={<SearchIcon color={searchIconColor} w="15px" h="15px" />}
+          icon={<SearchIcon color={searchIconColor} width="15px" height="15px" />}
           onClick={onSearch}
         />
       </InputLeftElement>

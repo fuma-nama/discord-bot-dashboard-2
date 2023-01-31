@@ -1,4 +1,4 @@
-import { SettingsIcon } from '@chakra-ui/icons';
+import { FiSettings as SettingsIcon } from 'react-icons/fi';
 import { Flex, Heading, Text } from '@chakra-ui/layout';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import BannerImg from 'assets/Banner1.png';

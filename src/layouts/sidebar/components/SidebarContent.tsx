@@ -19,7 +19,7 @@ import { useGuilds, useSelectedGuild, useSelfUserQuery } from 'stores';
 import { SearchBar } from 'components/forms/SearchBar';
 import { useMemo, useState } from 'react';
 import { config } from 'config/common';
-import { SettingsIcon } from '@chakra-ui/icons';
+import { FiSettings as SettingsIcon } from 'react-icons/fi';
 import { avatarUrl } from 'api/discord';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GuildItem } from './GuildItem';

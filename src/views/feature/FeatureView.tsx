@@ -1,4 +1,4 @@
-import Icon from '@chakra-ui/icon';
+import { Icon } from '@chakra-ui/react';
 import { Center, Heading, Text } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/react';
 import { LoadingPanel } from 'components/panel/LoadingPanel';

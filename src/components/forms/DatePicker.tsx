@@ -2,7 +2,7 @@ import { Calendar, CalendarProps } from 'react-calendar';
 import { FormComponentProps, FormControlCard } from './Form';
 import 'react-calendar/dist/Calendar.css';
 import './DatePicker.css';
-import Icon from '@chakra-ui/icon';
+import { Icon } from '@chakra-ui/react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { Text } from '@chakra-ui/layout';
 import {
@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@chakra-ui/react';
-import { CalendarIcon } from '@chakra-ui/icons';
+import { AiTwotoneCalendar as CalendarIcon } from 'react-icons/ai';
 
 export type DatePickerProps = CalendarProps;
 

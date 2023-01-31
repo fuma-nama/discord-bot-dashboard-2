@@ -9,6 +9,7 @@ import {
   FormLabel,
   Image,
   useColorMode,
+  Box,
 } from '@chakra-ui/react';
 import { avatarUrl, bannerUrl } from 'api/discord';
 import { SelectField } from 'components/forms/SelectField';
@@ -27,7 +28,7 @@ export function ProfileView() {
   const logout = useLogoutMutation();
   const t = profile.useTranslations();
 
-  const { cardBg } = useColors();
+  const { cardBg, brand } = useColors();
   const { colorMode, setColorMode } = useColorMode();
   const [devMode, setDevMode, lang, setLang] = useSettingsStore((s) => [
     s.devMode,
@@ -39,7 +40,16 @@ export function ProfileView() {
   return (
     <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={3}>
       <Flex direction="column" maxW="800px" p={2} pl={0}>
-        <Image src={bannerUrl(user)} rounded="2xl" />
+        {user.banner != null ? (
+          <Image
+            src={bannerUrl(user)}
+            sx={{ aspectRatio: '1100 / 440' }}
+            objectFit="cover"
+            rounded="2xl"
+          />
+        ) : (
+          <Box bg={brand} rounded="2xl" sx={{ aspectRatio: '1100 / 440' }} />
+        )}
         <VStack mt="-50px" ml="40px" align="start">
           <Avatar
             src={avatarUrl(user)}

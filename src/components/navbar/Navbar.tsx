@@ -4,6 +4,7 @@ import {
   BreadcrumbItem,
   Flex,
   FlexProps,
+  Icon,
   SkeletonText,
   Tag,
   Text,
@@ -15,7 +16,7 @@ import { getActiveSidebarItem } from 'utils/routeUtils';
 import { NavbarDefaultItems, NavbarLinksBox } from './NavbarItems';
 import { IoHome } from 'react-icons/io5';
 import items from 'sidebar';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { FaChevronRight as ChevronRightIcon } from 'react-icons/fa';
 import { show, useColorsExtend } from 'theme';
 import { common } from 'config/translations/common';
 
@@ -58,7 +59,10 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
           [show.navbar]: '0',
         }}
       >
-        <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
+        <Breadcrumb
+          fontSize="sm"
+          separator={<Icon verticalAlign="middle" as={ChevronRightIcon} color={linkColor} />}
+        >
           {breadcrumb.map((item, i) => (
             <BreadcrumbItem key={i}>
               <Tag

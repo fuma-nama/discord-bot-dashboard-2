@@ -1,4 +1,4 @@
-import Icon from '@chakra-ui/icon';
+import { Icon } from '@chakra-ui/react';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import { FaGamepad } from 'react-icons/fa';
 import { IoHappy } from 'react-icons/io5';
