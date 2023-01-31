@@ -1,6 +1,6 @@
 import { FaChevronLeft as ChevronLeftIcon } from 'react-icons/fa';
 import { HStack, Text } from '@chakra-ui/layout';
-import { Avatar, IconButton, SkeletonCircle } from '@chakra-ui/react';
+import { Avatar, Icon, IconButton, SkeletonCircle } from '@chakra-ui/react';
 import { iconUrl } from 'api/discord';
 import { NavbarBox } from 'components/navbar/Navbar';
 import { NavbarDefaultItems, NavbarLinksBox } from 'components/navbar/NavbarItems';
@@ -20,7 +20,7 @@ export function GroupNavbar({ back }: { back?: boolean }) {
           <IconButton
             display={{ [show.sidebar]: 'none' }}
             aria-label="back"
-            icon={<ChevronLeftIcon />}
+            icon={<Icon verticalAlign="middle" as={ChevronLeftIcon} />}
             onClick={() => setSelected(selected)}
           />
         </HorizontalCollapse>

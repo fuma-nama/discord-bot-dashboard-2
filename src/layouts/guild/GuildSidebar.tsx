@@ -1,6 +1,6 @@
 import { FaChevronLeft as ChevronLeftIcon } from 'react-icons/fa';
 import { Flex, HStack, StackProps, Text, VStack } from '@chakra-ui/layout';
-import { IconButton } from '@chakra-ui/react';
+import { Icon, IconButton } from '@chakra-ui/react';
 import { HSeparator } from 'components/layout/Separator';
 import { getFeatures, IdFeature } from 'config/utils';
 import { IoSettings } from 'react-icons/io5';
@@ -21,7 +21,7 @@ export function InGuildSidebar() {
       <HStack cursor="pointer" mb={2} onClick={() => navigate(`/guilds/${selected}`)}>
         <IconButton
           display={{ base: 'none', [show.sidebar]: 'block' }}
-          icon={<ChevronLeftIcon />}
+          icon={<Icon verticalAlign="middle" as={ChevronLeftIcon} />}
           aria-label="back"
         />
         <Text fontSize="lg" fontWeight="600">

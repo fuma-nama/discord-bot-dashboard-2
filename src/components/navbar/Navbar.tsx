@@ -4,6 +4,7 @@ import {
   BreadcrumbItem,
   Flex,
   FlexProps,
+  Icon,
   SkeletonText,
   Tag,
   Text,
@@ -58,7 +59,10 @@ export function DefaultNavbar({ children }: { children?: ReactNode }) {
           [show.navbar]: '0',
         }}
       >
-        <Breadcrumb fontSize="sm" separator={<ChevronRightIcon color={linkColor} />}>
+        <Breadcrumb
+          fontSize="sm"
+          separator={<Icon verticalAlign="middle" as={ChevronRightIcon} color={linkColor} />}
+        >
           {breadcrumb.map((item, i) => (
             <BreadcrumbItem key={i}>
               <Tag

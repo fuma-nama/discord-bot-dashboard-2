@@ -7,8 +7,6 @@ import { useMusicFeature } from './example/MusicFeature';
 import { FeaturesConfig, WelcomeMessageFeature } from './types';
 import { provider } from 'config/translations/provider';
 import { createI18n } from 'hooks/i18n';
-import { useForm } from 'hooks/forms/useForm';
-import { InputForm } from 'components/forms/InputForm';
 import { useWelcomeMessageFeature } from './example/WelcomeMessageFeature';
 
 /**

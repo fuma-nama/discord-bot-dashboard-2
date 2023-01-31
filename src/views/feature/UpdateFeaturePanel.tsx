@@ -1,4 +1,4 @@
-import { AiFillWarning as WarningIcon } from 'react-icons/ai';
+import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
 import { Flex, Heading, HStack, Spacer, Text } from '@chakra-ui/layout';
 import { ButtonGroup, Button, Icon } from '@chakra-ui/react';
 import { SlideFade } from '@chakra-ui/react';
