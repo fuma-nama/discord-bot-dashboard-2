@@ -35,4 +35,13 @@ export const cardStyles = defineMultiStyleConfig({
       mt: 4,
     },
   }),
+  variants: {
+    primary: definePartsStyle({
+      container: {
+        _light: {
+          boxShadow: '14px 17px 30px 4px rgb(112 144 176 / 13%)',
+        },
+      },
+    }),
+  },
 });
