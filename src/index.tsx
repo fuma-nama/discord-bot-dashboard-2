@@ -27,7 +27,9 @@ function RootRoutes({ loggedIn }: { loggedIn: boolean }) {
   return (
     <Routes>
       {layouts.map((layout, key) =>
-        layout.loggedIn === loggedIn ? mapNestedLayout(layout, key) : null
+        layout.loggedIn === loggedIn || layout.loggedIn === undefined
+          ? mapNestedLayout(layout, key)
+          : null
       )}
     </Routes>
   );

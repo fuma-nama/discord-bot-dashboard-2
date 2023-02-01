@@ -11,6 +11,7 @@ import { DashboardView } from 'views/dashboard/DashboardView';
 import { ProfileView } from 'views/profile/ProfileView';
 import { InGuildSidebar } from 'layouts/guild/GuildSidebar';
 import { GuildSettingsView } from 'views/guild/settings/GuildSettingsView';
+import { CallbackView } from 'views/auth/CallbackView';
 
 export const layouts: RootLayout[] = [
   {
@@ -28,7 +29,11 @@ export const layouts: RootLayout[] = [
     ],
     loggedIn: false,
   },
-
+  {
+    path: '/callback',
+    component: <CallbackView />,
+    loggedIn: false,
+  },
   {
     component: <AppLayout />,
     subLayouts: [

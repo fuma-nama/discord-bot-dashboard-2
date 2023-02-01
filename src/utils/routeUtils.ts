@@ -87,7 +87,7 @@ export type Layout = {
 };
 
 export type RootLayout = NormalLayout & {
-  loggedIn: boolean;
+  loggedIn?: boolean;
 };
 
 export interface SidebarItemInfo {
