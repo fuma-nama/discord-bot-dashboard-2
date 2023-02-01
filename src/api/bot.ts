@@ -1,3 +1,4 @@
+import { IOSTokenStorage } from 'api/core/plugins';
 import { CustomFeatures, CustomGuildInfo } from 'config/types/custom-types';
 import { withBot, callDefault, callReturn } from './core';
 import { ChannelTypes } from './discord';
@@ -41,12 +42,14 @@ export async function auth() {
 }
 
 export async function logout() {
-  return await callDefault(
+  await callDefault(
     `/auth/signout`,
     withBot({
       method: 'POST',
     })
   );
+
+  localStorage.removeItem(IOSTokenStorage);
 }
 
 /**

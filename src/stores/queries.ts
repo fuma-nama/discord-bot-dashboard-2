@@ -35,6 +35,7 @@ export const Keys = {
   guildRoles: (guild: string) => ['gulid_roles', guild],
   guildChannels: (guild: string) => ['gulid_channel', guild],
 };
+
 export const Mutations = {
   updateFeature: (guild: string, id: string) => ['feature', guild, id],
 };
