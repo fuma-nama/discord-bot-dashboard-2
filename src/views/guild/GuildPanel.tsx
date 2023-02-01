@@ -11,7 +11,7 @@ export function GuildPanel({ guild: id, info }: { guild: string; info: CustomGui
   return (
     <Flex direction="column" gap={5}>
       <Banner />
-      <Flex direction="column" gap={4} p={{ base: 0, '2sm': 3, md: 0 }}>
+      <Flex direction="column" gap={4}>
         <Heading fontSize="2xl">{t.features}</Heading>
         <SimpleGrid minChildWidth="328px" gap={3}>
           {getFeatures().map((feature) => (

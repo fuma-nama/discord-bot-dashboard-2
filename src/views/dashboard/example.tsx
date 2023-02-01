@@ -229,7 +229,12 @@ function MusicPlayer() {
 
 function PrimaryButton(props: { icon: ReactElement; children: string }) {
   return (
-    <Button leftIcon={props.icon} variant="action" _light={{ bg: 'white' }}>
+    <Button
+      leftIcon={props.icon}
+      variant="action"
+      _light={{ bg: 'white' }}
+      _dark={{ bg: 'navy.800' }}
+    >
       {props.children}
     </Button>
   );

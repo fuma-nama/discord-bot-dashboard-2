@@ -38,8 +38,8 @@ export function ProfileView() {
   ]);
 
   return (
-    <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={3}>
-      <Flex direction="column" maxW="800px" p={2} pl={0}>
+    <Grid templateColumns={{ base: '1fr', md: 'minmax(0, 800px) auto' }} gap={{ base: 3, lg: 6 }}>
+      <Flex direction="column" maxW="800px">
         {user.banner != null ? (
           <Image
             src={bannerUrl(user)}
