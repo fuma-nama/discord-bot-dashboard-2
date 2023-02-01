@@ -2,15 +2,21 @@
 
 import { NavLink } from 'react-router-dom';
 // chakra imports
-import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react';
-import { SidebarItemInfo as SidebarItemType } from 'utils/routeUtils';
-import { useColors, useItemHoverBg } from 'theme';
+import { Box, HStack, Text } from '@chakra-ui/react';
+import { SidebarItemInfo } from 'utils/routeUtils';
+import { useColorsExtend, useItemHoverBg } from 'theme';
 
-export function SidebarItem(props: { item: SidebarItemType; active: boolean }) {
-  const { item, active } = props;
-  let activeColor = useColorModeValue('gray.700', 'white');
-  let textColor = useColorModeValue('secondaryGray.500', 'navy.100');
-  const { brand, globalBg, cardBg } = useColors();
+export function SidebarItem({ item, active }: { item: SidebarItemInfo; active: boolean }) {
+  const { brand, globalBg, cardBg, activeColor, textColor } = useColorsExtend(
+    {
+      textColor: 'secondaryGray.500',
+      activeColor: 'gray.700',
+    },
+    {
+      textColor: 'navy.100',
+      activeColor: 'white',
+    }
+  );
   const hover = useItemHoverBg();
 
   return (
