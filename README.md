@@ -1,3 +1,5 @@
+![banner](./document/4B9E09C4-48F7-47B4-9622-93A43912BE63.png)
+
 # Mordern Discord Bot Dashboard
 
 > This project is a Rewrite of [discord-bot-dashboard](https://github.com/SonMooSans/discord-bot-dashboard)
