@@ -1,6 +1,9 @@
-# Mordern Discord Bot Dashboard
+![banner](./document/4B9E09C4-48F7-47B4-9622-93A43912BE63.png)
 
-> This project is a Rewrite of [discord-bot-dashboard](https://github.com/SonMooSans/discord-bot-dashboard)
+# Mordern Discord Bot 
+
+> **The new version has been released** <br>
+> [Learn More](https://github.com/SonMooSans/discord-bot-dashboard-next)
 
 Using typescript, vite 3, react 18 and chakra ui 2.0
 
