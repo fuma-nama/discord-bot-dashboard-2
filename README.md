@@ -1,9 +1,9 @@
+> **This project has been deprecated, please use `discord-bot-dashboard-next` instead** <br>
+> [Github Repository](https://github.com/SonMooSans/discord-bot-dashboard-next)
+
 ![banner](./document/4B9E09C4-48F7-47B4-9622-93A43912BE63.png)
 
 # Mordern Discord Bot 
-
-> **The new version has been released** <br>
-> [Learn More](https://github.com/SonMooSans/discord-bot-dashboard-next)
 
 Using typescript, vite 3, react 18 and chakra ui 2.0
 
@@ -14,7 +14,7 @@ Using typescript, vite 3, react 18 and chakra ui 2.0
 - Flexiable and Customizable
 - Detailed Documentation
 
-**Live Demo:** https://demo-discord-dashboard.vercel.app/
+**Live Demo:** https://demo-bot.vercel.app/
 
 - Only 'Welcome message' Feature is Supported
 - The api might be down sometimes (It is using the free tier of Koyeb)
